@@ -12,7 +12,7 @@
 
     <title>
         
-        
+        AttributeError:&#39;KerasTensor&#39; object has no attribute&#39; 神经网络，问题解决 - undefined
         
     </title>
 
@@ -75,7 +75,7 @@
                     <span>HOME</span>
                 </a>
             </li>
-            <li  class=active >
+            <li >
                 <a href="/tags">
                     <i class="iconfont icon-biaoqian1"></i>
                     <span>TAGS</span>
@@ -110,6 +110,10 @@
         </ul>
     </div>
     
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#AttributeError-%E2%80%98KerasTensor%E2%80%99-object-has-no-attribute%E2%80%99-%E5%9C%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%AD%E9%81%87%E5%88%B0%EF%BC%8C%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%82"><span class="toc-text">AttributeError: ‘KerasTensor’ object has no attribute’ 在神经网络中遇到，问题解决。</span></a></li></ol>
+</div>
+    
 </div>
 
 
@@ -137,65 +141,44 @@
         
 
 
-<!-- 归档列表 -->
+<div class="post-container">
+    <div class="post-title">
+        AttributeError:'KerasTensor' object has no attribute' 神经网络，问题解决
+    </div>
 
-<div class="archives-container">
+    <div class="post-meta">
+        <span class="attr">Post：<span>2024-02-20 17:01:31</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#Python" title="Python">Python</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Machine_Learning" title="Machine_Learning">Machine_Learning</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Neural_Network" title="Neural_Network">Neural_Network</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h1 id="AttributeError-‘KerasTensor’-object-has-no-attribute’-在神经网络中遇到，问题解决。"><a href="#AttributeError-‘KerasTensor’-object-has-no-attribute’-在神经网络中遇到，问题解决。" class="headerlink" title="AttributeError: ‘KerasTensor’ object has no attribute’ 在神经网络中遇到，问题解决。"></a>AttributeError: ‘KerasTensor’ object has no attribute’ 在神经网络中遇到，问题解决。</h1><p>这里我遇到的问题不仅仅是版本的问题，可能是在图神经网络的构建中，某些操作将不被允许。这些操作 x.numpy() 在构建模型之外是允许的，在模型中不行。<br>原因比较复杂，参考了github上的一些文章，最后找到了解决的办法:<br>禁用TF2中某些操作的函数<br>强制开启了TF2中某些操作的函数 <code>tf.config.run_functions_eagerly(True)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">tf.config.run_functions_eagerly(<span class="literal">True</span>)</span><br><span class="line">tf.compat.v1.disable_v2_behavior()</span><br><span class="line">tf.compat.v1.disable_eager_execution()</span><br><span class="line"><span class="keyword">if</span> tf.executing_eagerly():</span><br><span class="line">	x.numpy() <span class="comment"># type(x) &gt;&gt; &#x27;KerasTensor&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>我实际执行的环境： (TF&#x3D;2.14.0, python&#x3D;3.9.18, keras&#x3D;2.14.0).<br>我参考的网页<br><a target="_blank" rel="noopener" href="https://www.tensorflow.org/api_docs/python/tf/config/run_functions_eagerly">https://www.tensorflow.org/api_docs/python/tf/config/run_functions_eagerly</a><br><a target="_blank" rel="noopener" href="https://github.com/onnx/keras-onnx/issues/651#issuecomment-872061539">https://github.com/onnx/keras-onnx/issues/651#issuecomment-872061539</a></p>
 
-<div class="one-tag-list">
-                <span class="fa fa-calendar-times-o listing-seperator" id="2024">
-                    <span class="tag-text">2024</span>
-                </span>
-    <ul>
         
-        <!-- <li class="listing-item">
-        <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-        <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-        </li> -->
-        <li >
-            <span>02-20</span>
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/2024/02/20/向日葵，Win控制Linux_ubuntu，屏幕不刷新/">
-                        <span>
-                            向日葵，Win控制Linux_ubuntu，解决屏幕不刷新
-                        </span>
-            </a>
-            <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-        </li>
-        
-        <!-- <li class="listing-item">
-        <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-        <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-        </li> -->
-        <li >
-            <span>02-20</span>
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/2024/02/20/AttributeError  'KerasTensor' object has no attribute ' 神经网络/">
-                        <span>
-                            AttributeError:'KerasTensor' object has no attribute' 神经网络，问题解决
-                        </span>
-            </a>
-            <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-        </li>
-        
-        <!-- <li class="listing-item">
-        <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-        <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-        </li> -->
-        <li >
-            <span>02-15</span>
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/2024/02/15/hello-world/">
-                        <span>
-                            hello world
-                        </span>
-            </a>
-            <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-        </li>
-        
-
-    </ul>
-</div>
-
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
 </div>
 
     </div>
@@ -236,7 +219,7 @@
     // We expose some of the variables needed by the front end
     window.hexo_search_path = "search.json"
     window.hexo_root = "/"
-    window.isPost = false
+    window.isPost = true
 </script>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 

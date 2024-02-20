@@ -12,7 +12,7 @@
 
     <title>
         
-        
+        向日葵，Win控制Linux_ubuntu，解决屏幕不刷新 - undefined
         
     </title>
 
@@ -111,7 +111,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#AttributeError-%E2%80%98KerasTensor%E2%80%99-object-has-no-attribute-%E2%80%98-%E5%9C%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%AD%E9%81%87%E5%88%B0%EF%BC%8C%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%82"><span class="toc-text">AttributeError: ‘KerasTensor’ object has no attribute ‘ 在神经网络中遇到，问题解决。</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CTRL-ALT-DEL"><span class="toc-text">CTRL + ALT + DEL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-text">补充</span></a></li></ol>
 </div>
     
 </div>
@@ -143,11 +143,17 @@
 
 <div class="post-container">
     <div class="post-title">
-        
+        向日葵，Win控制Linux_ubuntu，解决屏幕不刷新
     </div>
 
     <div class="post-meta">
-        <span class="attr">Post：<span>2024-02-20 16:48:40</span></span>
+        <span class="attr">Post：<span>2024-02-20 17:04:08</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#Linux" title="Linux">Linux</a>
+        <span>/</span>
+        
         
         </span>
         <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
@@ -155,9 +161,8 @@
 </span>
     </div>
     <div class="post-content no-indent">
-        <h2 id="AttributeError-‘KerasTensor’-object-has-no-attribute-‘-在神经网络中遇到，问题解决。"><a href="#AttributeError-‘KerasTensor’-object-has-no-attribute-‘-在神经网络中遇到，问题解决。" class="headerlink" title="AttributeError: ‘KerasTensor’ object has no attribute ‘ 在神经网络中遇到，问题解决。"></a>AttributeError: ‘KerasTensor’ object has no attribute ‘ 在神经网络中遇到，问题解决。</h2><p>这里我遇到的问题不仅仅是版本的问题，可能是在图神经网络的构建中，某些操作将不被允许。这些操作 x.numpy() 在构建模型之外是允许的，在模型中不行。<br>原因比较复杂，参考了github上的一些文章，最后找到了解决的办法:<br>禁用TF2中某些操作的函数<br>强制开启了TF2中某些操作的函数 <code>tf.config.run_functions_eagerly(True)</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">tf.config.run_functions_eagerly(<span class="literal">True</span>)</span><br><span class="line">tf.compat.v1.disable_v2_behavior()</span><br><span class="line">tf.compat.v1.disable_eager_execution()</span><br><span class="line"><span class="keyword">if</span> tf.executing_eagerly():</span><br><span class="line">	x.numpy() <span class="comment"># type(x) &gt;&gt; &#x27;KerasTensor&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>我实际执行的环境： (TF&#x3D;2.14.0, python&#x3D;3.9.18, keras&#x3D;2.14.0).<br>我参考的网页<br><a target="_blank" rel="noopener" href="https://www.tensorflow.org/api_docs/python/tf/config/run_functions_eagerly">https://www.tensorflow.org/api_docs/python/tf/config/run_functions_eagerly</a><br><a target="_blank" rel="noopener" href="https://github.com/onnx/keras-onnx/issues/651#issuecomment-872061539">https://github.com/onnx/keras-onnx/issues/651#issuecomment-872061539</a></p>
+        <h1 id="CTRL-ALT-DEL"><a href="#CTRL-ALT-DEL" class="headerlink" title="CTRL + ALT + DEL"></a>CTRL + ALT + DEL</h1><p>连续按几次CTRL + ALT + DEL会恢复控制，不知道是WIndows BUG还是向日葵的BUG！我看其他大佬说的 还真有用。<br>原文地址：<a target="_blank" rel="noopener" href="https://tieba.baidu.com/p/6792310910">https://tieba.baidu.com/p/6792310910</a></p>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>当在window端按CTRL + ALT + DEL，会进入如下的页面，点取消。<br><img src="https://img-blog.csdnimg.cn/3595993064dd49348fa8d6ddc45b7120.jpeg" alt="在这里插入图片描述"><br>同时，ubuntu端会进入退出，这里选log out，退出登录。<img src="https://img-blog.csdnimg.cn/82d3b68c98f241099b1a7c3e458b05f8.jpeg" alt="在这里插入图片描述"><br>然后重新登录：<br><img src="https://img-blog.csdnimg.cn/32a5f2d3eedc44a6943b6c84575c9585.jpeg" alt="在这里插入图片描述"><br>之后就正常了。</p>
 
         
         <br />
