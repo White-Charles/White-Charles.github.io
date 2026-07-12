@@ -56,7 +56,7 @@ var searchJson;
 var caseSensitive = false
 
 searchButton.addEventListener('click', () => {
-    search()
+    openSearch()
 });
 
 escSearch.addEventListener('click',() => {
@@ -176,7 +176,7 @@ function searchFromKeyWord(keyword = ""){
     searchResultContainer.appendChild(searchFragment)
 }
 
-function search(){
+function openSearch(){
 
     toggleSeachField()
 
