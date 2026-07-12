@@ -92,6 +92,6 @@ search:
 # Deployment
 deploy:
   type: git
-  repo: https://github.com/White-Charles/White-Charles.github.io.git
+  repo: git@github.com:White-Charles/White-Charles.github.io.git
   branch: gh-pages
   message: 'Site updated: {{ now("YYYY-MM-DD HH:mm:ss") }} [ci skip]'
