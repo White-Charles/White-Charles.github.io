@@ -24,5 +24,20 @@
     <!-- ga & ba script hoook -->
     <script></script>
 
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
     <%- partial('_partial/analytics', null, {cache: false}) %>
 </head>
