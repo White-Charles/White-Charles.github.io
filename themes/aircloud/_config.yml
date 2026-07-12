@@ -1,0 +1,50 @@
+# Header
+# 博客标题（如果配置此项，导航栏将显示此配置，否则显示站点配置的 title）
+header_title:
+
+# SNS settings
+# 社交平台地址
+github_username: White-Charles
+
+# Comment
+# 评论功能
+comment:
+  type: giscus
+  script: |
+      <script src="https://giscus.app/client.js"
+          data-repo="White-Charles/White-Charles.github.io"
+          data-repo-id="R_kgDOLSReuQ"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOLSReuc4CdbUZ"
+          data-mapping="title"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="bottom"
+          data-theme="preferred_color_scheme"
+          data-lang="zh-CN"
+          crossorigin="anonymous"
+          async>
+      </script>
+
+# Donate
+# 赞赏功能
+donate:
+
+# Friends
+# 友情链接
+friends: [
+]
+
+# analytics
+# 站长统计
+analytics:
+
+# post style
+# 文章样式
+post_style:
+  indent: 0
+
+# avatar style
+avatar_style:
+  radius: true
