@@ -4,12 +4,15 @@
 
 # Site
 title: Charles White
-subtitle: 'sometimes code, sometimes fun'
+subtitle: 'code. compute. create.'
 description: 'Charles White personal blog - computational materials science, machine learning'
 keywords: 'materials science, machine learning, VASP, MD simulation'
 author: Charles White
 language: zh-CN
 timezone: 'Asia/Shanghai'
+
+# Sidebar
+sidebar-avatar: img/avatar.jpg
 
 # URL
 url: https://white-charles.github.io
