@@ -3,8 +3,6 @@ title: A 系列 — 附录与技巧
 layout: page
 ---
 
-# A 系列：附录与技巧
-
 > 涵盖 LVASPTHW 附录部分，包括基础工具、Bader 电荷、超算中心、ASE/Python 工具、Ubuntu 软件、机器学习数据和高级工具等主题。
 
 | # | 分类 | 说明 |

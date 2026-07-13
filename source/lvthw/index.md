@@ -3,8 +3,6 @@ title: LVTHW — Learn VASP The Hard Way
 layout: page
 ---
 
-# Learn VASP The Hard Way
-
 > 大师兄的 VASP 计算教学系列存档，包含教程主课（Ex 系列）和附录技巧（A 系列）两部分。
 
 ## 系列导航

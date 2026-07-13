@@ -382,28 +382,14 @@ document.addEventListener('DOMContentLoaded', function() {
     toggles.forEach(function(toggle) {
         toggle.addEventListener('click', function(e) {
             e.preventDefault();
-            // Find the parent li and the sub-menu within it
+            e.stopPropagation();
             var li = this.closest('li.has-sub');
             if (!li) return;
             var sub = li.querySelector(':scope > .sub-menu');
             if (!sub) return;
 
-            // Toggle current
             li.classList.toggle('open');
             sub.classList.toggle('open');
-
-            // Close sibling sub-menus at the same level (not children)
-            var parent = li.parentNode;
-            if (parent) {
-                var siblings = parent.querySelectorAll(':scope > li.has-sub.open');
-                siblings.forEach(function(sib) {
-                    if (sib !== li) {
-                        sib.classList.remove('open');
-                        var sibSub = sib.querySelector(':scope > .sub-menu');
-                        if (sibSub) sibSub.classList.remove('open');
-                    }
-                });
-            }
         });
     });
 
@@ -418,5 +404,30 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
+
+    // Restore menu state based on current URL on page load
+    var currentPath = window.location.pathname;
+    if (currentPath && currentPath !== '/') {
+        // Find all links in sub-menus whose href matches current path
+        var menuLinks = document.querySelectorAll('.sub-menu a');
+        var found = false;
+        menuLinks.forEach(function(link) {
+            if (link.getAttribute('href') === currentPath) {
+                found = true;
+                link.classList.add('active');
+                // Walk up to open all parent menus
+                var parent = link.closest('li');
+                while (parent) {
+                    var hasSub = parent.closest('li.has-sub');
+                    if (hasSub) {
+                        hasSub.classList.add('open');
+                        var subMenu = hasSub.querySelector(':scope > .sub-menu');
+                        if (subMenu) subMenu.classList.add('open');
+                    }
+                    parent = hasSub ? hasSub.parentElement.closest('li.has-sub') : null;
+                }
+            }
+        });
+    }
 });
 

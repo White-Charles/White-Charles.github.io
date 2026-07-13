@@ -1341,6 +1341,36 @@ pre .javascript .function {
   text-indent: 0;
 }
 
+/* Topic article list styles */
+.post-content ul {
+  padding-left: 0;
+  list-style: none;
+}
+.post-content ul li {
+  margin: 10px 0;
+  padding: 10px 15px;
+  border-left: 3px solid #4a90d9;
+  background: #f8f9fa;
+  border-radius: 0 4px 4px 0;
+  transition: background 0.2s;
+}
+.post-content ul li:hover {
+  background: #eef2f7;
+}
+.post-content ul li strong {
+  color: #4a90d9;
+  font-weight: 600;
+  margin-right: 8px;
+}
+.post-content ul li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 400;
+}
+.post-content ul li a:hover {
+  color: #4a90d9;
+}
+
 /* Pagination styles */
 .pagination-bar {
   text-align: center;
@@ -1406,19 +1436,20 @@ pre .javascript .function {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 10px 15px;
-  margin: 0;
+  padding: 0;
+  margin: 20px auto;
   cursor: pointer;
 }
 .nav .contents ul li.has-sub > a .sub-arrow {
-  margin-left: auto;
-  font-size: 12px;
-  color: #999;
-  transition: transform 0.25s ease;
+  margin-left: 8px;
   display: inline-block;
-}
-.nav .contents ul li.has-sub > a .sub-arrow::before {
-  content: "▸";
+  width: 0;
+  height: 0;
+  border-left: 5px solid #999;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  transition: transform 0.25s ease;
+  vertical-align: middle;
 }
 .nav .contents ul li.has-sub.open > a .sub-arrow {
   transform: rotate(90deg);

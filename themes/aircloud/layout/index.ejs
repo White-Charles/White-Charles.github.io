@@ -14,15 +14,14 @@ layout: layout
                     }) %>
                 </h3>
             </a>
+            <% if (post.tags.length){ %>
             <p>
-                <% if (post.tags.length){ %>
-                <span>/</span>
-                <% post.tags.forEach(function(tag){ %>
+                <% post.tags.forEach(function(tag, idx){ %>
+                <% if (idx > 0) { %><span>/</span><% } %>
                 <a class="tag" href="<%= config.root %>tags/#<%= tag.name %>" title="<%= tag.name %>"><%= tag.name %></a>
-                <span>/</span>
                 <% }) %>
-                <% } %>
             </p>
+            <% } %>
         </div>
     </div>
     <% }); %>

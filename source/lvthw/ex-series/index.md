@@ -3,8 +3,6 @@ title: Ex 系列 — 教程与主课
 layout: page
 ---
 
-# Ex 系列：VASP 教程（主课）
-
 > 涵盖 LVASPTHW 主课程部分，从入门准备到过渡态 NEB 计算，系统学习 VASP。
 
 | # | 分类 | 说明 |

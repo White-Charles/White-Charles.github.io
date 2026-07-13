@@ -17,6 +17,9 @@ timezone: 'Asia/Shanghai'
 # Sidebar
 sidebar-avatar: img/avatar.jpg
 
+# SEO title (shown in browser tab)
+SEOTitle: Charles White
+
 # URL
 url: https://white-charles.github.io
 permalink: :year/:month/:day/:title/
