@@ -388,12 +388,12 @@ document.addEventListener('DOMContentLoaded', function() {
             var sub = li.querySelector(':scope > .sub-menu');
             if (!sub) return;
 
-            li.classList.add('open');
-            sub.classList.add('open');
+            li.classList.toggle('open');
+            sub.classList.toggle('open');
         });
     });
 
-    // Close all sub-menus when clicking outside
+    // Close all sub-menus when clicking outside the nav
     document.addEventListener('click', function(e) {
         if (!e.target.closest('.nav')) {
             var openMenus = document.querySelectorAll('.has-sub.open');
@@ -404,30 +404,5 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
-
-    // Restore menu state based on current URL on page load
-    var currentPath = window.location.pathname;
-    if (currentPath && currentPath !== '/') {
-        // Find all links in sub-menus whose href matches current path
-        var menuLinks = document.querySelectorAll('.sub-menu a');
-        var found = false;
-        menuLinks.forEach(function(link) {
-            if (link.getAttribute('href') === currentPath) {
-                found = true;
-                link.classList.add('active');
-                // Walk up to open all parent menus
-                var parent = link.closest('li');
-                while (parent) {
-                    var hasSub = parent.closest('li.has-sub');
-                    if (hasSub) {
-                        hasSub.classList.add('open');
-                        var subMenu = hasSub.querySelector(':scope > .sub-menu');
-                        if (subMenu) subMenu.classList.add('open');
-                    }
-                    parent = hasSub ? hasSub.parentElement.closest('li.has-sub') : null;
-                }
-            }
-        });
-    }
 });
 

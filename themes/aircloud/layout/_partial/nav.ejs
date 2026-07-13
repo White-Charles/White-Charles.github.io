@@ -1,3 +1,11 @@
+<%
+  // Determine menu open state from current URL (server-side, no flash)
+  var p = page && page.canonical_path ? page.canonical_path : '';
+  var isLVTHW = p.indexOf('lvthw/') === 0;
+  var isA = isLVTHW && p.indexOf('lvthw/a-series/') === 0;
+  var isEx = isLVTHW && p.indexOf('lvthw/ex-series/') === 0;
+  var isCharles = p.indexOf('charles/') === 0;
+%>
 <div class="nav" id="nav">
     <div class="avatar-name">
         <div class="avatar <% if(config.avatar_style && config.avatar_style.radius) {%>radius<% } %>">
@@ -9,26 +17,26 @@
     </div>
     <div class="contents" id="nav-content">
         <ul>
-            <li class="has-sub">
+            <li class="has-sub<%= (isLVTHW || isCharles) ? ' open' : '' %>">
                 <a class="nav-toggle" href="javascript:void(0)">
                     <i class="iconfont icon-shouye1"></i>
                     <span><%= __('nav.home') %></span>
                     <i class="sub-arrow"></i>
                 </a>
-                <ul class="sub-menu">
+                <ul class="sub-menu<%= (isLVTHW || isCharles) ? ' open' : '' %>">
                     <!-- LVTHW -->
-                    <li class="has-sub">
+                    <li class="has-sub<%= isLVTHW ? ' open' : '' %>">
                         <a class="nav-toggle" href="javascript:void(0)">
                             <span>LVTHW</span>
                             <i class="sub-arrow"></i>
                         </a>
-                        <ul class="sub-menu">
-                            <li class="has-sub">
+                        <ul class="sub-menu<%= isLVTHW ? ' open' : '' %>">
+                            <li class="has-sub<%= isA ? ' open' : '' %>">
                                 <a class="nav-toggle" href="javascript:void(0)">
                                     <span>A 系列 · 附录</span>
                                     <i class="sub-arrow"></i>
                                 </a>
-                                <ul class="sub-menu">
+                                <ul class="sub-menu<%= isA ? ' open' : '' %>">
                                     <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
                                     <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
                                     <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
@@ -39,12 +47,12 @@
                                     <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
                                 </ul>
                             </li>
-                            <li class="has-sub">
+                            <li class="has-sub<%= isEx ? ' open' : '' %>">
                                 <a class="nav-toggle" href="javascript:void(0)">
                                     <span>Ex 系列 · 教程</span>
                                     <i class="sub-arrow"></i>
                                 </a>
-                                <ul class="sub-menu">
+                                <ul class="sub-menu<%= isEx ? ' open' : '' %>">
                                     <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
                                     <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
                                     <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
