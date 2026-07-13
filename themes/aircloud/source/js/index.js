@@ -388,8 +388,8 @@ document.addEventListener('DOMContentLoaded', function() {
             var sub = li.querySelector(':scope > .sub-menu');
             if (!sub) return;
 
-            li.classList.toggle('open');
-            sub.classList.toggle('open');
+            li.classList.add('open');
+            sub.classList.add('open');
         });
     });
 
