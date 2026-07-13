@@ -1,4 +1,3 @@
-
 <div class="nav" id="nav">
     <div class="avatar-name">
         <div class="avatar <% if(config.avatar_style && config.avatar_style.radius) {%>radius<% } %>">
@@ -10,11 +9,62 @@
     </div>
     <div class="contents" id="nav-content">
         <ul>
-            <li <% if(is_home()){ %> <%- "class=active" %> <% } %>>
-                <a href="<%= url_for(config.home_dir || '/') %>">
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
                     <i class="iconfont icon-shouye1"></i>
                     <span><%= __('nav.home') %></span>
+                    <i class="sub-arrow"></i>
                 </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li><a href="/charles/"><span>CHARLES</span></a></li>
+                </ul>
             </li>
             <li <% if(is_current('tags')){ %> <%- "class=active" %> <% } %>>
                 <a href="<%= url_for(config.tag_dir) %>">
@@ -52,12 +102,10 @@
     </div>
     <%
         if(is_post()){
-        // if(/[0-9]*\/[0-9]*\/[0-9]*\//.test(path)){
     %>
         <%- partial('./toc', {item: page, index: false}) %>
     <% } %>
 </div>
-
 
 <div class="search-field" id="search-field">
     <div class="search-bg" id="search-bg"></div>

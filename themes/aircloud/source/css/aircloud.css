@@ -1395,3 +1395,72 @@ pre .javascript .function {
   color: #666;
 
 }
+
+/* Sub-menu navigation styles */
+.nav .contents ul li.has-sub {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+.nav .contents ul li.has-sub > a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 15px;
+  margin: 0;
+  cursor: pointer;
+}
+.nav .contents ul li.has-sub > a .sub-arrow {
+  margin-left: auto;
+  font-size: 12px;
+  color: #999;
+  transition: transform 0.25s ease;
+  display: inline-block;
+}
+.nav .contents ul li.has-sub > a .sub-arrow::before {
+  content: "▸";
+}
+.nav .contents ul li.has-sub.open > a .sub-arrow {
+  transform: rotate(90deg);
+}
+.sub-menu {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+.sub-menu.open {
+  display: block;
+}
+.sub-menu li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.sub-menu li a {
+  display: block;
+  padding: 8px 15px 8px 30px !important;
+  font-size: 13px !important;
+  margin: 0 !important;
+  text-decoration: none;
+  color: #888;
+  transition: background 0.2s, color 0.2s;
+}
+.sub-menu li a:hover {
+  background: #f5f5f5;
+  color: #333;
+}
+.sub-menu .sub-menu li a {
+  padding-left: 45px !important;
+  font-size: 12px !important;
+  color: #999;
+}
+.sub-menu .sub-menu li a:hover {
+  color: #555;
+}
+/* Highlight active sub-menu item */
+.sub-menu li.active > a,
+.sub-menu li a.active {
+  color: #4a90d9;
+  font-weight: 500;
+}

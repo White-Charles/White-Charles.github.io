@@ -375,3 +375,48 @@ if(donateButton) {
     donateImg.src = donateImg.dataset.src
 }
 
+// Sub-menu navigation toggle
+/*****************************************************************************/
+document.addEventListener('DOMContentLoaded', function() {
+    var toggles = document.querySelectorAll('.nav-toggle');
+    toggles.forEach(function(toggle) {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Find the parent li and the sub-menu within it
+            var li = this.closest('li.has-sub');
+            if (!li) return;
+            var sub = li.querySelector(':scope > .sub-menu');
+            if (!sub) return;
+
+            // Toggle current
+            li.classList.toggle('open');
+            sub.classList.toggle('open');
+
+            // Close sibling sub-menus at the same level (not children)
+            var parent = li.parentNode;
+            if (parent) {
+                var siblings = parent.querySelectorAll(':scope > li.has-sub.open');
+                siblings.forEach(function(sib) {
+                    if (sib !== li) {
+                        sib.classList.remove('open');
+                        var sibSub = sib.querySelector(':scope > .sub-menu');
+                        if (sibSub) sibSub.classList.remove('open');
+                    }
+                });
+            }
+        });
+    });
+
+    // Close all sub-menus when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.nav')) {
+            var openMenus = document.querySelectorAll('.has-sub.open');
+            openMenus.forEach(function(item) {
+                item.classList.remove('open');
+                var sub = item.querySelector(':scope > .sub-menu');
+                if (sub) sub.classList.remove('open');
+            });
+        }
+    });
+});
+
