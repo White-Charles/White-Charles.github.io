@@ -1,8 +1,11 @@
 ---
-title: CHARLES — 我的文章
+title: CHARLES — 文章总览
 layout: page
 ---
 
-- **向日葵** [使用向日葵，Windows控制Linux_ubuntu，屏幕不刷新，问题解决](/2024/02/22/sunflower-ubuntu-remote/)
-- **Keras** [AttributeError: 'KerasTensor' object has no attribute' 神经网络，问题解决](/2024/02/20/keras-tensor-attribute-error/)
-- **VASP** [VASP+VTST 计算过渡态 — NEB 方法](/2026/07/13/vasp-neb-tutorial/)
+> Charles White 的个人技术笔记与教程
+
+## 系列导航
+
+- [Z 系列：附录](/charles/z-series/) — Linux/Python 实用技巧
+- [DFT 系列：教程](/charles/dft-series/) — 第一性原理计算

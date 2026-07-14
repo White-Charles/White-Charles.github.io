@@ -71,7 +71,35 @@
                         </ul>
                     </li>
                     <!-- CHARLES -->
-                    <li><a href="/charles/"><span>CHARLES</span></a></li>
+                    <li class="has-sub<%= isCharles ? ' open' : '' %>">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu<%= isCharles ? ' open' : '' %>">
+                            <li class="has-sub<%= p.indexOf('charles/z-series/') === 0 ? ' open' : '' %>">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu<%= p.indexOf('charles/z-series/') === 0 ? ' open' : '' %>">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub<%= p.indexOf('charles/dft-series/') === 0 ? ' open' : '' %>">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu<%= p.indexOf('charles/dft-series/') === 0 ? ' open' : '' %>">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
             <li <% if(is_current('tags')){ %> <%- "class=active" %> <% } %>>
