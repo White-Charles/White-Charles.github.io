@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex19 谁偷走的我的机时？（四） - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%97%B6%E9%97%B4%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-text">模型对计算时间的影响</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%B5%8B%E8%AF%95%E5%B7%A5%E4%BD%9C%EF%BC%9A"><span class="toc-text">1 测试工作：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90"><span class="toc-text">2 测试结果分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%A8%A1%E5%9E%8B%E5%A4%A7%E5%B0%8F%E5%AF%B9%E8%AE%A1%E7%AE%97%E6%97%B6%E9%97%B4%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-text">2.1 模型大小对计算时间的影响</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E4%BD%93%E7%B3%BB%E7%9A%84%E5%AF%B9%E7%A7%B0%E6%80%A7%E5%AF%B9%E8%AE%A1%E7%AE%97%E9%80%9F%E5%BA%A6%E7%9A%84%E5%BD%B1%E5%93%8D%EF%BC%9A"><span class="toc-text">2.2 体系的对称性对计算速度的影响：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-1-K%E7%82%B9%E4%BF%9D%E6%8C%81%E4%B8%8D%E5%8F%98%EF%BC%9A"><span class="toc-text">2.2.1 K点保持不变：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-%E5%AF%B9%E7%A7%B0%E6%80%A7%E5%AF%B9K%E7%82%B9%E7%9A%84%E5%BD%B1%E5%93%8D%EF%BC%9A"><span class="toc-text">2.2.2 对称性对K点的影响：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-3-%E6%A8%A1%E5%9E%8B%E5%AF%B9%E7%A7%B0%E6%80%A7%E4%B8%8EK%E7%82%B9%E5%AF%B9%E7%A7%B0%E6%80%A7%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">2.3.3 模型对称性与K点对称性的关系</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%89%A9%E5%B1%95%E7%BB%83%E4%B9%A0%EF%BC%9A"><span class="toc-text">3 扩展练习：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">4 总结：</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex19 谁偷走的我的机时？（四）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2017-12-11 15:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#机时" title="机时">机时</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#模型" title="模型">模型</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h3 id="模型对计算时间的影响"><a href="#模型对计算时间的影响" class="headerlink" title="模型对计算时间的影响"></a>模型对计算时间的影响</h3><hr>
+<p>上一节介绍的KPOINTS对计算的影响，相信大家已经认真阅读参考书的第三章部分了。本季我们讨论一下模型的大小对计算的影响。主要体现在晶胞的尺寸，对称性以及对K点的影响上。</p>
+<hr>
+<h3 id="1-测试工作："><a href="#1-测试工作：" class="headerlink" title="1 测试工作："></a>1 测试工作：</h3><p> 为了方便处理，我们把O$_2$计算的格子设置为长宽高均为8.0 $\AA$。</p>
+<p><img src="/img/lvthw/ex19/ex19-1.jpeg"><br>重复之前KPOINTS的批处理操作，我们可以获得一系列不同大小格子的文件夹。如下图：<br><img src="/img/lvthw/ex19/ex19-2.jpeg"></p>
+<p>命令：  <code>for i in $(seq 10 2 20); do cp 8 $i; sed –i &quot;3,5s/8.0/$i/g&quot; $i/POSCAR ;done</code></p>
+<hr>
+<h3 id="2-测试结果分析"><a href="#2-测试结果分析" class="headerlink" title="2 测试结果分析"></a>2 测试结果分析</h3><h3 id="2-1-模型大小对计算时间的影响"><a href="#2-1-模型大小对计算时间的影响" class="headerlink" title="2.1 模型大小对计算时间的影响"></a>2.1 模型大小对计算时间的影响</h3><p><img src="/img/lvthw/ex19/ex19-3.jpeg"></p>
+<p>注意：在后面加入 <code>sort –n</code> 后输出的变化。</p>
+<hr>
+<p><img src="/img/lvthw/ex19/ex19-4.jpeg"></p>
+<p><img src="/img/lvthw/ex19/ex19-5.jpeg"></p>
+<p>从图中可以看出来，计算时间随着格子的大小，需要的计算时间增加的很快。</p>
+<p>注意：在测试中，KPOINTS一直保持不变（因为只有一个Gamma点）。而在我们实际的计算操作中，使用1x1x1 KPOINTS的机会并不多。如果格子在某个方向增加了2倍，那么对应的改方向的K点就需要除以2。重复一下上节的经验指导。也就是在计算过程中，保持k<em>a保持不变。当然，k</em>a是我们提前测试好的。</p>
+<p><img src="/img/lvthw/ex19/ex19-6.jpeg"></p>
+<p>举例：</p>
+<p>一个<code>10x10x10</code> $\AA^3$的体相材料，我们计算的时候K点设置为：<code>6x6x6</code>。</p>
+<p>当我们将材料在x方向增加1倍，变为<code>20x10x10</code>  $\AA^3$。为保持一致的精确度，那么我们的K点需要设置为：<code>3x6x6</code>。</p>
+<hr>
+<p>这是因为倒易晶格矢量和实际的晶格矢量之间存在着倒数的关系：</p>
+<p><img src="/img/lvthw/ex19/ex19-7.jpeg"></p>
+<p>注： 类似的图，不加说明，均出自我们的参考书。也就是说，我们选取的晶格越大，倒易晶格矢量越小。用同等数目的K点分布到倒易晶格中，网格的密度也会越大，从而造成计算量的增加。</p>
+<hr>
+<h4 id="2-2-体系的对称性对计算速度的影响："><a href="#2-2-体系的对称性对计算速度的影响：" class="headerlink" title="2.2 体系的对称性对计算速度的影响："></a>2.2 体系的对称性对计算速度的影响：</h4><h5 id="2-2-1-K点保持不变："><a href="#2-2-1-K点保持不变：" class="headerlink" title="2.2.1 K点保持不变："></a>2.2.1 K点保持不变：</h5><p>这一点前面关于氧原子的计算就已经介绍到了，降低体系的对称性会增加额外的计算时间。如图：将<code>12x12x12</code> $\AA^3$ （计算需要186.86 s）的格子修改如下：</p>
+<p><img src="/img/lvthw/ex19/ex19-8.jpeg"></p>
+<p>计算结束后，查看时间，为194.9 s, 计算时间增加了8秒。</p>
+<p><img src="/img/lvthw/ex19/ex19-9.jpeg"></p>
+<h4 id="2-2-2-对称性对K点的影响："><a href="#2-2-2-对称性对K点的影响：" class="headerlink" title="2.2.2 对称性对K点的影响："></a>2.2.2 对称性对K点的影响：</h4><p>体系的对称性不仅仅提现在前面的计算中，更可以在计算中极大地减少K点的数目，从而加快计算，节省时间。这一点我们引用参考书中的一段话：</p>
+<p><img src="/img/lvthw/ex19/ex19-10.jpeg"></p>
+<h5 id="2-3-3-模型对称性与K点对称性的关系"><a href="#2-3-3-模型对称性与K点对称性的关系" class="headerlink" title="2.3.3 模型对称性与K点对称性的关系"></a>2.3.3 模型对称性与K点对称性的关系</h5><p>在这里，体系的对称性与K点对称性的匹配问题，尤其是对于hexagonal的结构来说，必须要使用 gamma centered points. 也就是第三行的第一个字母必须为G或者g。我们看一下官网的原话：</p>
+<blockquote>
+<p>We strongly recommend to use only Gamma centered grids forhexagonal lattices. Many tests we have performed indicate that the energy convergessignificantly faster with centered grids than with standard Monkhorst Pack grids. Grids generated with the “M” setting in the third line, in fact do not have full hexagonal symmerty.</p>
+</blockquote>
+<p>如果你不确定自己的体系，直接用G就可以了。</p>
+<blockquote>
+<p>For reasons of safety it might be a good choice to use only meshes with theirorigin at (switch “G” or “g” on third line or odd divisions) if the tetrahedron method is used.</p>
+</blockquote>
+<h3 id="3-扩展练习："><a href="#3-扩展练习：" class="headerlink" title="3 扩展练习："></a>3 扩展练习：</h3><p> 1 认真阅读： Density Functional Theory: A Practical Introduction: 第三章的前两节；</p>
+<p>2 VASP官网查找K点相关的说明。</p>
+<h3 id="4-总结："><a href="#4-总结：" class="headerlink" title="4 总结："></a>4 总结：</h3><p> 学习完本节，大家应该掌握的内容有： </p>
+<p>4.1 晶格大小对计算时间的影响；</p>
+<p>4.2 体系的对称性对计算时间的影响；</p>
+<p>4.3 掌握K点和晶格大小的经验规则；</p>
+<p>4.4 晶格对称性和K点对称性的一致性。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

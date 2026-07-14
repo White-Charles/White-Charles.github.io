@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        离子迁移概率密度可视化 - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Pymatgen-diffusion"><span class="toc-text">安装 Pymatgen-diffusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E7%94%A8%E6%B3%95"><span class="toc-text">学习用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E4%BD%9C%E5%9B%BE"><span class="toc-text">开始作图</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        离子迁移概率密度可视化
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-10-02 00:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#骚操作" title="骚操作">骚操作</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Pymatgen" title="Pymatgen">Pymatgen</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#软件" title="软件">软件</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>大师兄在9月8日的文章中讲了如何用 Pymatgen 计算离子的电导率（该方法可以用来研究固态电解质等问题），<strong>本次，大师兄介绍一下如何使用 Pymatgen 可视化离子的迁移概率密度。</strong></p>
+<p>先举个例子，</p>
+<blockquote>
+<p>在“Design principles for solid-state lithium superionic conductors”一文中（Wang et al., Nature Materials <strong>2015</strong>, <em>14</em> , 1026–1031. ），作者用Ab Initio Molecular Dynamic （AIMD）计算了Li 离子在Li$\mathrm{_1}$$\mathrm{_0}$GeP$\mathrm{_2}$S$\mathrm{_1}$$\mathrm{_2}$， Li$\mathrm{_7}$P$\mathrm{_3}$S$\mathrm{_1}$$\mathrm{_1}$，Li$\mathrm{_2}$S，和 Li$\mathrm{_4}$GeS$\mathrm{_4}$ 四种材料中的迁移概率密度（Probability Density），结果如下图所示：</p>
+</blockquote>
+<p><img src="/img/lvthw/A24/A24_1.png"></p>
+<blockquote>
+<ul>
+<li>从图中可以看出Li离子在图a所示材料中主要沿c轴方向的通道迁移，而且由于这个通道连通得比较好，Li离子的迁移势垒会比较低（0.22~0.25 eV）。</li>
+<li>Li离子在图b所示的材料的迁移路径形成了一个三维网格，而且由于这个概率密度比图b中的概率密度分布得更加均匀，Li离子的迁移势垒更低（0.18~0.19 eV）。</li>
+<li>图b所示的材料就完全不行了，因为Li离子的概率密度仅分布在特定的位点附近，说明离子不能有效地移动。</li>
+<li>Li离子在图d所示材料中也存在迁移局域化的行为。</li>
+<li>作者总结说 “A general principle for the design of Li-ion conductors with low activation energy can be distilled from the above findings: all of the sites within the diffusion network should be energetically close to equivalent, with large channels connecting them.”</li>
+</ul>
+</blockquote>
+<p>**那么我们如何在自己的计算中画出这样的图呢？**Pymatgen 举手说，它可以帮忙！</p>
+<p>但是在开始之前，我们要安装Pymatgen的插件：<strong>Pymatgen-diffusion</strong>（<a target="_blank" rel="noopener" href="https://github.com/materialsvirtuallab/pymatgen-diffusion%EF%BC%89%E3%80%82">https://github.com/materialsvirtuallab/pymatgen-diffusion）。</a></p>
+<h2 id="安装-Pymatgen-diffusion"><a href="#安装-Pymatgen-diffusion" class="headerlink" title="安装 Pymatgen-diffusion"></a>安装 Pymatgen-diffusion</h2><p>**推荐大家使用最新版的Anaconda安装Pymatgen及其插件。**点击上面的链接，进入官网后，点击最新版本链接，</p>
+<p><img src="/img/lvthw/A24/A24_2.png"></p>
+<p>我们可以下载.zip文件，</p>
+<p><img src="/img/lvthw/A24/A24_3.png"></p>
+<p>下载完成后，大家可以解压这个文件，得到 pymatgen-diffusion-2019.8.18文件夹。</p>
+<p>我们把其中的 pymatgen_diffusion 文件夹放到 Anaconda的site-packages文件夹下，路径是 Windows 系统：……\Anaconda\Lib\site-packages；Linux系统：……&#x2F;anaconda3&#x2F;lib&#x2F;pythonx.x&#x2F;site-packages，就算安装好了。</p>
+<p>接下来我们可以启动python，导入这个模块，如果不报错就没有问题了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[test@ln0%tianhe2 li_sn_s]$ python</span><br><span class="line">Python 3.8.3 (default, Jul  2 2020, 16:21:59) </span><br><span class="line">[GCC 7.3.0] :: Anaconda, Inc. on linux</span><br><span class="line">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span><br><span class="line">&gt;&gt;&gt; import pymatgen_diffusion</span><br><span class="line">&gt;&gt;&gt; </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="学习用法"><a href="#学习用法" class="headerlink" title="学习用法"></a>学习用法</h2><p>我们可以在其github网站上通过例子学习这个模块的用法。</p>
+<p><img src="/img/lvthw/A24/A24_4.png"></p>
+<p>点击打开 probbility_analysis.ipynb 文件。</p>
+<p><img src="/img/lvthw/A24/A24_5.png"></p>
+<p>其内容如下（有所删减）：如果不想看的话可直接查看 <strong>开始作图</strong> 部分</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pymatgen.analysis.diffusion_analyzer <span class="keyword">import</span> DiffusionAnalyzer</span><br><span class="line"><span class="keyword">from</span> pymatgen_diffusion.aimd.pathway <span class="keyword">import</span> ProbabilityDensityAnalysis</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="comment">#ProbabilityDensityAnalysis object</span></span><br><span class="line">filename=<span class="string">&quot;/Users/iekhengchu/repos/pymatgen-diffusion/pymatgen_diffusion/aimd/tests/cNa3PS4_pda.json&quot;</span></span><br><span class="line"></span><br><span class="line">data = json.load(<span class="built_in">open</span>(<span class="string">&quot;../pymatgen_diffusion/aimd/tests/cNa3PS4_pda.json&quot;</span>, <span class="string">&quot;r&quot;</span>))</span><br><span class="line">diff_analyzer = DiffusionAnalyzer.from_dict(data) <span class="comment"># 初始化DiffusionAnalyzer类</span></span><br><span class="line"></span><br><span class="line">pda = ProbabilityDensityAnalysis.from_diffusion_analyzer(diff_analyzer, interval=<span class="number">0.5</span>, </span><br><span class="line">                                                         species=(<span class="string">&quot;Na&quot;</span>, <span class="string">&quot;Li&quot;</span>)) <span class="comment">#可以指定离子</span></span><br><span class="line"><span class="comment">#Save probability distribution to a CHGCAR-like file</span></span><br><span class="line">pda.to_chgcar(filename=<span class="string">&quot;CHGCAR_new2.vasp&quot;</span>) <span class="comment">#保存概率密度文件</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="开始作图"><a href="#开始作图" class="headerlink" title="开始作图"></a>开始作图</h2><p>代码（test.py）如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pymatgen_diffusion.aimd.pathway <span class="keyword">import</span> ProbabilityDensityAnalysis</span><br><span class="line"><span class="keyword">from</span> pymatgen.core.trajectory <span class="keyword">import</span> Trajectory</span><br><span class="line"><span class="keyword">from</span> pymatgen.io.vasp.outputs <span class="keyword">import</span> Xdatcar</span><br><span class="line"><span class="keyword">from</span> pymatgen.analysis.diffusion_analyzer <span class="keyword">import</span> DiffusionAnalyzer</span><br><span class="line"></span><br><span class="line">traj = Trajectory.from_file(<span class="string">&#x27;XDATCAR&#x27;</span>)</span><br><span class="line">diff = DiffusionAnalyzer.from_structures(traj,<span class="string">&#x27;Li&#x27;</span>,<span class="number">900</span>,<span class="number">2</span>,<span class="number">1</span>)</span><br><span class="line">pda = ProbabilityDensityAnalysis.from_diffusion_analyzer(diff,interval=<span class="number">0.5</span>,species=(<span class="string">&quot;Li&quot;</span>))</span><br><span class="line">pda.to_chgcar(filename=<span class="string">&quot;pda.vasp&quot;</span>) <span class="comment">#保存概率密度文件</span></span><br></pre></td></tr></table></figure>
+
+<p>此处理过程大概耗时8分钟，因机器而异。</p>
+<p>在VESTA中可视化如下：</p>
+<p><img src="/img/lvthw/A24/A24_6.png"></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

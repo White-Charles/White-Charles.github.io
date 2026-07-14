@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+<div class="post-preview-container" style="min-height: 720px">
+    
+    <div class="post-preview">
+        <div class="post-time">2018-11-06</div>
+        <div class="post-info">
+            <a href="https://white-charles.github.io/2018/11/06/ex68/">
+                <h3>
+                    Ex68 频率，零点能，吉布斯自由能的计算
+                </h3>
+            </a>
+            
+            <p>
+                
+                
+                <a class="tag" href="/tags/#频率" title="频率">频率</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#零点能" title="零点能">零点能</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#吉布斯自由能" title="吉布斯自由能">吉布斯自由能</a>
+                
+            </p>
+            
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2018-11-05</div>
+        <div class="post-info">
+            <a href="https://white-charles.github.io/2018/11/05/ex67/">
+                <h3>
+                    Ex67 H$_2$O在Cu(111)表面上的吸附能
+                </h3>
+            </a>
+            
+            <p>
+                
+                
+                <a class="tag" href="/tags/#模型搭建" title="模型搭建">模型搭建</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#吸附能" title="吸附能">吸附能</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#H$_2$O" title="H$_2$O">H$_2$O</a>
+                
+            </p>
+            
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2018-11-04</div>
+        <div class="post-info">
+            <a href="https://white-charles.github.io/2018/11/04/ex66/">
+                <h3>
+                    Ex66 H$_2$O在Cu(111)表面上的吸附模型
+                </h3>
+            </a>
+            
+            <p>
+                
+                
+                <a class="tag" href="/tags/#模型搭建" title="模型搭建">模型搭建</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#吸附能" title="吸附能">吸附能</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#H$_2$O" title="H$_2$O">H$_2$O</a>
+                
+            </p>
+            
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2018-11-03</div>
+        <div class="post-info">
+            <a href="https://white-charles.github.io/2018/11/03/ex65/">
+                <h3>
+                    Ex65 p4vasp 的旋转操作
+                </h3>
+            </a>
+            
+            <p>
+                
+                
+                <a class="tag" href="/tags/#模型搭建" title="模型搭建">模型搭建</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#吸附能" title="吸附能">吸附能</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#CO" title="CO">CO</a>
+                
+            </p>
+            
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2018-11-02</div>
+        <div class="post-info">
+            <a href="https://white-charles.github.io/2018/11/02/ex64/">
+                <h3>
+                    Ex64 吸附能的计算（九）
+                </h3>
+            </a>
+            
+            <p>
+                
+                
+                <a class="tag" href="/tags/#模型搭建" title="模型搭建">模型搭建</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#吸附能" title="吸附能">吸附能</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#CO" title="CO">CO</a>
+                
+            </p>
+            
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2018-10-11</div>
+        <div class="post-info">
+            <a href="https://white-charles.github.io/2018/10/11/ex63/">
+                <h3>
+                    Ex63 吸附能的计算（八）
+                </h3>
+            </a>
+            
+            <p>
+                
+                
+                <a class="tag" href="/tags/#脚本" title="脚本">脚本</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#sed" title="sed">sed</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#模型搭建" title="模型搭建">模型搭建</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#找不同" title="找不同">找不同</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#批量操作" title="批量操作">批量操作</a>
+                
+            </p>
+            
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2018-10-10</div>
+        <div class="post-info">
+            <a href="https://white-charles.github.io/2018/10/10/ex62/">
+                <h3>
+                    Ex62 吸附能的计算（七）
+                </h3>
+            </a>
+            
+            <p>
+                
+                
+                <a class="tag" href="/tags/#p4vasp" title="p4vasp">p4vasp</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#ASE" title="ASE">ASE</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#CONTCAR" title="CONTCAR">CONTCAR</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#结构查看" title="结构查看">结构查看</a>
+                
+            </p>
+            
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2018-10-09</div>
+        <div class="post-info">
+            <a href="https://white-charles.github.io/2018/10/09/ex61/">
+                <h3>
+                    Ex61 吸附能的计算（六）
+                </h3>
+            </a>
+            
+            <p>
+                
+                
+                <a class="tag" href="/tags/#收敛" title="收敛">收敛</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#吸附能" title="吸附能">吸附能</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#天河II号" title="天河II号">天河II号</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#删除VASP文件" title="删除VASP文件">删除VASP文件</a>
+                
+            </p>
+            
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2018-10-08</div>
+        <div class="post-info">
+            <a href="https://white-charles.github.io/2018/10/08/ex60/">
+                <h3>
+                    Ex60 吸附能的计算（五）
+                </h3>
+            </a>
+            
+            <p>
+                
+                
+                <a class="tag" href="/tags/#p4vasp" title="p4vasp">p4vasp</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#模型搭建" title="模型搭建">模型搭建</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#吸附位点" title="吸附位点">吸附位点</a>
+                
+            </p>
+            
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2018-10-07</div>
+        <div class="post-info">
+            <a href="https://white-charles.github.io/2018/10/07/ex59/">
+                <h3>
+                    Ex59 吸附能的计算（四）
+                </h3>
+            </a>
+            
+            <p>
+                
+                
+                <a class="tag" href="/tags/#脚本" title="脚本">脚本</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#sed" title="sed">sed</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#sort" title="sort">sort</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#固定原子" title="固定原子">固定原子</a>
+                
+                <span>/</span>
+                <a class="tag" href="/tags/#规律" title="规律">规律</a>
+                
+            </p>
+            
+        </div>
+    </div>
+    
+</div>
+
+    </div>
+</div>
+
+
+<div class="pagination-bar">
+    <div class="pagination-nav">
+        
+        <a class="pag-btn" href="/" title="First">&laquo;&laquo;</a>
+        <a class="pag-btn" href="/page/6/" title="Previous">&laquo;</a>
+        
+        <span class="pag-nums">
+            
+            
+            
+                <a class="pag-num" href="/">1</a>
+                <span class="pag-dots">...</span>
+            
+            
+                
+                    <a class="pag-num" href="/page/5/">5</a>
+                
+            
+                
+                    <a class="pag-num" href="/page/6/">6</a>
+                
+            
+                
+                    <span class="pag-num current">7</span>
+                
+            
+                
+                    <a class="pag-num" href="/page/8/">8</a>
+                
+            
+                
+                    <a class="pag-num" href="/page/9/">9</a>
+                
+            
+            
+                <span class="pag-dots">...</span>
+                <a class="pag-num" href="/page/14/">14</a>
+            
+        </span>
+        
+        <a class="pag-btn" href="/page/8/" title="Next">&raquo;</a>
+        <a class="pag-btn" href="/page/14/" title="Last">&raquo;&raquo;</a>
+        
+    </div>
+    <div class="pagination-jump">
+        <span>Jump to</span>
+        <input type="number" id="pag-jump-input" min="1" max="14" value="7" />
+        <span class="pag-total">/ 14</span>
+        <button id="pag-jump-btn">GO</button>
+    </div>
+</div>
+<script>
+(function(){
+    var btn = document.getElementById('pag-jump-btn');
+    var inp = document.getElementById('pag-jump-input');
+    function go(){
+        var p = parseInt(inp.value, 10);
+        if (p >= 1 && p <= 14) {
+            window.location.href = '/' + (p === 1 ? '' : 'page/' + p + '/');
+        }
+    }
+    btn.addEventListener('click', go);
+    inp.addEventListener('keydown', function(e){ if (e.key === 'Enter') go(); });
+})();
+</script>
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = false
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex33 晶格参数的确定（Birch-Murnaghan状态方程-1） - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFBirch-Murnaghan%E6%96%B9%E7%A8%8B%EF%BC%9F"><span class="toc-text">1 什么是Birch-Murnaghan方程？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87BM%E6%96%B9%E7%A8%8B%E8%8E%B7%E5%8F%96%E6%99%B6%E6%A0%BC%E5%8F%82%E6%95%B0%EF%BC%9F"><span class="toc-text">2 如何通过BM方程获取晶格参数？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%8E%B7%E5%8F%96%E6%8B%9F%E5%90%88%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%9A"><span class="toc-text">3 获取拟合的数据：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%89%A9%E5%B1%95%E7%BB%83%E4%B9%A0"><span class="toc-text">4 扩展练习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%80%BB%E7%BB%93"><span class="toc-text">5 总结</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex33 晶格参数的确定（Birch-Murnaghan状态方程-1）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-02-02 02:06:48</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#Bulk" title="Bulk">Bulk</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#单胞" title="单胞">单胞</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#BM方程" title="BM方程">BM方程</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#批量" title="批量">批量</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>O$_2$分子的计算中，我们知道了，单纯从数据库中获取的结构，只能作为一个合理的初始值，与计算所得到的理论结构还有一定的差距，因此我们需要对该结构进行优化才可以获取稳定的晶格参数信息。有两个方法可以实现：</p>
+<ul>
+<li>1 Birch-Murnaghan状态方程拟合, </li>
+<li>2 VASP计算中通过调节ISIF参数直接优化Bulk。</li>
+</ul>
+<p>下面两节我们先讨论一下第一个方法：BM方程拟合。</p>
+<h2 id="1-什么是Birch-Murnaghan方程？"><a href="#1-什么是Birch-Murnaghan方程？" class="headerlink" title="1 什么是Birch-Murnaghan方程？"></a>1 什么是Birch-Murnaghan方程？</h2><p>BM方程为块体材料的体积随着外压变化的状态方程。大师兄参考了维基百科的说明，大家下载维基百科导出的PDF文件参考。在学习下面的内容前，请务必阅读这个文件，了解什么是Birch-Murnaghan方程。下载：<a target="_blank" rel="noopener" href="http://pan.baidu.com/s/1bUSYbs">http://pan.baidu.com/s/1bUSYbs</a> </p>
+<p><img src="/img/lvthw/ex33/ex33-1.jpeg"></p>
+<p><img src="/img/lvthw/ex33/ex33-2.jpeg"></p>
+<h2 id="2-如何通过BM方程获取晶格参数？"><a href="#2-如何通过BM方程获取晶格参数？" class="headerlink" title="2 如何通过BM方程获取晶格参数？"></a>2 如何通过BM方程获取晶格参数？</h2><p>首先，我们将BM方程中的体积转化为晶格参数（a）的函数：</p>
+<p><img src="/img/lvthw/ex33/ex33-3.jpeg"></p>
+<p>其中E(a)和E$_0$是晶格参数为a和a$_0$时bulk的能量，B$_0$，B$_0$’和V$_0$这些见BM方程的维基百科介绍。令$(1&#x2F;a)^2 &#x3D; x$，上图中的BM方程可以写成：</p>
+<p> $y(x) &#x3D; c_0 + c_1x + c_2x^2+c_3x^3 $ 的形式，</p>
+<p>E$_0$, B$_0$,B$_0$’和V$_0$等写进c$_0$,c$_1$,c$_2$,和c$_3$这些常数里面，它们的具体形式此时并不重要，我们需要做的就是拟合这样的曲线去寻找使y(x)为最小值时的x取值。对y(x)这个方程求导数，dy(x)&#x2F;dx &#x3D; 0 的时候，便可以获取能量最低时的x值了，再由$(1&#x2F;a)^2 &#x3D; x$ 获得晶格参数。</p>
+<p> dy(x)&#x2F;dx &#x3D; c$_1$+ 2c$_2$x + 3c$_3$x$^2$</p>
+<p>令：dy(x)&#x2F;dx &#x3D; 0，即 c$_1$+ 2c$_2$x + 3c$_3$x$^2$ &#x3D; 0</p>
+<p>这是一个典型的二项式方程，求解很容易。</p>
+<p>$$<br>x &#x3D; \frac{-2c_2\pm\sqrt{(2c_2)^2 - 4\times3C_3\times C_1}}{2\times3C_3}<br>$$<br>x有两个值，其中负值被舍弃掉，最终：</p>
+<p>$$<br>x &#x3D; \frac{-2c_2 + \sqrt{(2c_2)^2 - 4\times3C_3\times C_1}}{2\times3C_3}<br>$$</p>
+<h2 id="3-获取拟合的数据："><a href="#3-获取拟合的数据：" class="headerlink" title="3 获取拟合的数据："></a>3 获取拟合的数据：</h2><p>经过前面的分析，我们需要的就是获得的c$_1$，c$_2$ 和c$_3$值。可以设置一系列不同的晶格常数进行计算，得到对应的能量，然后将这些数据带入下面的方程中：$y(x) &#x3D; c_0 + c_1x + c_2x^2+c_3x^3 $进行拟合。本节我们主要讨论一下如何进行该计算。看到这里，你第一反应是我们之前测试K点或者SIGMA值时的那些Linux批量操作。是的，我们也需要进行一个批量操作的计算。</p>
+<p>3.1 分数坐标</p>
+<p>如果我们改变了晶格常数，那么Fe原子的坐标也要发生相应的变化。此时，用分数坐标更加方便，VESTA中在cif转VASP格式的时候，会提醒你选择哪个形式的坐标，我们选择分数坐标：</p>
+<p><img src="/img/lvthw/ex33/ex33-6.jpeg"></p>
+<p>POSCAR如下图：</p>
+<p><img src="/img/lvthw/ex33/ex33-7.jpeg"></p>
+<p>注意：</p>
+<p> 如果前面练习中，导出的为笛卡尔坐标形式的，你有两个选择：</p>
+<p>A）重新按照前面的步骤，用VESTA导出为分数坐标形式；</p>
+<p>B）将单点计算的结果直接复制过来（<code>cp  CONTCAR  POSCAR</code>），因为VASP的输出坐标为分数坐标形式，单点计算中，晶胞原子都没有动，CONTCAR可以直接使用。复制过来的POSCAR如下：</p>
+<p><img src="/img/lvthw/ex33/ex33-8.jpeg"></p>
+<p>3.2 获得分数坐标的POSCAR后，我们可以批量对晶格常数a,b,c进行批量操作，也可以对缩放系数进行批量操作，而原子的坐标不用去管。</p>
+<p>3.3 本练习对缩放系数进行批量操作</p>
+<p>我们取10个点，将1.0 替换成0.95, 0.96, 0.97, 0.98, 0.99, 1.01, 1.02, 1.03, 1.04, 1.05。此时，晶格常数为：<code>缩放系数</code>*<code>2.8664</code>.（记住，下一节用得到）</p>
+<p>a) 准备缩放系数为1.0 的计算文件夹，命名为1.00，里面包含我们前面一节已经讲过的Bulk单点计算相关文件；</p>
+<p>b) </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> 0.95 0.96 0.97 0.98 0.99 1.01 1.02 1.03 1.04 1.05; <span class="keyword">do</span> <span class="built_in">cp</span> 1.00 <span class="variable">$i</span> ; sed -i <span class="string">&quot;2s/1.0/<span class="variable">$i</span>/g&quot;</span> <span class="variable">$i</span>/POSCAR ; <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：这里大师兄在自己电脑的<code>~/.bashrc</code>文件里面设置了：<code> alias cp=&#39;cp -r&#39;</code></p>
+<p>思考： sed 命令后面用的是双引号（为什么？）如果这里看不懂的话，建议从Ex00开始学习。</p>
+<p>d.) 批量提交命令： </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> *; <span class="keyword">do</span> <span class="built_in">cd</span> <span class="variable">$i</span>; qsub sub4; <span class="built_in">cd</span> <span class="variable">$OLDPWD</span>; <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<p>其中，qsub sub4 是大师兄提交单个任务的命令。</p>
+<p>3.4 数据提取：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> *; <span class="keyword">do</span> <span class="built_in">echo</span> -e <span class="variable">$i</span> <span class="string">&quot;\t&quot;</span> $(grep <span class="string">&#x27;  without&#x27;</span> <span class="variable">$i</span>/OUTCAR | <span class="built_in">tail</span> -n 1| awk <span class="string">&#x27;&#123;print $7&#125;&#x27;</span>);  <span class="keyword">done</span> &gt; data</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/lvthw/ex33/ex33-9.jpeg"></p>
+<p>3.5 以上计算文件以及相关的命令已经上传到QQ群文件和百度网盘了，大家对比下计算结果。 <a target="_blank" rel="noopener" href="http://pan.baidu.com/s/1dEJr9rb">http://pan.baidu.com/s/1dEJr9rb</a> </p>
+<h2 id="4-扩展练习"><a href="#4-扩展练习" class="headerlink" title="4 扩展练习"></a>4 扩展练习</h2><p>4.1 完成本练习中的相关操作，并学习VASP官网批量操作的例子：</p>
+<p><a target="_blank" rel="noopener" href="https://cms.mpi.univie.ac.at/wiki/index.php/Fcc_Si">https://cms.mpi.univie.ac.at/wiki/index.php/Fcc_Si</a></p>
+<p>注意：FCC Si的例子用的原胞，并且该网址最后图中曲线不是二次方程！！！虽然用二次方程拟合出来的结果差不多。</p>
+<p>4.2 探索学习曲线拟合的方法；</p>
+<p>4.3 学习并了解BM方程以及如何拟合，如何通过BM方程获取稳定的晶格参数；</p>
+<p>4.4 对晶格参数进行批量操作，并计算。</p>
+<h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5 总结"></a>5 总结</h2><p>本节从BM方程开始，简单介绍了什么是BM方程，如何通过BM方程获取稳定晶胞对应的晶格参数，最后，又复习了一下本书前面几节的批量操作，下一节我们讲解一下如何通过python脚本对BM方程拟合。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

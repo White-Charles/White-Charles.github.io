@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        通过Ubuntu连接服务器的方法 - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="toc-text">前期准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83"><span class="toc-text">连接超算中心</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E6%B5%8B%E8%AF%95"><span class="toc-text">数据传输测试</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        通过Ubuntu连接服务器的方法
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2017-11-18 15:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#超算中心" title="超算中心">超算中心</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#sshfs" title="sshfs">sshfs</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Ubuntu" title="Ubuntu">Ubuntu</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>本教程主要讲述的是如何在Ubuntu16.04操作系统上连接国科智算超算。分3部分：</p>
+<ul>
+<li>1）前期准备； </li>
+<li>2）连接和挂载超算中心； </li>
+<li>3）数据传输测试。</li>
+</ul>
+<p>在使用本教程前，首先确认已经收到了超算管理员分配的秘钥。通过Vim或者其他文本编辑工具，可以查看一下这个秘钥。超算中心好比是一个宝藏，这个宝藏的大门上有把锁，而开启这把锁的钥匙，就是管理员给我们的秘钥。</p>
+<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><p>下面的工作，一步一步来，相信99.99% 的人都可以顺利完成。</p>
+<ul>
+<li>为了方便理解，本人将管理员给的秘钥重新命名了一下。将下面的999改成管理员给你的那个数字。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbro:~$ <span class="built_in">cp</span>  ~/Desktop/id_rsa_gkzshpc999.gkzshpc999  .ssh/my_key</span><br></pre></td></tr></table></figure>
+
+<p>经过上面的一步，管理员给的秘钥就被我们命名成：my_key了。这好比是我们在钥匙上贴了个标签，开门的时候直接找这个标签对应的钥匙就可以了。</p>
+<p>如果你的Ubuntu系统下没有 .ssh 文件夹，可以自己先建一个，然后再运行上面的命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbro:~$ <span class="built_in">mkdir</span> .ssh</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>安装sshfs </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbro:~$ <span class="built_in">sudo</span> apt-get install sshfs </span><br><span class="line">[<span class="built_in">sudo</span>] password <span class="keyword">for</span> qli: </span><br><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree       </span><br><span class="line">Reading state information... Done</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建挂载国科智算的文件目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbro:~$ <span class="built_in">mkdir</span> gkzs</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开~&#x2F;.bashrc文件，并添加下面的两行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> gkzs=<span class="string">&#x27;ssh -i /home/qli/.ssh/my_key  gkzshpc999@59.49.37.9 -p 9236&#x27;</span></span><br><span class="line"><span class="built_in">alias</span> mgkzs=<span class="string">&#x27;sshfs -o IdentityFile=/home/qli/.ssh/my_key  -p 9236 gkzshpc999@59.49.37.9:  /home/qli/gkzs&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>上面我们的两行alias后面的内容主要为：</p>
+<ul>
+<li>我们的手（ssh）拿着钥匙（-i &#x2F;home&#x2F;qli&#x2F;.ssh&#x2F;my_key） 打开大门 （<a href="mailto:&#103;&#107;&#x7a;&#x73;&#104;&#x70;&#x63;&#x39;&#x39;&#x39;&#x40;&#53;&#x39;&#46;&#x34;&#57;&#46;&#51;&#x37;&#x2e;&#x39;">gkzshpc999@59.49.37.9</a> -p 9236）</li>
+<li>我们的手（sshfs）拿着钥匙 （-o IdentityFile&#x3D;&#x2F;home&#x2F;qli&#x2F;.ssh&#x2F;my_key） 打开大门 （-p 9236 <a href="mailto:&#103;&#107;&#x7a;&#x73;&#104;&#x70;&#99;&#x39;&#57;&#x39;&#x40;&#x35;&#57;&#x2e;&#x34;&#x39;&#x2e;&#51;&#x37;&#46;&#57;">gkzshpc999@59.49.37.9</a>）后，并将宝藏运回家（&#x2F;home&#x2F;qli&#x2F;gkzs）</li>
+</ul>
+</li>
+<li><p>source 一下 ~&#x2F;.bashrc 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbro:~$ . ~/.bashrc</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="连接超算中心"><a href="#连接超算中心" class="headerlink" title="连接超算中心"></a>连接超算中心</h3><p>上面的工作完成之后，剩下的就是命令操作的事情了：</p>
+<ul>
+<li><p>连接超算中心：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbro:~$ <span class="built_in">ls</span></span><br><span class="line">Desktop  Documents  Downloads  gkzs  lvliang  Music  Pictures  Public  SCVPN  teklahome  Templates  Videos</span><br><span class="line">qli@bigbro:~$ gkzs</span><br><span class="line">Last login: Thu Nov 22 05:07:16 2018 from 80.29.50.15</span><br><span class="line">[gkzshpc999@login02 ~]$ <span class="built_in">ls</span></span><br><span class="line">perl5</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开新的一个Terminal，我们挂载超算中心到我们的电脑上面，以便传输数据。</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbro:~$ <span class="built_in">ls</span></span><br><span class="line">Desktop  Documents  Downloads  gkzs  lvliang  Music  Pictures  Public  SCVPN  teklahome  Templates  Videos</span><br><span class="line">qli@bigbro:~$ <span class="built_in">ls</span> gkzs/</span><br><span class="line"> </span><br><span class="line">qli@bigbro:~$ mgksz</span><br><span class="line">qli@bigbro:~$ <span class="built_in">ls</span> gkzs/</span><br><span class="line">perl5</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="数据传输测试"><a href="#数据传输测试" class="headerlink" title="数据传输测试"></a>数据传输测试</h3><ul>
+<li><p>在连接到服务器的界面：我们创建一个文件：mount_test。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[gkzshpc999@login02 ~]$ <span class="built_in">echo</span>  <span class="string">&#x27;I love BigBro&#x27;</span> &gt;  mount_test</span><br><span class="line">[gkzshpc999@login02 ~]$ <span class="built_in">ls</span></span><br><span class="line">mount_test  perl5</span><br><span class="line">[gkzshpc999@login02 ~]$ <span class="built_in">cat</span> mount_test </span><br><span class="line">I love BigBro</span><br><span class="line">[gkzshpc999@login02 ~]$ </span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>在挂载的目录下查看：目录下多出来了刚刚创建的 mount_test文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbro:~$ <span class="built_in">cd</span>  gkzs/</span><br><span class="line">qli@bigbro:~/gkzs$ <span class="built_in">ls</span></span><br><span class="line">mount_test  perl5</span><br><span class="line">qli@bigbro:~/gkzs$ <span class="built_in">cat</span> mount_test </span><br><span class="line">I love BigBro</span><br><span class="line">qli@bigbro:~/gkzs$ </span><br><span class="line">qli@bigbro:~/gkzs$ <span class="built_in">cp</span> ~/Desktop/CONTCAR  .</span><br><span class="line">qli@bigbro:~/gkzs$ <span class="built_in">ls</span></span><br><span class="line">CONTCAR  mount_test  perl5</span><br><span class="line">qli@bigbro:~/gkzs$ </span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>上面的最后操作中，我们从桌面上复制了一个CONTCAR到挂载的目录下，然后查看下服务器的终端：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[gkzshpc999@login02 ~]$ <span class="built_in">ls</span></span><br><span class="line">CONTCAR  mount_test  perl5</span><br><span class="line">[gkzshpc999@login02 ~]$ <span class="built_in">head</span> -n 5 CONTCAR  </span><br><span class="line">Ru\(0\0\1)                              </span><br><span class="line">   1.00000000000000     </span><br><span class="line">     8.1377999784000004    0.0000000000000000    0.0000000000000000</span><br><span class="line">     4.0688999892000002    7.0475415119999996    0.0000000000000000</span><br><span class="line">     0.0000000000000000    0.0000000000000000   21.5631999968999999</span><br><span class="line">[gkzshpc999@login02 ~]$ </span><br></pre></td></tr></table></figure>
+
+
+
+<p>完成了上面的操作，下面你就可以将自己电脑上准备的一些计算文件或者文件夹通过命令复制到超算中心，然后就可以提交任务了。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

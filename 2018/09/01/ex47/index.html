@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex47 表面能的计算（一） - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%A1%A8%E9%9D%A2%E8%83%BD%E5%AE%9A%E4%B9%89"><span class="toc-text">1 表面能定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-VASP%E8%AE%A1%E7%AE%97"><span class="toc-text">2 VASP计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%B8%8B%E9%9D%A2%E6%88%91%E4%BB%AC%E7%9C%8B%E4%B8%80%E4%B8%8B%E8%BF%99%E7%AF%87%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E4%B8%AD%E7%9A%84%E8%AE%A1%E7%AE%97%E4%BB%8B%E7%BB%8D%EF%BC%9A"><span class="toc-text">3 下面我们看一下这篇参考文献中的计算介绍：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%89%A9%E5%B1%95%E7%BB%83%E4%B9%A0%EF%BC%9A"><span class="toc-text">4 扩展练习：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">5 总结：</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex47 表面能的计算（一）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-09-01 02:06:48</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#表面能" title="表面能">表面能</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>继续前面的计算，这一节我们主要讲一下表面能的计算过程。</p>
+<h3 id="1-表面能定义"><a href="#1-表面能定义" class="headerlink" title="1 表面能定义"></a>1 表面能定义</h3><p>首先，我们先介绍一下表面能的定义。为了偷懒，本人直接摘抄的<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Surface_energy">维基百科</a>的解释，如下：</p>
+<p>表面能是创造物质表面时，破坏分子间化学键所需消耗的能量。在固体物理理论中，表面原子比物质内部的原子具有更多的能量，因此，根据能量最低原理，原子会自发的趋于物质内部而不是表面。表面能的另一种定义是，材料表面相对于材料内部所多出的能量。把一个固体材料分解成小块需要破坏它内部的化学键，所以需要消耗能量。如果这个分解的过程是可逆的，那么把材料分解成小块所需要的能量就和小块材料表面所增加的能量相等。但事实上，只有在真空中刚刚形成的表面才符合上述能量守恒。因为新形成的表面是非常不稳定的，它们通过表面原子重组和相互间的反应，或者对周围其他分子或原子的吸附，从而使表面能量降低。</p>
+<h3 id="2-VASP计算"><a href="#2-VASP计算" class="headerlink" title="2 VASP计算"></a>2 VASP计算</h3><p>具体到VASP的计算中，表面能是怎么算出来的呢？ 下面我们看一下VASP官网的表面能的计算过程。</p>
+<p><img src="/img/lvthw/ex47/ex47-2.jpeg"></p>
+<p>公式先大体浏览一遍，我们分析下里面的各项所表示的内容：</p>
+<ul>
+<li>E<sup>rel</sup>： Relaxation energy， 即弛豫能量。这个前面一节我们已经讲过了，从刚刚切好的表面优化到稳定的表面所释放的热量。图中的第一个点就是刚刚切好表面的能量（E<sup>surf</sup>），最后一个点就是优化完成之后的能量。这个相信大家现在都能理解了。</li>
+<li>σ： 在handonsession-III里面，这个用来表示表面能。</li>
+<li>E<sup>surf</sup>：刚刚切好的 slab 能量；可以直接算个单点，也可以取优化过程中第一个离子步的能量。</li>
+<li>N<sub>atoms</sub>： Slab 中的原子数目</li>
+<li>E<sub>bulk</sub>： Bulk结构中单个原子的能量。</li>
+</ul>
+<p><strong>注意1：</strong></p>
+<p>前面说的最后一点。E<sub>bulk</sub>， 这个不是指的体相的能量，而是体相中单个原子能量。即体相的能量除以原子数目。我们顺便回顾一下前面单胞的优化：</p>
+<ol>
+<li>获取稳定的晶格常数，两个方法：</li>
+</ol>
+<pre><code>* ISIF + Large ENCUT
+* 通过计算不同的晶格常数的晶胞能量，用BM方程拟合
+</code></pre>
+<ol start="2">
+<li>得到稳定的晶格常数之后，如果用的 ISIF&#x3D; 3 这个方法，则将 CONTCAR 复制成 POSCAR ，然后在 INCAR 中设置： ISIF &#x3D; 2 + 正常的 ENCUT ，做个单算，算下计算晶胞的能量。</li>
+<li>用晶胞的能量除以晶胞中的原子数目，就得到了这里的 E<sub>bulk</sub>。比如前面 Cu 的单胞中有4个原子，我们则用计算后体系的能量除以4。</li>
+</ol>
+<p><strong>注意2：</strong></p>
+<p>Handonsession-III 里面的表面能，严格来说，这个定义其实是不对的。因为表面能，从字面上理解，它的单位应该是： 能量&#x2F;面积。而图中只有能量，没有面积。所以，图中的表面能指的是纯能量。</p>
+<ol>
+<li>σ<sup>unrel</sup>： 将块体直接切开所用的功，因为是切成了2份，公式中除以2。</li>
+</ol>
+<pre><code>注意，在这个计算里面，暂且不考虑表面的弛豫，单纯从体相切成2个表面的过程。
+能量是刚刚切出来的slab的能量： -25.560
+</code></pre>
+<ol start="2">
+<li>从体相到切开表面直至达到稳定状态，总的能量变化为：<br>$$<br>\sigma &#x3D; \sigma^{unrel + E^{rel}}<br>$$</li>
+</ol>
+<p><strong>注意3：</strong></p>
+<p>E<sup>rel</sup> 这里没有除以2。为什么呢？ 这是因为我们只放开了上面的两层原子。也就是只优化了一个表面。<br>至此，从体相切成表面，然后直至表面稳定，这一个过程的能量就算完了。<br>既然前面说了，表面能里面有面积，那么面积指的是什么面积？怎么求面积呢？</p>
+<ol>
+<li>面积就是你计算的slab的那一层表面积，很多人问我这个问题，我也是无语了！</li>
+<li>怎么求呢? 我们先看一下Slab模型(Notepad++这个软件打开的！没有的话赶紧去安装一个)</li>
+</ol>
+<p><img src="/img/lvthw/ex47/ex47-3.png"></p>
+<p>前面几行放大一下，看看晶格尺寸。</p>
+<p><img src="/img/lvthw/ex47/ex47-4.png"></p>
+<p>如果面积用A来表示， 则： </p>
+<p>A &#x3D; 2.57170 * 2.22716 – 0.000 * (-1.28585) </p>
+<p><strong>注意4：</strong></p>
+<p>这里的单位是 Å<sup>2</sup><br>原理如下图：(自画自拍，不喜勿喷!)</p>
+<p><img src="/img/lvthw/ex47/ex47-5.jpeg"></p>
+<p>菱形的面积等于： x1 * y2<br>如果坐标系不是那么正儿八经对在一起的时候，如下图：</p>
+<p><img src="/img/lvthw/ex47/ex47-6.jpeg"></p>
+<p>则面积等于：x1 * y2 – y1 * x2<br>Handonsession-III 中 Ni(100) 表面的面积为：</p>
+<p><img src="/img/lvthw/ex47/ex47-7.png"></p>
+<p>A &#x3D; (0.5*0.5– 0.5 * (-0.5)) &#x3D; 0.5 Å<sup>2</sup><br>这里我们还忘了乘以前面的缩放系数：所以，<br>A &#x3D; 0.5 * 3.53 * 3.53 &#x3D; 6.23045 Å<sup>2</sup><br>最终表面能为： 0.71 eV &#x2F; 6.23045 Å<sup>2</sup> &#x3D; 0.114 eV&#x2F;Å<sup>2</sup><br>一般来说表面能的单位为： J&#x2F;m<sup>2</sup><br>换算系数为： 1 eV&#x2F;Å<sup>2</sup> &#x3D; 16.02 J&#x2F;m<sup>2</sup><br>换算完毕后，表面能为： σ &#x3D; 0.114 * 16.02 J&#x2F;m<sup>2</sup> &#x3D; 1.826 J&#x2F;m<sup>2</sup> 。</p>
+<p><strong>注意5</strong>： 我们的参考书中(第97页中)给弄反了。</p>
+<p><img src="/img/lvthw/ex47/ex47-8.jpeg"></p>
+<p>这是因为：<br>1 eV &#x3D; 1.602176487<em>10<sup>-19</sup> J<br>1 Å<sup>2</sup> &#x3D; (1</em>10<sup>-10</sup>)* (1*10<sup>-10</sup>) m<sup>2</sup><br>大家自己算算就知道了。讲到这里，相信金属表面能，大家都可以照着去算一遍了。</p>
+<p><strong>注意6：</strong></p>
+<p>获取E<sup>surf</sup> 的时候，一定要检查：1） 单点计算是不是收敛了？或者2） 第一个离子步是不是收敛了？</p>
+<p>如果没有收敛的话，表面能的计算就是错的。σ<sup>unrel</sup>和E<sup>rel</sup>都跟这个量密切相关。</p>
+<h3 id="3-下面我们看一下这篇参考文献中的计算介绍："><a href="#3-下面我们看一下这篇参考文献中的计算介绍：" class="headerlink" title="3 下面我们看一下这篇参考文献中的计算介绍："></a>3 下面我们看一下这篇参考文献中的计算介绍：</h3><p>Shapecontrol in concave metal nanoparticles by etching<br>Nanoscale, 2017,9, 13089-13094 </p>
+<p><img src="/img/lvthw/ex47/ex47-9.jpeg"></p>
+<p>这是本人博士期间的一个工作，主要讨论了不同盐酸浓度下Pt纳米颗粒的成长，腐蚀过程以及形貌的预测。有兴趣的可以看看，当然啦，本人也希望大家多多引用。对于表面能的计算，大家可以参考支持信息中的公式1，如下图： </p>
+<p><img src="/img/lvthw/ex47/ex47-10.jpeg"></p>
+<p>相信到这里，大家可以完全明白这段话的意思，以及计算的整个流程了。</p>
+<h3 id="4-扩展练习："><a href="#4-扩展练习：" class="headerlink" title="4 扩展练习："></a>4 扩展练习：</h3><ol>
+<li>重复一下 Hand on Session -III 中 Ni(100)  表面能的计算;</li>
+<li>计算下我们前面的 Cu(111) 表面能的计算;</li>
+<li>计算下 Cu(100), Cu(110) 的表面能。</li>
+<li>对比 Cu(111), Cu(110) 和 Cu(100) 的表面能，分析下规律。</li>
+<li>思考1：表面能的计算有什么需要注意的， 请公众号留言回答！</li>
+<li>思考2：表面能能用来干什么？请公众号留言回答！</li>
+</ol>
+<h3 id="5-总结："><a href="#5-总结：" class="headerlink" title="5 总结："></a>5 总结：</h3><p>本节，我们主要讲了表面能的计算，参考的资料有：</p>
+<ol>
+<li>VASP 官网的 Hand on session (如果你自己下载不到，请认真反思自己！)</li>
+<li>我们的参考书： Density Functional Theory: A Practical Inroduction</li>
+<li>以及本人发表的文章一篇。 </li>
+<li>希望大家可以认真学习，不要急躁！！！</li>
+</ol>
+<p>本书中只要是用到的，提到的资料，本人都已经明确说明出处，获取方式以及下载链接了，请认真浏览，不要再浪费时间找我索要！</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

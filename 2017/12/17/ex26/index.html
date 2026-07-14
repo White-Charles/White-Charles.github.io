@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex26 乙醇分子的振动频率计算(四) - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-OUTCAR%E5%88%86%E6%9E%90"><span class="toc-text">1 OUTCAR分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%9B%9E%E9%A1%BE%E4%B8%80%E4%B8%8BJmol%E4%B8%AD%E7%9A%84%E9%A2%91%E7%8E%87%E6%8C%AF%E5%8A%A8"><span class="toc-text">1.1 回顾一下Jmol中的频率振动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-OUTCAR%E4%B8%AD%E7%9A%84%E4%BF%A1%E6%81%AF%EF%BC%9A"><span class="toc-text">1.2 OUTCAR中的信息：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%A2%91%E7%8E%87%E5%8D%95%E4%BD%8D%E7%9A%84%E6%8D%A2%E7%AE%97"><span class="toc-text">2 频率单位的换算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-OUTCAR%E9%A2%91%E7%8E%87%E4%BF%A1%E6%81%AF%E7%9A%84%E6%8F%90%E5%8F%96%EF%BC%9A"><span class="toc-text">3  OUTCAR频率信息的提取：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E4%BD%BF%E7%94%A8%E4%BB%A5%E4%B8%8B%E5%87%A0%E4%B8%AA%E5%91%BD%E4%BB%A4%EF%BC%9A"><span class="toc-text">3.1 使用以下几个命令：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-grep-f-OUTCAR"><span class="toc-text">3.2 grep &#39;f  &#x3D;&#39; OUTCAR</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%9B%B6%E7%82%B9%E8%83%BD%E6%A0%A1%E6%AD%A3"><span class="toc-text">4 零点能校正</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%98%8E%E7%99%BD%E4%BB%80%E4%B9%88%E6%98%AF%E9%9B%B6%E7%82%B9%E8%83%BD%EF%BC%9A%E5%9B%9E%E9%A1%BE%E9%A2%91%E7%8E%87%E8%AE%A1%E7%AE%97%E7%AC%AC%E4%B8%80%E8%8A%82%E7%9A%84%E5%86%85%E5%AE%B9%EF%BC%9A"><span class="toc-text">4.1 明白什么是零点能：回顾频率计算第一节的内容：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E8%8E%B7%E5%8F%96%E6%8C%AF%E5%8A%A8%E8%83%BD%E9%87%8F%E6%95%B0%E6%8D%AE%EF%BC%9A"><span class="toc-text">4.2 获取振动能量数据：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E5%B0%86%E6%89%80%E6%9C%89%E6%8C%AF%E5%8A%A8%E7%9A%84%E8%83%BD%E9%87%8F%E6%B1%82%E5%92%8C%EF%BC%9A"><span class="toc-text">4.3 将所有振动的能量求和：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E5%86%99%E8%84%9A%E6%9C%AC"><span class="toc-text">4.4 写脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%89%A9%E5%B1%95%E7%BB%83%E4%B9%A0%EF%BC%9A"><span class="toc-text">5 扩展练习：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">6 总结：</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex26 乙醇分子的振动频率计算(四)
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2017-12-17 02:06:48</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#乙醇" title="乙醇">乙醇</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#振动频率" title="振动频率">振动频率</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#零点能" title="零点能">零点能</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>前面我们学会了通过使用 <strong>Jmol</strong> 查看分子振动。但分子振动频率在<code>OUTCAR</code>是什么样子的呢？今天我们就分析一下<code>OUTCAR</code>文件中的频率信息，以及如何写脚本计算零点能矫正。</p>
+<hr>
+<h2 id="1-OUTCAR分析"><a href="#1-OUTCAR分析" class="headerlink" title="1 OUTCAR分析"></a>1 OUTCAR分析</h2><h3 id="1-1-回顾一下Jmol中的频率振动"><a href="#1-1-回顾一下Jmol中的频率振动" class="headerlink" title="1.1 回顾一下Jmol中的频率振动"></a>1.1 回顾一下Jmol中的频率振动</h3><p><img src="/img/lvthw/ex26/ex26-1.jpeg"></p>
+<p><strong>Jmol</strong> 提取了<code>OUTCAR</code>中的振动信息，将每个振动模式的频率列了出来。</p>
+<h3 id="1-2-OUTCAR中的信息："><a href="#1-2-OUTCAR中的信息：" class="headerlink" title="1.2 OUTCAR中的信息："></a>1.2 OUTCAR中的信息：</h3><p><img src="/img/lvthw/ex26/ex26-2.jpeg"></p>
+<p>对比一下这两个振动频率和·中的前两个。</p>
+<hr>
+<p>1）<code>1 f =</code> 代表第一个振动模式，细心的你仔细观察，会发现每一行有四个单位的数值：<code>THz</code>, <code>2PiTHz</code>, <code>cm-1</code>,和 <code>meV</code>，这四个是完全等同的；</p>
+<p>2）下面一行为坐标 X Y Z和每个原子在 $x, y, z$ 方向上的振动大小；</p>
+<p>3）X Y Z下面的数字为结构的坐标信息（Cartesian坐标系），dx dy dz 为振动的具体数值；</p>
+<p>4)后面的振动模式的频率和第一个的格式一样。</p>
+<hr>
+<h2 id="2-频率单位的换算"><a href="#2-频率单位的换算" class="headerlink" title="2 频率单位的换算"></a>2 频率单位的换算</h2><p>我们先讲一下这四个单位的换算公式：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Relevant    Formulas:</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$ E &#x3D;   hc &#x2F; \lambda $</td>
+</tr>
+<tr>
+<td align="left">$ \nu &#x3D; c &#x2F; \lambda $</td>
+</tr>
+<tr>
+<td align="left">$\tilde{\nu} &#x3D; 1 &#x2F; \lambda $</td>
+</tr>
+<tr>
+<td align="left">$ T &#x3D;   1 &#x2F; \nu $</td>
+</tr>
+<tr>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>Definitions:</strong></td>
+</tr>
+<tr>
+<td align="left">$E$ &#x3D;   energy ($eV$)</td>
+</tr>
+<tr>
+<td align="left">$\lambda$ &#x3D;   wavelength  ($m$)</td>
+</tr>
+<tr>
+<td align="left">$\tilde{\nu}$ &#x3D;   wavenumber  ($m^{-1}$)</td>
+</tr>
+<tr>
+<td align="left">$T$ &#x3D;   period ($s$)</td>
+</tr>
+<tr>
+<td align="left">$\nu$  &#x3D;   frequency  ($s^{-1}$ or $\textrm{Hz}$)</td>
+</tr>
+<tr>
+<td align="left">$h$ &#x3D; Planck’s constant &#x3D; $4.135667516 \times 10^{-15}~eV \cdot s$</td>
+</tr>
+<tr>
+<td align="left">$c$ &#x3D;   speed of  light &#x3D; $ 299792458~m&#x2F;s$</td>
+</tr>
+</tbody></table>
+<p>以第一个振动为例：</p>
+<table>
+<thead>
+<tr>
+<th align="left">1f   &#x3D;</th>
+<th align="right"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">111.907</td>
+<td align="right">$\textrm{THz}$</td>
+</tr>
+<tr>
+<td align="left">703.134</td>
+<td align="right">2PiTHz</td>
+</tr>
+<tr>
+<td align="left">3732.82</td>
+<td align="right">$cm^{-1} $</td>
+</tr>
+<tr>
+<td align="left">462.811</td>
+<td align="right">$meV$</td>
+</tr>
+</tbody></table>
+<p>1） THz 和 2PiTHz 的换算： $2\pi$ 的关系：</p>
+<p>$$ 111.907230<del>(\rm{THz})  \times 2 \pi  &#x3D; 703.133866</del>(\rm{2PiTHz}) $$</p>
+<p>2） THz 和 cm-1 的关系：$\nu &#x3D; c &#x2F; \lambda &#x3D; c \tilde{\nu} $， $c$ 是光速，$\lambda$ 是波长，$\tilde{\nu}$ 是波数，单位是 $m^{-1}$。计算前先换算成标准单位： 1 THz &#x3D; 1012 Hz, 1 $cm^{-1}$ &#x3D; 100 $m^{-1}$，因此：</p>
+<p>$$ 111.907230 \times 1012<del>(\textrm{Hz}) &#x3D; 299792458</del>(m&#x2F;s) \times 3732.823294 \times 100 (m^{-1}) $$</p>
+<p>3）THz 和能量 eV 的关系：</p>
+<p>$ E &#x3D; h\nu $， $h$ 为普朗克常数：$4.135667516 \times 10^{-15}~eV \cdot s$ <strong>(注意此时：Plank constant 的单位！！！)</strong></p>
+<p>$$ 462.811270 (meV) &#x3D; 0.4628 eV &#x3D; 4.135667516 \times 10^{-15} (eV*s) *  111.907230 \times 1012 (Hz) $$</p>
+<p>4） 波数（$cm^{-1}$）和能量（$meV$）的关系：<br>$E &#x3D; hc &#x2F; \lambda &#x3D; h \tilde \nu $<br>$ 462.811270<del>meV &#x3D; 0.4628</del>eV<br> &#x3D; 4.135667516 \times 10^{-15}<del>(eV*s) \times 299792458</del>(m&#x2F;s) \times 3732.823294 \times 100~(m^{-1}) $</p>
+<p>大家根据上面的公式自己手动算一遍就明白了，还可以使用下面这个网址进行计算：<a target="_blank" rel="noopener" href="http://halas.rice.edu/conversions">http://halas.rice.edu/conversions</a> 这里就不再多说了。</p>
+<hr>
+<h2 id="3-OUTCAR频率信息的提取："><a href="#3-OUTCAR频率信息的提取：" class="headerlink" title="3  OUTCAR频率信息的提取："></a>3  OUTCAR频率信息的提取：</h2><p>我们可以使用<code>grep</code>命令提取，有以下两个方式。在进行之前，首先强调一点：下面的解释<strong>只适用于</strong>NWRITE&#x3D; 0、1或者2 的时候。因为NWRITE &#x3D; 3 的时候，会额外再输出一次频率的信息。</p>
+<h3 id="3-1-使用以下几个命令："><a href="#3-1-使用以下几个命令：" class="headerlink" title="3.1 使用以下几个命令："></a>3.1 使用以下几个命令：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grep THz OUTCAR</span><br><span class="line">grep 2PiTHz OUTCAR</span><br><span class="line">grep cm-1 OUTCAR</span><br><span class="line">grep meV OUTCAR；</span><br></pre></td></tr></table></figure>
+
+<p>这几个命令中，我们分别以振动的不同单位作为提取对象，便可以得到所有的振动信息（这里的所有指的是包含虚频）：以大师兄常用的 <code>grep cm-1 OUTCAR</code> 为例：</p>
+<p><img src="/img/lvthw/ex26/ex26-3.jpeg"></p>
+<p>黄色标出来的第一列：$9 \times 3 &#x3D; 27$ 个振动模式，第二列是以<code>cm-1</code>为单位的振动频率大小，最后三行 <code>f/i=</code> 指的是虚频。</p>
+<hr>
+<p>前面我们提到过，虚频可以判断结构是否稳定。那这里，我们计算出的乙醇分子结构肯定不稳定喽？不一定。</p>
+<p>因为频率计算和软件的数值积分有关（我也不清楚数值积分怎么进行的）；</p>
+<p>计算过程中我们的设置对频率计算影响很大，<code>KPOINTS</code>, <code>ENCUT</code>, <code>EDIFF</code>, <code>POTIM</code>等都会影响计算的精度（下一节讨论）；综合这些因素，对于分子的振动频率来说（注意：声子谱不适用）一般低于 $100<del>cm^{-1}$ 的频率可以忽略。严格点可以降到 $50</del>cm^{-1}$，也就是说：如果你在计算中发现有个 $50~cm^{-1}$ 左右的虚频，完全可以不考虑。</p>
+<hr>
+<h3 id="3-2-grep-f-OUTCAR"><a href="#3-2-grep-f-OUTCAR" class="headerlink" title="3.2 grep &#39;f  =&#39; OUTCAR"></a>3.2 <code>grep &#39;f  =&#39; OUTCAR</code></h3><p><img src="/img/lvthw/ex26/ex26-4.jpeg"></p>
+<p><strong>注意：图中虚频部分没有显示出来！严格按照我用的这个命令</strong></p>
+<p>使用这个命令的时候，不提取虚频部分。查看虚频的时候，可以用之前的方式，也可以用这个命令：</p>
+<p><img src="/img/lvthw/ex26/ex26-5.jpeg"></p>
+<p>在零点能的计算时，虚频是不能考虑在内的，因为它不是分子的真实的振动模式。在我们这个例子中，虚频的出现是软件的误差所导致。在过渡态中，虚频代表的是反应方向。从另一个角度去分析：乙醇分子的零点能（下面讲到）为：$2.117<del>eV$，图中三个虚频对应的能量为：$0.76 + 2.31 + 8.14 &#x3D; 11.11</del>meV &#x3D; 0.01111~ eV$，所占比例为：$0.0111&#x2F;2.117 &#x3D; 0.5% $ 这个可以忽略不计。</p>
+<hr>
+<h2 id="4-零点能校正"><a href="#4-零点能校正" class="headerlink" title="4 零点能校正"></a>4 零点能校正</h2><h3 id="4-1-明白什么是零点能：回顾频率计算第一节的内容："><a href="#4-1-明白什么是零点能：回顾频率计算第一节的内容：" class="headerlink" title="4.1 明白什么是零点能：回顾频率计算第一节的内容："></a>4.1 明白什么是零点能：回顾频率计算第一节的内容：</h3><p><img src="/img/lvthw/ex26/ex26-6.jpeg"></p>
+<p><img src="/img/lvthw/ex26/ex26-7.jpeg"></p>
+<h3 id="4-2-获取振动能量数据："><a href="#4-2-获取振动能量数据：" class="headerlink" title="4.2 获取振动能量数据："></a>4.2 获取振动能量数据：</h3><p><img src="/img/lvthw/ex26/ex26-8.jpeg"></p>
+<p>分析下结构：</p>
+<p><img src="/img/lvthw/ex26/ex26-9.jpeg"></p>
+<p>上图输出共有11列（列之间用空格分开）：我们要的零点能在第10列，使用下面的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&#x27;f  =&#x27;</span> OUTCAR | awk <span class="string">&#x27;&#123;print $10&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果想同时输出第 1 和 10 两列：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&#x27;f  =&#x27;</span> OUTCAR | awk<span class="string">&#x27;&#123;print $1 &quot; &quot;$10&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><code>$1</code> 和 <code>$10</code> 之间有 2个 双引号：<strong>“ “</strong>，两个双引号里面有一个空格用来分开），否则两列会连在一起。</p>
+<p><strong>注意！注意！注意！</strong></p>
+<p><strong>这里我们提取的能量为：$h\nu$ ！！！</strong></p>
+<p><strong>而零点能为 $1&#x2F;2 h \nu$！！！</strong></p>
+<h3 id="4-3-将所有振动的能量求和："><a href="#4-3-将所有振动的能量求和：" class="headerlink" title="4.3 将所有振动的能量求和："></a>4.3 将所有振动的能量求和：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qli@BigBroSci:~/Desktop/freq$ grep <span class="string">&#x27;f  =&#x27;</span> OUTCAR | awk <span class="string">&#x27;&#123;print $10&#125;&#x27;</span> | <span class="built_in">paste</span> -sd+ | bc</span><br><span class="line">qli@BigBroSci:~/Desktop/freq$ 4233.962325</span><br></pre></td></tr></table></figure>
+
+<p>输出的4233.96就是所有的 hv 之和。</p>
+<p>1）不要忘记除以 $2$</p>
+<p>2）此时单位是 $meV$，换算成 $eV$ 还需要除以 $1000$。</p>
+<p>3）所以，我们的零点能是 $4233.962325&#x2F;2&#x2F;1000~ eV&#x3D; 2.117~eV$</p>
+<h3 id="4-4-写脚本"><a href="#4-4-写脚本" class="headerlink" title="4.4 写脚本"></a>4.4 写脚本</h3><p>将前面的命令写到一个文件里面就成为了脚本：怎么写呢？本人平时喜欢使用类似 $4233.962325$ 这个数字，除以 $2000$ 这一步在后面的工作中进行。因此只用到了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&#x27;f =&#x27;</span> OUTCAR | awk <span class="string">&#x27;&#123;print $10&#125;&#x27;</span> | <span class="built_in">paste</span> -sd+ | bc</span><br></pre></td></tr></table></figure>
+<p>这个命令。写脚本的具体操作：</p>
+<p><img src="/img/lvthw/ex26/ex26-10.jpeg"></p>
+<p>1）把这行命令写到一个文件中，文件名为 <code>fsum</code> （本人不喜欢 <code>.sh</code> 尾缀，加不加都一样）；</p>
+<p>2）赋予可执行权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> u+x ~/bin/fsum</span><br></pre></td></tr></table></figure>
+
+<p>3）移到 <code>~/bin</code> 文件夹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> fsum ~/bin</span><br></pre></td></tr></table></figure>
+
+<p>4）在任何一个频率计算的目录下运行：敲命令 <code>fsum</code> 即可；</p>
+<p>5）不喜欢 <code>fsum</code> 这个命令，将文件名改成你自己喜欢的名字：</p>
+<p>如果想在脚本里面直接完成除以 $2000$ 的任务，可以这么写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hv_sum=$(grep<span class="string">&quot;f  =&quot;</span> OUTCAR | awk <span class="string">&#x27;&#123;print  $10&#125;&#x27;</span>| <span class="built_in">paste</span> -sd+ | bc)</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;scale =6; <span class="variable">$hv_sum</span>/2000&quot;</span> | bc</span><br></pre></td></tr></table></figure>
+<p><img src="/img/lvthw/ex26/ex26-11.jpeg"></p>
+<p>此时结果的单位为：$eV$。</p>
+<hr>
+<h2 id="5-扩展练习："><a href="#5-扩展练习：" class="headerlink" title="5 扩展练习："></a>5 扩展练习：</h2><p>5.1 <code>OUTCAR</code>中的频率输出要看明白是怎么回事；</p>
+<p>5.2 频率的各个单位的换算要搞明白；</p>
+<p>5.3 怎么提取信息，计算零点能要掌握；</p>
+<p>5.4 怎么写脚本，从现在开始要练习了！</p>
+<h2 id="6-总结："><a href="#6-总结：" class="headerlink" title="6 总结："></a>6 总结：</h2><p>本节我们主要讨论了一下<code>OUTCAR</code>中的频率结果，能量换算，如何提取振动能量，以及如何计算零点能，最后简单介绍了一下脚本的写法，打消大家对脚本的崇拜心理，自己稍加琢磨也会写出实用的脚本！</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        A34 利用ASE的热力学模块计算气体的熵 - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="toc-text">简单说明：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E9%83%A8%E5%88%86%EF%BC%9A"><span class="toc-text">脚本部分：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E5%AE%9E%E4%BE%8B%EF%BC%9A"><span class="toc-text">运行实例：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E8%AF%B4%E6%98%8E%EF%BC%9A-1"><span class="toc-text">简单说明：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E4%B8%8B%E8%BD%BD%EF%BC%9A"><span class="toc-text">示例下载：</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        A34 利用ASE的热力学模块计算气体的熵
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2022-07-23 15:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#ASE" title="ASE">ASE</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#气体" title="气体">气体</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Entropy" title="Entropy">Entropy</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h3 id="简单说明："><a href="#简单说明：" class="headerlink" title="简单说明："></a>简单说明：</h3><p>ASE提供的热力学模块可以很方便地获取气体分子的热力学数据比如吉布斯自由能，熵等。具体参见：<a target="_blank" rel="noopener" href="https://wiki.fysik.dtu.dk/ase/ase/thermochemistry/thermochemistry.html%E3%80%82%E6%9C%AC%E8%8A%82%E4%BB%8B%E7%BB%8D%E4%B8%8B%E6%B0%94%E4%BD%93%E5%88%86%E5%AD%90%E7%86%B5%E7%9A%84%E8%AE%A1%E7%AE%97%EF%BC%8C%E7%94%A8%E5%88%B0%E7%9A%84%E6%98%AF**IdealGasThermo**%E8%BF%99%E4%B8%80%E4%B8%AA%E6%A8%A1%E5%9D%97%EF%BC%8C%E4%BE%8B%E5%AD%90%E4%B8%BA%E6%B0%A8%E6%B0%94%E5%88%86%E5%AD%90%EF%BC%88NH3%EF%BC%89%E3%80%82**IdealGasThermo**%E8%AE%A1%E7%AE%97%E6%B0%94%E4%BD%93%E5%88%86%E5%AD%90%E7%9A%84%E7%83%AD%E5%8A%9B%E5%AD%A6%E8%87%AA%E7%94%B1%E8%83%BD%EF%BC%8C%E9%99%A4%E4%BA%86VASP%E8%AE%A1%E7%AE%97%E4%B9%8B%E5%A4%96%EF%BC%8C%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E6%9C%894%E7%82%B9%E6%B3%A8%E6%84%8F%E7%9A%84%EF%BC%8C%E8%BF%99%E4%BA%9B%E9%83%BD%E8%A6%81%E8%BE%93%E5%85%A5%E5%88%B0%E5%AF%B9%E5%BA%94%E7%9A%84%E5%8F%82%E6%95%B0%E4%B9%8B%E4%B8%AD%E3%80%82">https://wiki.fysik.dtu.dk/ase/ase/thermochemistry/thermochemistry.html。本节介绍下气体分子熵的计算，用到的是**IdealGasThermo**这一个模块，例子为氨气分子（NH3）。**IdealGasThermo**计算气体分子的热力学自由能，除了VASP计算之外，要注意的有4点注意的，这些都要输入到对应的参数之中。</a></p>
+<p>1） 分子的对称数；</p>
+<p>2）分子的结构：线性或者非线性；</p>
+<p>3）分子中未成对的电子数目，或者多重度。</p>
+<p>4）温度，压强</p>
+<p>这些具体的输入，网站上都有相应的说明，自己根据分子的特性改下即可。比如对称数不会算的话，可以参考下面的这个表格。</p>
+<p><img src="/img/lvthw/A34/A34_1.png"></p>
+<h3 id="脚本部分："><a href="#脚本部分：" class="headerlink" title="脚本部分："></a>脚本部分：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Created on Tue Jul 12 18:38:35 2022</span></span><br><span class="line"><span class="string">https://janaf.nist.gov/tables/H-083.html #Database</span></span><br><span class="line"><span class="string">Symmetry Number: Table 10.1 and Appendix B of C. Cramer “Essentials of Computational Chemistry”, 2nd Ed.</span></span><br><span class="line"><span class="string">spin:  0 for molecules in which all electrons are paired, 0.5 for a free radical with a single unpaired electron, 1.0 for a triplet with two unpaired electrons, such as O_2.</span></span><br><span class="line"><span class="string">@author: qli</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> ase.io <span class="keyword">import</span> read, write</span><br><span class="line"><span class="keyword">from</span> ase.thermochemistry <span class="keyword">import</span> IdealGasThermo</span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> constants <span class="keyword">as</span> con</span><br><span class="line"></span><br><span class="line">atoms = read(<span class="string">&#x27;./freq/POSCAR&#x27;</span>)</span><br><span class="line">sym = <span class="number">3</span> <span class="comment"># symmetry number of NH3 </span></span><br><span class="line">spin = <span class="number">0</span> <span class="comment"># spin of NH3. </span></span><br><span class="line">tem = <span class="number">298.15</span> <span class="comment"># Temperature</span></span><br><span class="line">out = read(<span class="string">&#x27;./OUTCAR&#x27;</span>,  <span class="built_in">format</span>=<span class="string">&#x27;vasp-out&#x27;</span>)</span><br><span class="line">potentialenergy = out.get_potential_energy()</span><br><span class="line"></span><br><span class="line">model = read(<span class="string">&#x27;./freq/POSCAR&#x27;</span>)</span><br><span class="line"><span class="comment"># model_positions = model.get_positions()</span></span><br><span class="line"></span><br><span class="line">vib_energies = []</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;./freq/OUTCAR&#x27;</span>) <span class="keyword">as</span> f_in:</span><br><span class="line">    lines = f_in.readlines()</span><br><span class="line">    <span class="keyword">for</span> num, line <span class="keyword">in</span> <span class="built_in">enumerate</span>(lines):</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;cm-1&#x27;</span> <span class="keyword">in</span> line:</span><br><span class="line">            vib_e = <span class="built_in">float</span>(line.rstrip().split()[-<span class="number">2</span>])</span><br><span class="line">            vib_energies.append(vib_e)</span><br><span class="line"></span><br><span class="line">vib_energies = np.array(vib_energies[:-<span class="number">6</span>])/<span class="number">1000</span> <span class="comment"># For Gas, the last six are translation and rotation</span></span><br><span class="line"><span class="comment"># zpe = sum(vib_energies)/2</span></span><br><span class="line"></span><br><span class="line">thermo = IdealGasThermo(vib_energies=vib_energies,</span><br><span class="line">                        potentialenergy=potentialenergy,</span><br><span class="line">                        atoms=atoms,</span><br><span class="line">                        geometry=<span class="string">&#x27;nonlinear&#x27;</span>,</span><br><span class="line">                        symmetrynumber=<span class="number">3</span>, spin=spin)</span><br><span class="line"></span><br><span class="line">zpe = thermo.get_ZPE_correction()</span><br><span class="line">entropy = thermo.get_entropy(temperature=tem, pressure=<span class="number">101325</span>,verbose=<span class="literal">True</span>)  <span class="comment"># Unit eV/K</span></span><br><span class="line">TS = tem * entropy   </span><br><span class="line">G = potentialenergy + zpe - TS</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;G&#x27;</span>, G)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;S&#x27;</span>, con.Avogadro * con.electron_volt * entropy, <span class="string">&#x27;J/K/mol&#x27;</span>)  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="运行实例："><a href="#运行实例：" class="headerlink" title="运行实例："></a>运行实例：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbro test_nh3 % <span class="built_in">ls</span></span><br><span class="line">CONTCAR             INCAR               OUTCAR              freq/</span><br><span class="line">H-083.txt           KPOINTS             POSCAR              get_gas_entropy.py*</span><br><span class="line">qli@bigbro test_nh3 % python3 get_gas_entropy.py </span><br><span class="line">Entropy components at T = 298.15 K and P = 101325.0 Pa:</span><br><span class="line">=================================================</span><br><span class="line">                           S               T*S</span><br><span class="line">S_trans (1 bar)    0.0014947 eV/K        0.446 eV</span><br><span class="line">S_rot              0.0004981 eV/K        0.149 eV</span><br><span class="line">S_elec             0.0000000 eV/K        0.000 eV</span><br><span class="line">S_vib              0.0000047 eV/K        0.001 eV</span><br><span class="line">S (1 bar -&gt; P)    -0.0000011 eV/K       -0.000 eV</span><br><span class="line">-------------------------------------------------</span><br><span class="line">S                  0.0019964 eV/K        0.595 eV</span><br><span class="line">=================================================</span><br><span class="line">G -19.220631915628093</span><br><span class="line">S 192.6230402411749 J/K/mol</span><br></pre></td></tr></table></figure>
+
+<h4 id="简单说明：-1"><a href="#简单说明：-1" class="headerlink" title="简单说明："></a>简单说明：</h4><p>1）目录里面H-083.txt是NIST-<em>JANAF</em>的热力学数据库的值。自己可以测试对比下。</p>
+<p>2）脚本所在目录是NH3分子优化的计算，脚本读取当前的OUTCAR获取能量，</p>
+<p>3）目录里面还有个<code>freq/</code>，对应的是NH3分子的频率计算，读取其中的POSCAR和OUTCAR获取分子结构和频率信息。对分子来说，VASP频率计算结果中的后面6个对应的是平动和转动部分，不能作为振动计算熵。平动和转动的熵是通过IdealGasThermo模块和分子结构来计算的，具体计算公式参考统计热力学、物理化学等。</p>
+<p>4）计算表面吸附物种的可以使用<code>Harmonic limit </code>这个模块。</p>
+<h3 id="示例下载："><a href="#示例下载：" class="headerlink" title="示例下载："></a>示例下载：</h3><p>关注公众号：大师兄科研网， 后台回复关键词： NH3 </p>
+<p><img src="/img/lvthw/A34/qrcode.png"></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

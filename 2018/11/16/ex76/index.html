@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex76 过渡态任务的检查（一） - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%83%E6%80%81"><span class="toc-text">心态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9E%AA"><span class="toc-text">枪</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#INCAR"><span class="toc-text">INCAR</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E7%9A%84%E8%8E%B7%E5%8F%96%EF%BC%9A"><span class="toc-text">软件的获取：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vaspkit%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">vaspkit的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VMD-%E6%9F%A5%E7%9C%8Bpdb%E6%96%87%E4%BB%B6"><span class="toc-text">VMD 查看pdb文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex76 过渡态任务的检查（一）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-11-16 15:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#过渡态" title="过渡态">过渡态</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#NEB" title="NEB">NEB</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#检查" title="检查">检查</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>前面我们介绍了怎么准备过渡态计算的INCAR，POSCAR，POTCAR和POTCAR，这一节理所当然，就是要提交任务了。过渡态计算的时候，和大多数的计算是一样的：检查输入文件，准备好脚本，敲命令提交任务。所以，我们就在这三个方面展开，具体讨论一下里面的细节部分，避免不必要的出错，提高计算的成功率和效率。</p>
+<h3 id="心态"><a href="#心态" class="headerlink" title="心态"></a>心态</h3><p>算过渡态的时候，要把自己想象成一个整装待命的狙击手，要熟悉自己的枪（VASP），周围的环境（影响计算的因素），以及狙杀的对象（计算的体系）。</p>
+<h4 id="枪"><a href="#枪" class="headerlink" title="枪"></a>枪</h4><p>也就是VASP的输入文件，开枪前，先检查一遍自己的枪有没有问题。</p>
+<p>怎么检查呢？</p>
+<p>大师兄本人的方法就是：不断在心里按着顺序默念：INCAR，KPOINTS，POSCAR，POTCAR。然后根据自己的经验检查并修改。这里你也许会说，大师兄，那是因为你有经验了啊，才能这么做，没有经验的我，该怎么办呢？</p>
+<p>不要怕，我们下面慢慢分析。</p>
+<h4 id="INCAR"><a href="#INCAR" class="headerlink" title="INCAR"></a>INCAR</h4><p> 对于大多数的计算，影响计算时间的主要因素是KPOINTS，体系的大小，INCAR中关于收敛的参数。这三者紧密相连。而INCAR中的计算在粗算的这一个环节里面，对时间的影响不是很大。这给我们的启示就是：不管是粗算，还是后面提高精度的计算，我们使用同样的设置即可。大家一般来说的低高精度的计算，主要集中在EDIFF和EDIFFG这两个参数上。体系不是很特殊，EDIFF&#x3D;1E-5; EDIFFG&#x3D;-0.02 就足够了。完全没有必要再粗算的时候将它们的数值调大点或者调小点。如果可以这样思考的话，那我们就可以将INCAR的参数提前设置好，用的时候直接拿来就可以了。</p>
+<p>想到了这一点，下面我们的任务就轻松了，可以写个脚本，直接敲个命令生成CI-NEB计算的INCAR。这里大师兄用的是另外一个办法：</p>
+<p>1） 先准备好一个INCAR，里面肯定把CI-NEB计算的参数等乱七八糟的都写好了。</p>
+<p>2）将INCAR放在一个固定的目录下面，比如：~&#x2F;bin&#x2F;INCAR_neb</p>
+<p>3）提交任务前，将INCAR复制过来即可。</p>
+<p>4）划重点：alias 的骚操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp ~/bin/INCAR_neb INCAR </span><br><span class="line">alias neb=&#x27;cp ~/bin/INCAR_neb INCAR&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>这样的话，我们直接敲个命令，就可以得到INCAR文件了。</p>
+<p><strong>INCAR的检查：</strong></p>
+<p>前面的做法，并不代表我们就可以直接使用INCAR文件了。能不能直接用，取决于我们的具体计算细节。若INCAR中的参数与当前任务的不一致，或者缺少某些参数，我们就需要更新一下，主要有以下几个方面：</p>
+<p>1） INCAR中默认的插点数目和实际不一致，记得更新。</p>
+<p>2）若POSCAR中的结构有磁性，并且和INCAR中的不一致，记得更新；</p>
+<p>3）如使用DFT-D2，INCAR中C6和R6的设置和POSCAR中的元素不一致，记得更新；</p>
+<p>4）如使用DFT+U，INCAR中U和J的设置与POSCAR中的元素不一致，记得更新。</p>
+<p>5）若计算的体系键能比较大，ISPRING这个参数可以稍微修改下，比如从-5调小到-8。</p>
+<p>6）若发现slab体系粗算的时候，不怎么收敛，偶极校正取消一下。</p>
+<p><strong>KPOINTS的检查：</strong></p>
+<p>我们在粗算阶段，KPOINTS直接用gamma点即可。为了方便可以使用脚本kponits.sh 1 1 1 直接生成。也可以添加到我们的alias这个命令中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias neb=&#x27;cp ~/bin/INCAR_neb INCAR &amp;&amp; kpoints.sh 1 1 1 &#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>POTCAR 的检查：</strong></p>
+<p>可以使用我们前面的自动生成与POSCAR对应POTCAR的脚本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp 01/POSCAR . &amp;&amp; pospot.sh &amp;&amp; rm POSCAR </span><br></pre></td></tr></table></figure>
+
+<p>为了方便，也可以直接将上面这句话添加到alias里面：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias neb=&#x27;cp ~/bin/INCAR_neb INCAR &amp;&amp; kpoints.sh 1 1 1 &amp;&amp; cp 01/POSCAR . &amp;&amp; pospot.sh &amp;&amp; rm POSCAR &#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>POSCAR的检查：</strong></p>
+<p>POSCAR被归结到枪这一部分，其实也是我们狙杀的对象。在粗算这部分的检查，需要注意的地方有：</p>
+<p>1） 确保slab被固定住了；否则你算完会发现表面的原子都疯掉了。前面我们讲过怎么通过脚本或者sed命令批量固定了，就不再过多叙述。</p>
+<p>2）使用p4v一次性打开所有的POSCAR文件：p4v 0*&#x2F;POSCAR ; 这里大师兄也是用了alias</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alias pp=&#x27;p4v 0*/POSCAR&#x27;</span><br><span class="line">alias ap=&#x27;ase-gui 0*/POSCAR&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>上面的2个操作都是在Linux下面的，p4v和ase-gui大家根据习惯随便选一款即可。</p>
+<ul>
+<li><p>使用p4vasp，然后挨个点IMAGE对应的POSCAR，检查结构对不对；</p>
+</li>
+<li><p>使用ase-gui 将所有的文件全部打开后，摁键盘的PageUp和PageDown这2个键，类似于自己看一帧一帧的电影，体验也很棒。</p>
+</li>
+<li><p>检查插点的时候，原子是不是乱套了，没有一一对应；</p>
+</li>
+<li><p>检查我们插的点，是不是具有很好的化学或者物理意义，也就是预先评估下自己猜的这个路径靠不靠谱。</p>
+</li>
+</ul>
+<ol start="3">
+<li>使用Windows的用户先不用着急，大师兄正在学习VASPkit+VDM的骚操作。学会了下一节会及时更新，并提交过渡态的计算。</li>
+</ol>
+<p>前面一节，我们提到说，在<code>Ubuntu</code>或者其他<code>Linux</code>系统下面，可以使用<code>p4vasp</code>或者<code>ASE</code>将结构批量打开，查看我们初步设置的NEB路径是否合理。但是在<code>Windows</code>系统下，我们不方便使用命令进行查看。这里介绍一下在<code>Windows</code>下面通过<code>VASPkit</code>结合<code>VMD</code>查看NEB路径结构的方法。</p>
+<h3 id="软件的获取："><a href="#软件的获取：" class="headerlink" title="软件的获取："></a>软件的获取：</h3><ul>
+<li><code>VASPkit</code>程序的下载<ul>
+<li>链接：<a target="_blank" rel="noopener" href="https://sourceforge.net/projects/vaspkit/">https://sourceforge.net/projects/vaspkit/</a></li>
+<li>QQ群：217821116， 364586948</li>
+</ul>
+</li>
+<li><code>VMD</code>的下载链接：<a target="_blank" rel="noopener" href="http://www.ks.uiuc.edu/Research/vmd/">http://www.ks.uiuc.edu/Research/vmd/</a></li>
+</ul>
+<h3 id="vaspkit的使用"><a href="#vaspkit的使用" class="headerlink" title="vaspkit的使用"></a><code>vaspkit</code>的使用</h3><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">iciq-lq@ln3:/THFS/home/iciq-lq/demo_neb$ ls</span><br><span class="line"><span class="number">00</span>  <span class="number">01</span>  <span class="number">02</span>  <span class="number">03</span>  <span class="number">04</span>  <span class="number">05</span>  <span class="number">06</span>  <span class="number">07</span>  <span class="number">08</span>  <span class="number">09</span>  INCAR  KPOINTS  NEB.pdb  POTCAR</span><br><span class="line">iciq-lq@ln3:/THFS/home/iciq-lq/demo_neb$ rm NEB.pdb </span><br><span class="line">iciq-lq@ln3:/THFS/home/iciq-lq/demo_neb$ ls</span><br><span class="line"><span class="number">00</span>  <span class="number">01</span>  <span class="number">02</span>  <span class="number">03</span>  <span class="number">04</span>  <span class="number">05</span>  <span class="number">06</span>  <span class="number">07</span>  <span class="number">08</span>  <span class="number">09</span>  INCAR  KPOINTS  POTCAR</span><br><span class="line">iciq-lq@ln3:/THFS/home/iciq-lq/demo_neb$ vaspkit </span><br><span class="line"> </span><br><span class="line"> +---------------------------------------------------------------+</span><br><span class="line"> |             VASPKIT Version: <span class="number">0.71</span> (<span class="number">16</span> Nov. <span class="number">2018</span>)              |</span><br><span class="line"> |       A Pre- and Post-Processing <span class="function"><span class="keyword">Program</span></span> for VASP Code        |</span><br><span class="line"> |       Official Website: http://vaspkit.sourceforge.net        |</span><br><span class="line"></span><br><span class="line">*</span><br><span class="line">*</span><br><span class="line">*</span><br><span class="line">*                                                                 </span><br><span class="line"> <span class="number">0</span>)  Quit                                                         </span><br><span class="line"> ------------&gt;&gt;</span><br><span class="line"><span class="number">5</span></span><br><span class="line"> ==================== Catalysis-ElectroChem Kit ==================</span><br><span class="line"> <span class="number">501</span>) Thermal Corrections for Adsorbate                      </span><br><span class="line"> <span class="number">502</span>) Thermal Corrections for Gas                    </span><br><span class="line"> <span class="number">503</span>) d-Band Center (experimental)                    </span><br><span class="line"> <span class="number">504</span>) Convert NEB-Path to PDB <span class="keyword">Format</span> for Animation                    </span><br><span class="line">                                                                  </span><br><span class="line"> <span class="number">0</span>)   Quit                                                        </span><br><span class="line"> <span class="number">9</span>)   Back                                                        </span><br><span class="line"> ------------&gt;&gt;</span><br><span class="line"><span class="number">504</span></span><br><span class="line"> +-------------------------- Warm Tips --------------------------+</span><br><span class="line">         See An Example <span class="keyword">in</span> vaspkit/examples/neb_animation.        </span><br><span class="line"> +---------------------------------------------------------------+</span><br><span class="line"> --&gt;&gt; (<span class="number">1</span>) Reading Structural Parameters from <span class="number">00</span>/POSCAR <span class="keyword">File</span>...</span><br><span class="line"> +---------------------------------------------------------------+</span><br><span class="line">*</span><br><span class="line">*</span><br><span class="line">*</span><br><span class="line">+---------------------------------------------------------------+</span><br><span class="line"> |               Selective Dynamics is Activated<span class="comment">!                |</span></span><br><span class="line"> +---------------------------------------------------------------+</span><br><span class="line"> --&gt;&gt; (*) Reading Structural Parameters from <span class="number">09</span>/POSCAR <span class="keyword">File</span>...</span><br><span class="line"> +---------------------------------------------------------------+</span><br><span class="line"> |               Selective Dynamics is Activated<span class="comment">!                |</span></span><br><span class="line"> +---------------------------------------------------------------+</span><br><span class="line"> +---------------------------------------------------------------+</span><br><span class="line"> |                         * DISCLAIMER *                        |</span><br><span class="line"> |        CHECK Your Results for Consistency <span class="keyword">if</span> Necessary        |</span><br><span class="line"> |   Bug Reports and Suggestions for Improvements Are Welcome    |</span><br><span class="line"> | Citation of VASPKIT Is Not Mandatory BUT Would Be Appreciated |</span><br><span class="line"> |                     (^.^) GOOD LUCK (^.^)                     |</span><br><span class="line"> +---------------------------------------------------------------+</span><br><span class="line"> iciq-lq@ln3:/THFS/home/iciq-lq/demo_neb$ </span><br><span class="line">iciq-lq@ln3:/THFS/home/iciq-lq/demo_neb$ ls</span><br><span class="line"><span class="number">00</span>  <span class="number">01</span>  <span class="number">02</span>  <span class="number">03</span>  <span class="number">04</span>  <span class="number">05</span>  <span class="number">06</span>  <span class="number">07</span>  <span class="number">08</span>  <span class="number">09</span>  INCAR  KPOINTS  NEB.pdb  POTCAR</span><br><span class="line">iciq-lq@ln3:/THFS/home/iciq-lq/demo_neb$ </span><br><span class="line">iciq-lq@ln3:/THFS/home/iciq-lq/demo_neb$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>在终端输入:<code> vaspkit</code></li>
+<li>输入：5 后回车</li>
+<li>输入：504 后回车</li>
+<li>然后你会得到一个<code>NEB.pdb</code>文件。</li>
+<li><code>pdb</code>文件包含了00到09这几个文件夹中<code>POSCAR</code>的结构信息，用以<code>VMD</code>进行 查看。</li>
+</ul>
+<h3 id="VMD-查看pdb文件"><a href="#VMD-查看pdb文件" class="headerlink" title="VMD 查看pdb文件"></a><code>VMD</code> 查看<code>pdb</code>文件</h3><p>使用<code>VMD</code>查看<code>pdb</code>的方法，我们将<code>VASPkit</code>中的具体说明拿过来展示一下：</p>
+<ul>
+<li>在<code>Windows</code>系统中启动<code>VMD</code>程序</li>
+<li>将我们在服务器中生成的<code>NEB.pdb</code>文件下载到本地，然后拖到<code>VMD</code>的界面</li>
+<li>在<code>VMD</code>主窗口选择菜单 <code>Display</code> –&gt; <code>Orthographic</code> 正交显示模式 </li>
+<li>在<code>VMD</code>主窗口选择菜单<code>Graphics</code> –&gt; <code>Representations</code> –&gt; <code>Drawing Methods</code> 选择 <code>CPK</code></li>
+<li>默认是不显示盒子边界的，在<code>VMD</code>主窗口选择菜单 <code>Extensions</code> ,选择 <code>Tk Console</code> , 在弹出的<code>VMD TkConsole</code> 窗口中输入 <code>pbc box -color white</code> ，然后回车，查看模型结构。</li>
+<li>点界面的右下角的箭头后，你可以看到我们初步猜测的<code>NEB</code>路径中原子快速动起来了。箭头左面有个<code>speed</code>，我们可以调节原子的速度。</li>
+<li>在<code>VMD</code>主窗口选择菜单 <code>Mouse</code> –&gt; <code>Label</code> –&gt; <code>2</code>， 然后去模型界面上，点与<code>NEB</code>路径中最相关的2个原子，就可以查看<code>NEB</code>路径中，原子间距离随着<code>IMAGE</code>结构的变化了。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Windows下的用户，在做过渡态计算的时候，可视化是一个痛点，通常来说，Images中的结构都只能一个一个打开查看，计算的时候不能很好地体会一个反应的发生路径。使用VASPkit则可以顺利地解决这个问题，这个功能更详细的说明，请参考VASPkit的使用手册。当然，这个方法也适用于Linux操作系统下VASPkit + VMD的操作。此外，大师兄还是建议大家有余力的时候多多接触类似于Ubuntu，Centos这样的Linux操作系统。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

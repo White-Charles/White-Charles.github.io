@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex70 过渡态的计算（一） - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%B8%A1%E6%80%81%E8%AE%A1%E7%AE%97%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-text">过渡态计算的例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%B8%A1%E6%80%81%E8%AE%A1%E7%AE%97%EF%BC%9A%E5%88%9D%E6%9C%AB%E6%80%81%E7%BB%93%E6%9E%84%E7%9A%84%E4%BC%98%E5%8C%96%E3%80%82"><span class="toc-text">过渡态计算：初末态结构的优化。</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9D%E6%80%81%E7%BB%93%E6%9E%84%E7%9A%84%E4%BC%98%E5%8C%96"><span class="toc-text">初态结构的优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AB%E6%80%81%E7%BB%93%E6%9E%84%E7%9A%84%E6%90%AD%E5%BB%BA%E4%BC%98%E5%8C%96"><span class="toc-text">末态结构的搭建优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%87%E6%B8%A1%E6%80%81%E7%BB%93%E6%9E%84%E7%9A%84%E4%BC%98%E5%8C%96"><span class="toc-text">过渡态结构的优化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%91%E7%8E%87%E8%AE%A1%E7%AE%97%EF%BC%9A%EF%BC%88%E8%BF%87%E6%B8%A1%E6%80%81%E7%9A%84%E9%AA%8C%E8%AF%81%E5%8A%9E%E6%B3%95%E4%B9%8B%E4%B8%80%EF%BC%89"><span class="toc-text">频率计算：（过渡态的验证办法之一）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">总结：</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex70 过渡态的计算（一）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-11-08 15:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#过渡态" title="过渡态">过渡态</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#NEB" title="NEB">NEB</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#NH3" title="NH3">NH3</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>从本节起，我们开始学习下过渡态相关的计算。在进行下面的讲解之前，大家务必要记住这两点：</p>
+<ul>
+<li><p>1） 过渡态只是一个结构而已，过渡态的计算并不是你想象的那么神秘；也就是计算很容易。</p>
+</li>
+<li><p>2）物理化学，结构化学书中的过渡态相关的基本知识要掌握，也就是你的理论基础要扎实。感觉基础不好的，认真看书。</p>
+</li>
+</ul>
+<h3 id="过渡态计算的例子"><a href="#过渡态计算的例子" class="headerlink" title="过渡态计算的例子"></a>过渡态计算的例子</h3><p>我们遵循一个从简单到复杂的顺序，慢慢介绍一下表面化学中过渡态的一般计算思路和方法。简单的例子，本节我们选取的是VASP官网的经典计算：NH<sub>3</sub>的翻转，如下图：</p>
+<p><img src="/img/lvthw/ex70/ex70-1.png"></p>
+<p>如果你不太懂这个过程，可以把NH<sub>3</sub>看做一把雨伞。翻转的过程，就相当于大风把伞吹翻。</p>
+<p><img src="/img/lvthw/ex70/ex70-2.jpeg"></p>
+<p>对于这个计算的一些参考资料，大家可以点下面这两个链接：</p>
+<p>1） <a target="_blank" rel="noopener" href="http://www.vasp.at/vasp-workshop/tutorials/tutorial_ammonia_flipping.pdf">http://www.vasp.at/vasp-workshop/tutorials/tutorial_ammonia_flipping.pdf</a></p>
+<p>Vasp官网的一个PPT介绍，这个PPT有些年头了，不过对于我们学习还是很有帮助的。建议看完PPT里面的内容（最好是自己练习一遍后），再继续下面的学习。</p>
+<p>2） <a target="_blank" rel="noopener" href="https://cms.mpi.univie.ac.at/wiki/index.php/Category:Examples">https://cms.mpi.univie.ac.at/wiki/index.php/Category:Examples</a></p>
+<p>VASP wiki网页中关于过渡态计算的例子。</p>
+<hr>
+<h3 id="过渡态计算：初末态结构的优化。"><a href="#过渡态计算：初末态结构的优化。" class="headerlink" title="过渡态计算：初末态结构的优化。"></a>过渡态计算：初末态结构的优化。</h3><p>过渡态计算的第一步：我们要知道自己想算什么，需要准备什么？</p>
+<p>算过渡态，肯定指的是某一个反应或者过程的过渡态。过渡态的两边也分别对应着反应物和反应产物。所以，算一个反应的过渡态，不管计算过程如何，我们最终都会有三个结构：初始和末态结构，以及过渡态。初末态的结构和前我们已经讲过的优化过程是一样的，我们先回顾一番。</p>
+<hr>
+<h4 id="初态结构的优化"><a href="#初态结构的优化" class="headerlink" title="初态结构的优化"></a>初态结构的优化</h4><p><strong>1）搭建结构（POSCAR）</strong></p>
+<p><img src="/img/lvthw/ex70/ex70-3.jpeg"></p>
+<p>该图中的三个结构分别对应的是NH3翻转的初始，过渡态以及末态结构。这里反应物和产物都是NH3。首先，我们肯定要有一个NH3的结构。这里大师兄就直接复制PPT里面的坐标快速制备一个POSCAR。</p>
+<p><img src="/img/lvthw/ex70/ex70-4.png"></p>
+<p>注意： PPT里面没有写元素符号，大家记得自己加上。下图是本人复制后制作的POSCAR。 （添加了元素行，Cartesian坐标。）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ammonia flipping</span><br><span class="line">1.0</span><br><span class="line"> +9.0000000000  +0.0000000000  +0.0000000000</span><br><span class="line"> +0.0000000000 +10.0000000000  +0.0000000000</span><br><span class="line"> +0.0000000000  +0.0000000000 +11.0000000000</span><br><span class="line">H N</span><br><span class="line"> 3 1</span><br><span class="line">Selective</span><br><span class="line">Cartesian</span><br><span class="line"> +3.8185740000  +3.9721220000  +4.3936400000  T T T</span><br><span class="line"> +3.0000000000  +2.5542720000  +4.3936400000  T T T</span><br><span class="line"> +2.1814260000  +3.9721220000  +4.3936400000  T T T</span><br><span class="line"> +3.0000000000  +3.5000000000  +4.0000000000  F F F</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/lvthw/ex70/ex70-5.png"></p>
+<hr>
+<p><strong>2） 准备输入文件（INCAR）</strong></p>
+<p>优化NH$_3$的初始结构：(回顾气相分子计算需要注意的地方)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">System = NH3</span><br><span class="line">ISMEAR = 0</span><br><span class="line">SIMGA = 0.01</span><br><span class="line"></span><br><span class="line">ALGO = FAST</span><br><span class="line">ENCUT = 450</span><br><span class="line">EDIFF = 1E-5</span><br><span class="line"></span><br><span class="line">NWRITE = 0</span><br><span class="line">LWAVE = .FALSE.</span><br><span class="line">LCHARG = .FALSE.</span><br><span class="line"></span><br><span class="line">IBRION = 2</span><br><span class="line">POTIM = 0.1</span><br><span class="line">EDIFFG = -0.02</span><br><span class="line">NSW = 100</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>3） 准备输入文件（KPOINTS）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">K-POINTS</span><br><span class="line"> 0</span><br><span class="line">Gamma</span><br><span class="line"> 1 1 1</span><br><span class="line"> 0 0 0</span><br></pre></td></tr></table></figure>
+
+<p><strong>4） 准备POTCAR 并提交任务</strong></p>
+<p><strong>5) 优化完的结构：</strong></p>
+<p><img src="/img/lvthw/ex70/ex70-6.png"></p>
+<p>只需要几步优化就完成了。这是因为我们复制的别人的（VASP官网例子）结构，因为这些结构已经被优化过了。即我们优化过程有一个很好的猜测结构。</p>
+<p>这给我们的启发就是：在你开始计算的时候，一定要善于利用前人的或者自己前面的计算结构。这会大大节省我们的计算工作量。</p>
+<hr>
+<h4 id="末态结构的搭建优化"><a href="#末态结构的搭建优化" class="headerlink" title="末态结构的搭建优化"></a>末态结构的搭建优化</h4><p>在上面结构的基础上，我们很容易搭建初末态的结构。仔细观察这个图，我们可以保持H原子的坐标不变，只需要将N原子的坐标修改一下。初始结构里面，三个H原子在xy平面上，</p>
+<p>N与H原子z方向的距离为0.3929 Å。如果N原子翻转过去，那么它的坐标将会是：</p>
+<p>4.3929 + 0.3929  &#x3D; 4.7858 Å。</p>
+<p><img src="/img/lvthw/ex70/ex70-7.jpeg"></p>
+<p><strong>自行将这个图顺时针旋转90°</strong></p>
+<p><img src="/img/lvthw/ex70/ex70-8.png"></p>
+<p>然后跟前面同样的方法，优化一下就可以了。</p>
+<h4 id="过渡态结构的优化"><a href="#过渡态结构的优化" class="headerlink" title="过渡态结构的优化"></a>过渡态结构的优化</h4><p><img src="/img/lvthw/ex70/ex70-9.jpeg"></p>
+<p>上图中，我们可以发现，过渡态是一个平面的结构，我们可以按照前面末态结构搭建的思想弄一个初始的过渡态结构出来。即直接将N原子的z方向坐标修改成H原子的。如下图：</p>
+<p><img src="/img/lvthw/ex70/ex70-10.png"></p>
+<p>对比下前面初末态结构的坐标，你会发现Z 方向上被固定住了（最后一列SZ没有选择）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">+3.8177218605  +3.9717738141  +4.3929644172  T T F</span><br><span class="line">+3.0000000000  +2.5559112549  +4.3926756556  T T F</span><br><span class="line">+2.1822781395  +3.9717738141  +4.3929644172  T T F</span><br><span class="line">+3.0000000000  +3.5000000000  +4.3929644172  F F F</span><br></pre></td></tr></table></figure>
+
+<p>这样做是强制优化过程中，所有的原子都在xy平面上。我们只优化H原面的坐标。原因如下：</p>
+<p><img src="/img/lvthw/ex70/ex70-11.png"></p>
+<p>这个三角形对应的就是我们从初始结构（IS）搭建过渡态结构（TS）的过程。在初始结构里面，N在三角形最下面，H在右边的点上，当我们人为把N原子放到H平面上的时候，N从下面的点移动到上面，导致N—H 键变短（从1.022 减小到0.944 Å）。但这个变短的过程是我们人为搭建结构所导致的。所以我们要把H原子在xy表面上放开，继续优化一下。参数（ICNAR，POTCAR， KPOINTS）保持不变，提交优化任务，最终我们的过渡态结构如下：</p>
+<p><img src="/img/lvthw/ex70/ex70-12.png"></p>
+<p>N, H 在同一平面内，N—H 键长为：1.004 Å</p>
+<hr>
+<h3 id="频率计算：（过渡态的验证办法之一）"><a href="#频率计算：（过渡态的验证办法之一）" class="headerlink" title="频率计算：（过渡态的验证办法之一）"></a>频率计算：（过渡态的验证办法之一）</h3><p>验证一个算完的过渡态是不是真正过渡态的时候，我们需要用到频率计算。因为过渡态只有一个虚频。（自己看书去学习为什么只有一个虚频？）复习下前面我们讲过的频率计算的细节：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">IBRION = 5</span><br><span class="line">POTIM = 0.015</span><br><span class="line">EDIFF = 1E-6</span><br><span class="line">NFREE = 2</span><br><span class="line">NSW = 1</span><br></pre></td></tr></table></figure>
+
+
+
+<p>5）此外，我们需要另外加一个无关痛痒的参数：NWRITE &#x3D; 2 （或者不设置，默认值是2）</p>
+<p>大师兄本人喜欢用NWRITE &#x3D; 0 。但当参数为0，使用Jmol可视化频率计算结果的时候：你会发现所有的原子都是同一个颜色，如下图：</p>
+<p><img src="/img/lvthw/ex70/ex70-13.png"></p>
+<p>当使用NWRITE的默认值2的时候，则是正常的：这是因为NWRITE &#x3D; 0 写入的OUTCAR的数据太少，Jmol无法获取元素相关的参数用来可视化。此处，特别感谢群里的：<strong>连赞小朋友</strong>帮忙分析.</p>
+<p><img src="/img/lvthw/ex70/ex70-14.png"></p>
+<p>提取频率相关的参数，可以使用下面的命令：</p>
+<p>grep cm-1 OUTCAR 提取所有的频率（检查频率结果推荐使用）</p>
+<p>grep ‘i&#x3D;’  OUTCAR  提取所有的虚频 （基本没啥用）</p>
+<p>grep ‘f  &#x3D;’ OUTCAR 提取所有的非虚频 （计算零点能推荐使用）</p>
+<p>Jmol中所有的虚频都在最下面，大家可以根据前面的grep命令的结果和Jmol的界面对比下。本计算一共有3个虚频： 5.7, 10.2和806.8 cm<sup>-1</sup> 。前面2个虚频很小，直接不管就可以了。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>算到这里，NH<sub>3</sub>翻转的过渡态我们就已经讲完了。本节采用的是直接优化的方法获取过渡态的结构，适用于一些非常简单的体系或者你已经非常熟悉的过渡态结构。回到开头我们讲的那句话，过渡态只是一个结构而已，我们需要做的就是如何通过一些计算的技巧和方法来获取这些结构。很多人一提到过渡态就会想到使用VTST编译的VASP程序算NEB（Nudged Elastic Band method）以及CI-NEB (Climbing Image NEB)，其实NEB和CI-NEB也仅仅是大家常用的一个方法而已，除此之外，还有很多。</p>
+<p><strong>最关键的</strong>就是通过结构化学的基础知识来搭建、计算并判断这些过渡态结构背后的物理化学意义，通俗点说就是：算的对不对，你要自己心里有个数。</p>
+<p>很多人会说算过渡态要通过频率来验证，其实这一步只是前面一步的副产物而已。只要你的化学基本功底深厚，加以训练，就可以准确判断反应的路径。</p>
+<p>本节计算例子的下载： 链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1hHGhrOlxMik8NBUqEzolwQ">https://pan.baidu.com/s/1hHGhrOlxMik8NBUqEzolwQ</a>   密码：2dw5</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

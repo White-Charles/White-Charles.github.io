@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex16 谁偷走的我的机时？（一） - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BD%93%E7%B3%BB%E7%9A%84%E7%A3%81%E6%80%A7-EX8"><span class="toc-text">1 体系的磁性 (EX8)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AF%B9%E7%A7%B0%E6%80%A7-EX8"><span class="toc-text">2 对称性 (EX8)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-SIGMA%E7%9A%84%E5%8F%96%E5%80%BC-EX1"><span class="toc-text">3  SIGMA的取值 (EX1)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E5%8D%8A%E5%AF%BC%E4%BD%93%E5%92%8C%E7%BB%9D%E7%BC%98%E4%BD%93%EF%BC%9A"><span class="toc-text">3.1 半导体和绝缘体：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E9%87%91%E5%B1%9E%E4%BD%93%E7%B3%BB%EF%BC%9A"><span class="toc-text">3.2 金属体系：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%90%88%E7%90%86%E7%9A%84%E5%88%9D%E5%A7%8B%E7%BB%93%E6%9E%84-%EF%BC%88Ex13-15%EF%BC%89"><span class="toc-text">4 合理的初始结构 （Ex13-15）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-EDIFF-%EF%BC%88Ex9%EF%BC%89"><span class="toc-text">5 EDIFF （Ex9）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-EDIFFG-%EF%BC%88Ex9%EF%BC%89"><span class="toc-text">6 EDIFFG （Ex9）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E7%BB%83%E4%B9%A0%EF%BC%9A"><span class="toc-text">扩展练习：</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex16 谁偷走的我的机时？（一）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2017-12-08 15:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#机时" title="机时">机时</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#回顾" title="回顾">回顾</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>前面O$_2$初始结构为0.9 $\AA$时，如果使用<code>BRION=2</code>，相对于初始结构为1.07$\AA$的时候，为避免过度矫正，我们需要设置一个更小的POTIM，大师兄尝试过了，<code>POTIM = 0.01</code> 的时候得到了正确的计算结果。到此，O$_2$分子的计算我们暂且告一段落。做计算，机时很重要，尤其是缺钱，捉襟见肘的时候，我们就更加需要珍惜，保证并提高自己的计算成功率，避免重复计算。这一节我们总结下前面讲到的影响计算时间的一些细节。大家在计算的时候知道如何把握时间，在有限的机时内获取更多的有效的计算结果。</p>
+<hr>
+<h3 id="1-体系的磁性-EX8"><a href="#1-体系的磁性-EX8" class="headerlink" title="1 体系的磁性 (EX8)"></a>1 体系的磁性 (EX8)</h3><p>考虑自旋后（<code>ISPIN=2</code>），VASP计算时会将电子分为两部分处理，一部分是$\alpha$电子，另一部分是$\beta$电子，我们在氧原子的自旋极化计算中提到过了，忘了的可以查看Ex8，Ex11中的内容。</p>
+<p>补充一下：如果原子的<code>MAGMOM</code>为负值：应该这么写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MAGMOM = 10*-2 # 有10个原子，每个原子的初始磁矩为 -2</span><br></pre></td></tr></table></figure>
+
+<p>注意： -2 不用括号（）括起来</p>
+<hr>
+<h3 id="2-对称性-EX8"><a href="#2-对称性-EX8" class="headerlink" title="2 对称性 (EX8)"></a>2 对称性 (EX8)</h3><p>体系的对称性降低，会增加相应的计算量。查看O原子计算时，改变晶胞大小，取消对称性前后的计算时间。</p>
+<hr>
+<h3 id="3-SIGMA的取值-EX1"><a href="#3-SIGMA的取值-EX1" class="headerlink" title="3  SIGMA的取值 (EX1)"></a>3  SIGMA的取值 (EX1)</h3><p>我们看一下VASP练习手册：handonsession-I 里面的一句话说明：</p>
+<p><img src="/img/lvthw/ex16/ex16-1.jpg"></p>
+<p>因此，设置一个较小的SIGMA值会使收敛变慢。大家对于ISMEAR的选择，一定要多看官网的说明！</p>
+<hr>
+<h4 id="3-1-半导体和绝缘体："><a href="#3-1-半导体和绝缘体：" class="headerlink" title="3.1 半导体和绝缘体："></a>3.1 半导体和绝缘体：</h4><p>1） K点小于4 的时候，用<code>ISMEAR=0</code>, <code>SIGMA</code>取值小一些；比如SIGMA&#x3D;0.05; 此时用ISMEAR &#x3D; -5 会出错；</p>
+<p>2）K点数目大于4的时候，可以使用<code>ISMEAR= -5</code>；</p>
+<p>3） 注意： 我们算的气体分子，是绝缘体，且只用了gamma点，所以我们参数的设置如下： </p>
+<hr>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ISMEAR=<span class="number">0</span> </span><br><span class="line">SIGMA=<span class="number">0.01</span> </span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h4 id="3-2-金属体系："><a href="#3-2-金属体系：" class="headerlink" title="3.2 金属体系："></a>3.2 金属体系：</h4><p>ISMEAR一般用<code>ISMEAR=0</code> 或者整数1，2即可。</p>
+<p><code>SIGMA =0.1</code> 足够。</p>
+<hr>
+<h3 id="4-合理的初始结构-（Ex13-15）"><a href="#4-合理的初始结构-（Ex13-15）" class="headerlink" title="4 合理的初始结构 （Ex13-15）"></a>4 合理的初始结构 （Ex13-15）</h3><p>前面我们刚讲到，一个合理的初始结构，可以避免很多意外的错误以及快速得到正确的结果。</p>
+<p>如果你的初始结构不合理导致的计算出错，首先应该去调整结构，最后才是去调节参数，比如上一节中<code>IBRION=2 </code>时的POTIM值。</p>
+<hr>
+<h3 id="5-EDIFF-（Ex9）"><a href="#5-EDIFF-（Ex9）" class="headerlink" title="5 EDIFF （Ex9）"></a>5 EDIFF （Ex9）</h3><p>EDIFF 控制了电子迭代的收敛标准，如果你设置的标准比较严格，则每一个离子步需要更多的电子步数，需要的时间也会随着离子步的增加成线性关系增长。</p>
+<hr>
+<h3 id="6-EDIFFG-（Ex9）"><a href="#6-EDIFFG-（Ex9）" class="headerlink" title="6 EDIFFG （Ex9）"></a>6 EDIFFG （Ex9）</h3><p>EDIFFG控制了结构收敛的标准，同样严格的标准需要更多的结构优化步骤来实现。</p>
+<hr>
+<h3 id="扩展练习："><a href="#扩展练习：" class="headerlink" title="扩展练习："></a>扩展练习：</h3><p>1 本文所提到的内容，必须去官网查看，并认真阅读，如有不懂的，请在群里自由提问；</p>
+<p>2 思考一下，还有其他因素影响我们的机时吗？</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

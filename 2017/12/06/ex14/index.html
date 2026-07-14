@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex14 论合理结构的重要性（二） - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E5%88%9D%E5%A7%8B%E7%BB%93%E6%9E%84%E5%AF%B9%E7%BB%93%E6%9E%9C%E7%9A%84%E5%BD%B1%E5%93%8D%E3%80%82"><span class="toc-text">不同初始结构对结果的影响。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%A6%E4%B8%80%E4%B8%AAbad%E7%BB%93%E6%9E%84%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-text">另一个bad结构的计算</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%91%A8%E6%9C%9F%E6%80%A7%E7%9A%84%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98"><span class="toc-text">周期性的显示问题</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C%E5%AF%B9%E8%BF%98%E6%98%AF%E9%94%99%EF%BC%9F"><span class="toc-text">结果对还是错？</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E7%BB%83%E4%B9%A0%E5%8F%8A%E6%80%9D%E8%80%83"><span class="toc-text">扩展练习及思考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">总结：</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex14 论合理结构的重要性（二）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2017-12-06 02:06:48</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#p4vasp" title="p4vasp">p4vasp</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#合理结构" title="合理结构">合理结构</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#周期性" title="周期性">周期性</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>在ex13中，当初始值为1.5 $\AA$ 的时候，计算共进行了9步。对比下之前我们采用实验值（Ex11）作为初始结构计算时用了4步。从这里我们可以看出来，如果你一个合理的初始结构，可以加快优化的速度，减少机时，节约你的时间。当然，计算的具体时间可以通过OUTCAR尾部的信息查看。</p>
+<h3 id="不同初始结构对结果的影响。"><a href="#不同初始结构对结果的影响。" class="headerlink" title="不同初始结构对结果的影响。"></a>不同初始结构对结果的影响。</h3><p>那么不同的初始结构，除了在时间上，对计算的结构还有影响吗？ 首先我们对比下Ex11和Ex13的结果。 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">iciq-lq@ln3:/THFS/home/iciq-lq/LVASPTHW$ tail ex13/nsw10/CONTCAR</span><br><span class="line">     0.0000000000000000    8.0000000000000000    0.0000000000000000</span><br><span class="line">     0.0000000000000000    0.0000000000000000    8.9000000000000004</span><br><span class="line">   O</span><br><span class="line">     2</span><br><span class="line">Direct</span><br><span class="line">  0.0000000000000000  0.0000000000000000  0.0149145061380336</span><br><span class="line">  0.0000000000000000  0.0000000000000000  0.1536248197046605</span><br><span class="line"></span><br><span class="line">  0.00000000E+00  0.00000000E+00  0.00000000E+00</span><br><span class="line">  0.00000000E+00  0.00000000E+00  0.00000000E+00</span><br><span class="line">iciq-lq@ln3:/THFS/home/iciq-lq/LVASPTHW$ tail ex11/opt/CONTCAR</span><br><span class="line">     0.0000000000000000    8.0000000000000000    0.0000000000000000</span><br><span class="line">     0.0000000000000000    0.0000000000000000    8.9000000000000004</span><br><span class="line">   O</span><br><span class="line">     2</span><br><span class="line">Direct</span><br><span class="line">  0.0000000000000000  0.0000000000000000 -0.0019537557431563</span><br><span class="line">  0.0000000000000000  0.0000000000000000  0.1367852164173130</span><br><span class="line"></span><br><span class="line">  0.00000000E+00  0.00000000E+00  0.00000000E+00</span><br><span class="line">  0.00000000E+00  0.00000000E+00  0.00000000E+00</span><br><span class="line">iciq-lq@ln3:/THFS/home/iciq-lq/LVASPTHW$</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在Ex11和Ex13中，两个计算的能量和CONTCAR中的键长值也几乎相等，看下面的结果。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">iciq-lq@ln3:/THFS/home/iciq-lq/LVASPTHW$ python</span><br><span class="line">Python 2.6.6 (r266:84292, Sep  4 2013, 07:46:00)</span><br><span class="line">[GCC 4.4.7 20120313 (Red Hat 4.4.7-3)] on linux2</span><br><span class="line">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span><br><span class="line">&gt;&gt;&gt; 0.1536248197046605-0.0149145061380336</span><br><span class="line">0.13871031356662689</span><br><span class="line">&gt;&gt;&gt; 0.1367852164173130--0.0019537557431563</span><br><span class="line">0.13873897216046929</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="另一个bad结构的计算"><a href="#另一个bad结构的计算" class="headerlink" title="另一个bad结构的计算"></a>另一个bad结构的计算</h3><p>上次我们用了一个大于实验值的初始结构1.5$\AA$。下面我们看下小于实验值的初始情况：0.9 $\AA$ 。</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">iciq-lq@ln3:/THFS/home/iciq-lq/LVASPTHW/ex14$ cat POSCAR</span><br><span class="line">O</span><br><span class="line"><span class="number">1.0</span></span><br><span class="line"><span class="number">7.5</span> <span class="number">0.0</span> <span class="number">0.0</span></span><br><span class="line"><span class="number">0.0</span> <span class="number">8.0</span> <span class="number">0.0</span></span><br><span class="line"><span class="number">0.0</span> <span class="number">0.0</span> <span class="number">8.9</span></span><br><span class="line">O</span><br><span class="line"><span class="number">2</span></span><br><span class="line">Cartesian</span><br><span class="line"><span class="number">0.0</span> <span class="number">0.0</span> <span class="number">0.0</span></span><br><span class="line"><span class="number">0.0</span> <span class="number">0.0</span> <span class="number">0.9</span></span><br></pre></td></tr></table></figure>
+
+<p>INCAR，KPOINTS，POTCAR等不变，提交任务，等待计算结束，查看结果。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">iciq-lq@ln3:/THFS/home/iciq-lq/LVASPTHW/ex14$ tail OSZICAR</span><br><span class="line">DAV:  18     0.141396114006E+03    0.20879E-02   -0.88760E-04   144   0.130E-01    0.579E-01</span><br><span class="line">DAV:  19     0.141397297948E+03    0.11839E-02   -0.52751E-04    96   0.893E-02    0.455E-01</span><br><span class="line">DAV:  20     0.141388687914E+03   -0.86100E-02   -0.28657E-03   144   0.231E-01    0.206E+00</span><br><span class="line">DAV:  21     0.141395321236E+03    0.66333E-02   -0.62073E-03    96   0.361E-01    0.112E+00</span><br><span class="line">DAV:  22     0.141389669824E+03   -0.56514E-02   -0.95109E-03    96   0.429E-01    0.161E-01</span><br><span class="line">DAV:  23     0.141382943017E+03   -0.67268E-02   -0.22808E-03    96   0.216E-01    0.118E+00</span><br><span class="line">DAV:  24     0.141390086243E+03    0.71432E-02   -0.39635E-03    96   0.307E-01    0.825E-01</span><br><span class="line">DAV:  25     0.141385767811E+03   -0.43184E-02   -0.44984E-03    96   0.305E-01    0.480E-01</span><br><span class="line">DAV:  26     0.141385726226E+03   -0.41585E-04   -0.10329E-04    96   0.429E-02</span><br><span class="line">   5 F= 0.14138573E+03 E0= 0.14138680E+03  d E =0.141123E+03  mag=    -2.0000</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>计算共进行了5步，且最后的磁矩看起来是正确的。<strong>思考</strong>： 从这里得出的信息，能确定我们的计算结果是正确的吗？ </p>
+<p>答： 不知道。因为我们还要要去查看一下结构。判断结构是否合理。如果结构不合理，则收敛的计算也是失败了。</p>
+<p>用p4vasp打开CONTCAR后，如下图：</p>
+<p><img src="/img/lvthw/ex14/ex14-1.jpeg"></p>
+<p>师兄，这是神马情况，两个原子怎么跑这么远？</p>
+<p>不用担心，这是因为周期性的原因。p4vasp中可以进行如下的操作：</p>
+<p><img src="/img/lvthw/ex14/ex14-2.jpeg"></p>
+<p>首先，点击左侧的Build按钮，然后再点击右侧的 To unit cell。这样你会发现结构调整到下图的样子：</p>
+<p><img src="/img/lvthw/ex14/ex14-3.jpeg"></p>
+<p>两个原子之间的距离还是很长（7.821 $\AA$），但实际键长不是这么长的。</p>
+<p>而是8.9-7.821 &#x3D; 1.079 $\AA$。</p>
+<p>师兄你为什么这么算?</p>
+<p>因为我们的体系是周期性的，也就是图中的格子在三维方向上可以无限重复，如果我们向左重复一个单元，那么在新的单元中右侧的氧原子与原来左侧的氧原子距离很短。已知格子在z方向的长度为8.9 $\AA$，减去7.821就是剩下的两个氧原子之间的键长了。</p>
+<p>如果，你还不明白，进行下图的操作：</p>
+<p><img src="/img/lvthw/ex14/ex14-4.jpeg"></p>
+<p>点击左侧的Control 选项，然后在下面红色框中，将格子在三维方向上重复，效果如下：</p>
+<p><img src="/img/lvthw/ex14/ex14-5.jpeg"></p>
+<p>注意，该操作只是展示三维方向的结构，如果此时你保存结构，不管你在三维方向上重复了多少次，保存的结构则还是原来的尺寸大小。</p>
+<p><img src="/img/lvthw/ex14/ex14-6.jpeg"></p>
+<p>键长为1.0785 $\AA$。</p>
+<h5 id="周期性的显示问题"><a href="#周期性的显示问题" class="headerlink" title="周期性的显示问题"></a>周期性的显示问题</h5><p>暂且抛开对错不说，由于周期性导致的原子不在一个格子里面的情况，在今后的计算中你会经常碰到。如果你遇到这种情况，不要立即在群里问：师兄，为什么优化之后，体系中的原子不见了？为什么之前左面原子不见了，右侧本来没有原子，优化完多了？</p>
+<p> 归根结底都是周期性导致的显示问题。你需要做的就是把结构在三维方向上重复一下，查看结构是对还是错。</p>
+<h5 id="结果对还是错？"><a href="#结果对还是错？" class="headerlink" title="结果对还是错？"></a>结果对还是错？</h5><p>现在我们分析下对错，已知O$_2$分子的键长为1.2075 $\AA$，因此该计算与实验值偏差为：（1.0785-1.2075）&#x2F;1.2075 &#x3D;10.68 %，这么大的偏差，是不可以忍受的。</p>
+<p>检查一下能量： 为 -8.54642426 eV。 之前正确的能量为： -9.85498627eV。</p>
+<p><img src="/img/lvthw/ex14/ex14-7.jpeg"></p>
+<p>在第二版的改进中，大师兄又计算了这个任务一次，得到了另外一个结果：2个O原子距离很短。</p>
+<p><img src="/img/lvthw/ex14/ex14-8.png"></p>
+<p>查看能量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">iciq-lq@ln3:/THFS/home/iciq-lq/LVASPTHW/ex14$ grep &#x27;  without&#x27; OUTCAR</span><br><span class="line">  energy  without entropy=        0.26254047  energy(sigma-&gt;0) =        0.26254047</span><br><span class="line">  energy  without entropy=       11.76187113  energy(sigma-&gt;0) =       11.76187113</span><br><span class="line">  energy  without entropy=      142.97353506  energy(sigma-&gt;0) =      142.97353506</span><br><span class="line">  energy  without entropy=  1359169.21650280  energy(sigma-&gt;0) =  1359169.21650280</span><br><span class="line">  energy  without entropy=      141.38788142  energy(sigma-&gt;0) =      141.38680382</span><br><span class="line">iciq-lq@ln3:/THFS/home/iciq-lq/LVASPTHW/ex14$</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>思考： 能量为什么会差这么多呢（1.11 eV 或者最新结果140多eV）？ </p>
+<p>答： 我们需要知道体系的能量随键长的变化关系：如下图：</p>
+<p> <img src="/img/lvthw/ex14/ex14-7.jpg"></p>
+<p>图中X 处是O$_2$的稳定结构，两个原子间距离小于X处的键长时，它们之间的排斥力导致了体系的能量快速升高。</p>
+<p>由于我们已经知道了正确的计算结果，通过分析后，这次的计算失败！但对于不知道结果的时候，怎么判断计算是否成功失败呢？首先根据VASP计算的收敛情况，也就是计算至少应该正常结束，其次，这是远远不够的，我们还要查看输出结构的几何构型，判断是否具有物理或者化学的意义，还要看每一步收敛的能量信息。这些就需要我们化学基础知识了。</p>
+<h3 id="扩展练习及思考"><a href="#扩展练习及思考" class="headerlink" title="扩展练习及思考"></a>扩展练习及思考</h3><p>1 计算为什么会失败?</p>
+<p>2 分析该计算中每一步收敛的情况，以及能量的变化。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>1 不合理的结构会增加计算时间；</p>
+<p>2 不合理的结构会导致计算结果没意义；</p>
+<p>3 知道怎么处理周期性结构中，原子不在一个晶格里面的情况；</p>
+<p>4 学会判断计算结果的物理或者化学意义。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

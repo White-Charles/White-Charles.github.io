@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        A09 超算中心使用前的准备工作（一） - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%B8%8B%E8%BD%BDLinux%E7%89%88%E7%9A%84VPN%E8%BD%AF%E4%BB%B6%EF%BC%9A"><span class="toc-text">1 下载Linux版的VPN软件：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85Linux-%E7%89%88VPN"><span class="toc-text">2 安装Linux 版VPN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%BF%9E%E6%8E%A5VPN"><span class="toc-text">3 连接VPN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%80%9A%E8%BF%87ssh%E8%BF%9E%E6%8E%A5%E8%B6%85%E7%AE%97%E4%B8%AD%E5%BF%83%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9A"><span class="toc-text">4 通过ssh连接超算中心服务器：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E4%B8%8A%E4%BC%A0%E6%88%96%E8%80%85%E4%B8%8B%E8%BD%BD%E6%95%B0%E6%8D%AE%EF%BC%88sshfs%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="toc-text">5 上传或者下载数据（sshfs的使用）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%BC%82%E5%B8%B8%E9%97%AE%E9%A2%98%E7%9A%84%E5%A4%84%E7%90%86"><span class="toc-text">6 异常问题的处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        A09 超算中心使用前的准备工作（一）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2011-12-25 02:06:48</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#超算中心" title="超算中心">超算中心</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#吕梁" title="吕梁">吕梁</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>感谢吕梁超算中心的支持，以后VASP的学习系列练习，都将在天河二号上面进行展示操作。一方面帮助大家继续学习VASP知识，另一方面也帮助大家快速掌握使用超算中心计算的技巧，进而避免一些焦头烂额的琐事。今天我们先讲解一下怎么在Ubuntu系统上，1）安装VPN, 2）连接天河二号超算中心，3）以及将超算中心挂载到本地电脑上，进行文件互传。</p>
+<p>如果你是Windows用户，管理员在发送账号的时候，已经将使用说明一起发给你了。相信大家都可以顺利链接。那么请跳过本节内容。</p>
+<p>但是Linux系统在计算具有的独特优势是Windows所不能比的，建议Windows用户继续看下去，对以后使用Linux系统做计算会有帮助。下一节，我们介绍如何使用脚本运行VASP软件，由于本人还在摸索，需要和管理沟通学习，大家再耐心等待一天。如果你想要试用或者申请超算中心的机时，请加QQ群：国防科大吕梁超算中心（204521798）了解更多的信息。</p>
+<hr>
+<h2 id="1-下载Linux版的VPN软件："><a href="#1-下载Linux版的VPN软件：" class="headerlink" title="1 下载Linux版的VPN软件："></a>1 下载Linux版的VPN软件：</h2><p>链接：<a target="_blank" rel="noopener" href="https://www.hillstonenet.com/our-products/next-gen-firewalls-e-series/">https://www.hillstonenet.com/our-products/next-gen-firewalls-e-series/</a></p>
+<p>直接跳到网页最底部，右侧点击 Linux OS 下载。<strong>注意</strong>：这个VPN不支持Ubuntu17 和 18的版本。</p>
+<p><img src="/img/lvthw/a09/a09-1.png"></p>
+<p><img src="/img/lvthw/a09/a09-2.png"></p>
+<hr>
+<h2 id="2-安装Linux-版VPN"><a href="#2-安装Linux-版VPN" class="headerlink" title="2 安装Linux 版VPN"></a>2 安装Linux 版VPN</h2><p>Hillstone 官网已经给出了详细的安装说明， 链接如下：</p>
+<p><a target="_blank" rel="noopener" href="http://docs.hillstonenet.com/en/Content/7_VPN/SSL_VPN_Client_L.htm#Starting">http://docs.hillstonenet.com/en/Content/7_VPN&#x2F;SSL_VPN_Client_L.htm#Starting</a></p>
+<p>大家可以参考链接，也可以根据下面的步骤进行。本人直接将官网的照片复制过来了。</p>
+<p><img src="/img/lvthw/a09/a09-3.png"></p>
+<p>找到刚才下载的vpn软件： 右击 –&gt; 点击最底部的Properties</p>
+<hr>
+<p><img src="/img/lvthw/a09/a09-4.png"></p>
+<p>在弹出的窗口中，将Execute的那个框选中，然后点击左上角的叉号直接关闭。、</p>
+<p>双击这个软件的图标，一步一步点下去，这样就完成安装啦，同时桌面上会生成VPN的快捷方式图标。</p>
+<hr>
+<h2 id="3-连接VPN"><a href="#3-连接VPN" class="headerlink" title="3 连接VPN"></a>3 连接VPN</h2><p>1） 打开VPN：双击桌面的VPN图标，会弹出让你输入电脑密码的对话框，输入密码，点击Authenticate按钮。</p>
+<p><img src="/img/lvthw/a09/a09-5.png"></p>
+<p>2） 点击下图中的New 对应的加号，会弹出对话框，让你输入IP，账号密码</p>
+<p><img src="/img/lvthw/a09/a09-6.png"></p>
+<p>注意：</p>
+<ul>
+<li><p>Name, Description 这两项随便填。</p>
+</li>
+<li><p>Host的IP超算中心给了三个，大家根据自己的网进行选择，如果一个不行，换另一个试试即可。</p>
+</li>
+<li><p>Port 就是 4433</p>
+</li>
+<li><p>User name和Password是VPN的账号和密码！！！</p>
+</li>
+<li><p>一定要选中Remember Password. 因为管理员给的密码实在是太安全了，Linux的VPN不能修改密码。如果嫌密码麻烦，可以在Windows连接成功后，修改VPN的密码。</p>
+</li>
+</ul>
+<p>4） 点击OK就开始连接了</p>
+<p>5） vpn的官网的填写说明，大家把网页中的第三条展开就可以看到了</p>
+<p><img src="/img/lvthw/a09/a09-7.png"></p>
+<p>6） 连接过程以及成功是这个样子：</p>
+<p><img src="/img/lvthw/a09/a09-8.png"></p>
+<p><img src="/img/lvthw/a09/a09-9.png"></p>
+<hr>
+<h2 id="4-通过ssh连接超算中心服务器："><a href="#4-通过ssh连接超算中心服务器：" class="headerlink" title="4 通过ssh连接超算中心服务器："></a>4 通过ssh连接超算中心服务器：</h2><p>VPN登录成功后，后面我们就可以通过Terminal连接超算中心了。为了方便，提高效率，强烈建议大家按照下面的步骤进行：</p>
+<p>1） 安装sshfs </p>
+<p>这个用于把超算中心挂载到你的本地电脑上，后面再细说，先安装好。可以命令行一键搞定。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install sshfs</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/lvthw/a09/a09-10.png"></p>
+<p>2） 在home目录下建一个文件夹，名字为： lvliang</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/lvliang</span><br></pre></td></tr></table></figure>
+
+<p>3） 将下面的内容加入到 .bashrc 文件中，将下面代码中的<code>172.16.20.XX</code> 换成超算管理员发给你的IP地址。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">####lvliang###</span><br><span class="line">alias lvliang=&#x27;ssh iciq-lq@172.16.20.XX&#x27;</span><br><span class="line">alias mlvliang=&#x27;sshfs iciq-lq@172.16.20.XX: ~/lvliang/&#x27;</span><br><span class="line">alias ulvliang=&quot;sudo umount ~/lvliang  -l&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>lvliang 这个命令用来连接超算中心，提交任务，运行命令处理任务等</li>
+<li>mlvliang 用来挂载超算中心到你的电脑上，相当于把超算中心看作成一个移动硬盘</li>
+<li>ulvliang 用来卸载超算中心。</li>
+</ul>
+<p>4） 保存后，更新下 .bashrc 文件，然后直接敲命令： lvliang 即可连接超算中心。</p>
+<p>第一次连接，可能会出来一堆提示东西，输入Yes ，回车即可。</p>
+<p>输入自己的超算中心账号密码，就可以登录啦。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbro:~$ . .bashrc </span><br><span class="line">qli@bigbro:~$ lvliang </span><br><span class="line">iciq-lq@172.16.20.10&#x27;s password: </span><br><span class="line">Last login: Tue Dec  4 18:22:59 2018 from 172.16.31.135</span><br></pre></td></tr></table></figure>
+
+<p>5）新用户刚开始的时候主目录下面什么都没有，强烈建议大家建一个 bin 文件夹，用来存放脚本。直接 <code>mkdir ~/bin</code> 即可。</p>
+<hr>
+<h2 id="5-上传或者下载数据（sshfs的使用）"><a href="#5-上传或者下载数据（sshfs的使用）" class="headerlink" title="5 上传或者下载数据（sshfs的使用）"></a>5 上传或者下载数据（sshfs的使用）</h2><p>1） 挂载超算中心到自己的本地电脑。</p>
+<p>打开一个新的终端，</p>
+<ul>
+<li>输入前面我们写进.bashrc文件中的命令： mlvliang (m是mount的缩写)。</li>
+<li>输入超算中心的密码：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbro:~$ mlvliang </span><br><span class="line">iciq-lq@172.16.20.10&#x27;s password: </span><br><span class="line">qli@bigbro:~$ cd lvliang/</span><br><span class="line">qli@bigbro:~/lvliang$ ls</span><br><span class="line">bin  LVASPTHW  POTCAR  test_jobs</span><br><span class="line">qli@bigbro:~/lvliang$ </span><br></pre></td></tr></table></figure>
+
+<p>现在超算中心就成功被挂载到我们电脑上了，我们可以随时进入并访问超算中的文件夹，通过<code>cp、mv、rsync</code>等命令往里面传数据，或者下载数据到本地的电脑。</p>
+<hr>
+<p>2） 例子1 ：</p>
+<p>挂载超算中心登录后，我们将Ex01的文件下载（通过<code>cp</code>命令）到本地电脑桌面上。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbro:~/lvliang$ ls</span><br><span class="line">bin  LVASPTHW  POTCAR  test_jobs</span><br><span class="line">qli@bigbro:~/lvliang$ cd LVASPTHW/</span><br><span class="line">qli@bigbro:~/lvliang/LVASPTHW$ ls</span><br><span class="line">ex01  ex02  ex03  ex04  ex05  ex06  ex07  ex08  ex09  ex10  ex11  ex12  ex13  ex14  ex15  ex74  ex77  ex78  potcar</span><br><span class="line">qli@bigbro:~/lvliang/LVASPTHW$ cp ex01 ~/Desktop/</span><br><span class="line">qli@bigbro:~/lvliang/LVASPTHW$ ls ~/Desktop/ex01/</span><br><span class="line">INCAR  KPOINTS  POSCAR  POTCAR</span><br></pre></td></tr></table></figure>
+
+<p>3） 例子2 ：</p>
+<p>我们将电脑桌面的ex16文件夹上传（通过<code>cp</code>命令）到超算中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbro:~/lvliang/LVASPTHW$ ls</span><br><span class="line">ex01  ex02  ex03  ex04  ex05  ex06  ex07  ex08  ex09  ex10  ex11  ex12  ex13  ex14  ex15  ex74  ex77  ex78  potcar</span><br><span class="line">qli@bigbro:~/lvliang/LVASPTHW$ cp ~/Desktop/ex16 .</span><br><span class="line">qli@bigbro:~/lvliang/LVASPTHW$ ls</span><br><span class="line">ex01  ex02  ex03  ex04  ex05  ex06  ex07  ex08  ex09  ex10  ex11  ex12  ex13  ex14  ex15  ex16  ex74  ex77  ex78  potcar</span><br><span class="line">qli@bigbro:~/lvliang/LVASPTHW$ </span><br></pre></td></tr></table></figure>
+
+
+
+<p>4） 注意事项：</p>
+<p>1） 必须通过mlvliang这个命令将超算中心挂载到本地电脑上之后，我们才可以互传文件。</p>
+<p>2） 如果还没有挂载，就将电脑的内容复制到lvliang这个文件夹中，那么挂载之后，服务器中不会显示刚刚复制的内容</p>
+<p>3） 不要用鼠标点击电脑里面的文件夹查看文件，这样会很慢，只能使用命令！！！切记！！</p>
+<p>4） 卸载的时候，使用mlvliang 这个命令，然后输入自己的电脑密码（不是超算中心的了。）</p>
+<p>5） 我们这样做，相当于把超算中心当做一个移动硬盘来使用，非常方便。</p>
+<h2 id="6-异常问题的处理"><a href="#6-异常问题的处理" class="headerlink" title="6 异常问题的处理"></a>6 异常问题的处理</h2><p>1）挂载超算中心到本地电脑上的时候，有时候因为网络连接，会出现下图中的错误。这时候我们先使用<code>ulvliang </code>命令把超算中心卸载掉，然后再重新挂载就可以了。</p>
+<p><img src="/img/lvthw/a09/a09-11.png"></p>
+<p>2） 如果上面还解决不了的话，可以尝试着先关机，出去溜达一会儿，然后回来再弄。或者找超算管理员解决。他们一般都很上心，服务响应很快。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>本节就先介绍到这里，大家可以通过这样的方式，安装VPN，连接以及挂载超算中心，并将自己的文件上传到超算中心（比如VASP的那一堆POTCAR文件，自己的脚本，任务文件等等）。先把准备工作做好，下一节我们就可以提交任务进行计算了。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

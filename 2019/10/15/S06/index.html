@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        高阶弹性常数计算的一点建议 - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        高阶弹性常数计算的一点建议
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-10-15 19:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#ponychen" title="ponychen">ponychen</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#弹性常数" title="弹性常数">弹性常数</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>在线弹性理论中，体系被施加一个无穷小的应变，从而体系应变后的能量可以以小应变为自变量泰勒展开，并忽略二阶导以上的高阶项。通过对不同特定的独立的应变模式求解能量应变方程或者应力应变方程，我们可以获得材料所有的二阶弹性常数（SOECs）。SOECs反映了体系的简谐弹性特征。通过SOECs，一方面我们可以获得体系的基于Vogit-Reuss-Hill平均的多晶力学性能，包括杨氏模量，剪切模量，体积模量，泊松比和维氏硬度等，以及在此基础之上的各向异性系数等等特征；另一方面，我们也可以通过SOECs获得单晶力学性能在空间中的具体分布，并将其用图的模式直观的表示出来。</p>
+<p><img src="/img/lvthw/share06/share061.png"></p>
+<p>图中我们展示了某种金属的杨氏模量和剪切模量（每个面的平均值）的空间分布图，感兴趣的读者可以猜猜这是哪种布拉维晶型的金属。</p>
+<p>在实际负载下，材料承受的往往是有限形变，这时候材料的非简谐弹性将称为不可忽视的因素。很多实验数据有去测量体系的三阶弹性常数（TOECs），甚至四阶弹性常数（FOECs）。注意到TOECs和FOECs相对比SOECs在实验中更加受到实验精度的影响，具体的测量非常困难。如果我们能在理论上对其进行预测，将变得非常有意义。实际上已经有若干文献进行了相关研究，笔者也抱着好奇的态度尝试进行了TOECs和FOECs的计算。原理上来说相对简单，我们只需要将能量对应变进行泰勒展开，将阶次保留到四次，即可同时获得SOECs，TOECs和FOECs。</p>
+<p><img src="/img/lvthw/share06/share062.png"></p>
+<p>将所有的应变η设为同一个数值，我们就可以用一个包含四次，三次和二次项的多项式来拟合计算的数据，获得包含各个弹性常数的多元一次方程组。求解这个这个方程组即可获得所有的弹性常数。</p>
+<p>不过实际操作起来并没有这么简单。即使是最简单的立方体系，其TOECs也达到了6个，而FOECs更是达到了11个。对于更低对称性的体系，其计算量更是一个天文数字（开玩笑的，天文倒不至于，很大就是了）。一种避让的方法就是，我们可以用应力对应变进行展开，这样相对需要的独立应变数少一些。笔者使用Au作为测试体系，根据文献对体系施加了11种独立应变，如下图。</p>
+<p><img src="/img/lvthw/share06/share063.png"></p>
+<p>感兴趣的童鞋可以直接阅读文末给的参考文献。笔者通过测试发现，首先，体系的应变量必须足够大。笔者一开始犯上了计算SOECs的习惯，使用的很小的应变，计算结果简直南辕北辙。后来将应变加到15%后，获得的TOECs相对理想。细想也是，应变很小时，体系还处于线弹性阶段，这时候的非谐弹性非常微弱，极容易被数值误差干扰。将应变加大到非谐区后，数值就非常稳定了。同时，尽管我们使用了大应变条件，但是实际上高阶弹性常数的具体数值依旧会对数值精度的波动非常敏感。</p>
+<table>
+<thead>
+<tr>
+<th>Au&#x2F;GPa</th>
+<th>C111</th>
+<th>C112</th>
+<th>C123</th>
+<th>C144</th>
+<th>C155</th>
+<th>C456</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>exp</td>
+<td>-1730</td>
+<td>-922</td>
+<td>-233</td>
+<td>-13</td>
+<td>-648</td>
+<td>-12</td>
+</tr>
+<tr>
+<td>mine</td>
+<td>-1207</td>
+<td>-847</td>
+<td>-275</td>
+<td>7</td>
+<td>-616</td>
+<td>62</td>
+</tr>
+</tbody></table>
+<p>同文献一样，笔者使用了非常高精度的k点半径和截断能。随着精度的提高，结果趋于较好的收敛。笔者在此展示了笔者自己算的TOECs与实验的比较，两者相对来说还是比较接近的（相对实验的误差与文献差不多）。总的来说，如果有小伙伴需要计算材料的TOECs或者FOECs，笔者建议一定要对应变，k点，截断能三者都要做仔细地收敛测试。</p>
+<p>Wang,Hao, and Mo Li. “Ab initio calculations of second-, third-, andfourth-order elastic constants for single crystals.” <em>PhysicalReview B</em> 79.22 (2009): 224102.</p>
+<p>本文经ponychen授权发布，版权属于ponychen。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

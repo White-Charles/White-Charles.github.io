@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        VASP计算遇到错误怎么办？ - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC1%E9%98%B6%E6%AE%B5%EF%BC%9A"><span class="toc-text">第1阶段：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC2%E9%98%B6%E6%AE%B5%EF%BC%9A"><span class="toc-text">第2阶段：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC3%E9%98%B6%E6%AE%B5%EF%BC%9A"><span class="toc-text">第3阶段：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC4%E9%98%B6%E6%AE%B5%EF%BC%88I%EF%BC%89"><span class="toc-text">第4阶段（I）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC-6-%E9%98%B6%E6%AE%B5"><span class="toc-text">第 6 阶段</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        VASP计算遇到错误怎么办？
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2017-12-22 02:06:48</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#VASP出错" title="VASP出错">VASP出错</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#解决问题" title="解决问题">解决问题</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#QQ群" title="QQ群">QQ群</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>搞科研，总会遇到各种各样的问题需要解决，同样VASP计算也不例外，本文大师兄列举了一些解决问题的步骤和方法，只提供大体的方向，没有具体事例，大家结合自己的计算研究亲自去实践体会，写本文的目的是告诉大家：自己亲自解决问题才是你快速成长的加速器。 </p>
+<p><img src="/img/lvthw/A06/A06-1.jpg"></p>
+<h3 id="第1阶段："><a href="#第1阶段：" class="headerlink" title="第1阶段："></a>第1阶段：</h3><p> 靠自己（最重要的！） </p>
+<p>1.1 凭自己的经验解决；</p>
+<p>1.2 按照VASP的输出错误，进行修改解决；</p>
+<p>1.3 查找VASP官网的相关参数；</p>
+<p>1.4 平时多阅读VASP手册；</p>
+<p>1.5 不懂的参数不要往INCAR里面放。</p>
+<p><img src="/img/lvthw/A06/A06-2.jpg"></p>
+<h3 id="第2阶段："><a href="#第2阶段：" class="headerlink" title="第2阶段："></a>第2阶段：</h3><p><strong>主动搜索（也是靠自己）</strong> </p>
+<p>2.1 将错误信息复制到百度里面搜索，一般会得到一堆论坛或者博客的相关指导说明，按照里面的内容修改自己的输入文件，然后解决问题。</p>
+<p><img src="/img/lvthw/A06/A06-3.jpg"></p>
+<p>2.2  将错误信息复制到Google里面搜索，一般会得到VASP官网的论坛一节其他国外网址的相关错误示例，这时候，就要耐着性子把其中的内容读完，然后修改输入文件进行解决；一般来说，进行到这一步，至少60% 左右的问题可以解决!!! </p>
+<h3 id="第3阶段："><a href="#第3阶段：" class="headerlink" title="第3阶段："></a>第3阶段：</h3><p><strong>靠师兄师姐，师弟师妹，老板</strong></p>
+<p>如果时间过去2天，还没有解决。可以将自己的错误信息以及尝试的方法总结。</p>
+<p>分享给组里的师兄弟，师姐妹们，寻求求助办法。如果还未解决，就要报告给自己的老师，求助指导！！！此时，解决的成功率应该能达到70-100% </p>
+<p><strong>大师兄的建议</strong>：自己主动去解决是关键，这需要培养主动解决问题的能力。老板是辅助的策略，除了指导课题的方向，在学生遇到问题时能出马解决，这也是他或者她为什么是老板的原因之一。</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="第4阶段（I）"><a href="#第4阶段（I）" class="headerlink" title="第4阶段（I）"></a>第4阶段（I）</h3><p><strong>论坛求助</strong></p>
+<p>如果老板不给力（很多做实验的老板要求学生去做计算，大师兄本人极度鄙视这样的老板，完全就是对学生的不负责任！），可以去尝试论坛求助：这里大师兄推荐：</p>
+<p><img src="/img/lvthw/A06/A06-5.jpg"></p>
+<p>将问题复制到百度里面，你就会发现这个问题会在很多论坛里面出现。不过论坛求助有一点需要注意：发帖的人水平参差不齐，要抱着怀疑的态度去接受所有人的答复（<strong>记住，是所有人！！！</strong>），别人的回复只能当作参考。</p>
+<p><strong>第4阶段（II）QQ群求助：</strong></p>
+<p>这里大师兄列举了三个管理员认真负责的QQ群：</p>
+<p>​                                                                               <strong>遇见大师兄</strong></p>
+<p><img src="/img/lvthw/A06/A06-7.jpg"></p>
+<p>​                                                                             <strong>第一性原理之家</strong></p>
+<p><img src="/img/lvthw/A06/A06-8.jpg"></p>
+<p>​                                                                                         <strong>物理化学材料互助群</strong></p>
+<p><img src="/img/lvthw/A06/A06-9.jpg"></p>
+<p>进行到这一步，基本上95%的问题可以解决了。 </p>
+<p><strong>第5阶段：VASP官方论坛发帖</strong></p>
+<p>以上都解决不了的话（极少的情况了），可以去VASP官网发帖求助，等待VASP的其他用户或者管理员解决。不过需要注册！</p>
+<p><img src="/img/lvthw/A06/A06-10.jpg"></p>
+<h3 id="第-6-阶段"><a href="#第-6-阶段" class="headerlink" title="第 6 阶段"></a>第 6 阶段</h3><p><strong>QQ群求助：</strong></p>
+<p><strong>6.1 尊重别人的时间</strong></p>
+<p>A）QQ群求助的时候，提供的信息要全面：</p>
+<p>1）  算的什么体系</p>
+<p>2） 算的什么内容</p>
+<p>3）INCAR长什么样子</p>
+<p>4）错误信息</p>
+<p>5）KPOINTS以及POSCAR 很多人把图片一截，或者拿手机拍张照片就直接在群里求助了，这是对大家时间的极度不尊重。而且被应助的概率很低！！！你不尊重大家的时间，大家也不会浪费时间在你身上。 </p>
+<p>B）可以将计算结果压缩，上传到QQ群文件进行求助（但不要把CHG，CHGCAR和WAVECAR等压缩到里面，因为它们太大，大家都懒得去下载！如果你上传了一个100M的求助文件，基本没人帮你！）</p>
+<p>C）不要多群求助 有很多人加了很多群，把遇到的问题在所有的群里面都发了一遍！这样的行为简直就是在浪费大家的宝贵时间，本人见到这种情况，一般都不会去帮助。</p>
+<p><strong>6.2</strong> <strong>把你得小心眼收起来！！！</strong> </p>
+<p>A) 除了涉密的一些计算，其他情况没有必要给大家隐瞒什么，大家也不会坏到去抢你的课题去算！心胸狭隘的人也不配得到帮助！</p>
+<p>B) 要虚心接受别人的批评，也就是心眼要大。大师兄也遇到很多奇葩，在群里求助，没人回答，就直接退群了。被别人批评了几句，也退群了。只能说这些没心胸的人也不值得去帮助。</p>
+<p><strong>6.3</strong> <strong>互相帮助</strong></p>
+<p>别人遇到的问题，如果你知道怎么解决，不要有所隐瞒。请认真帮助解决，用俺奶奶经常挂在嘴边的那句话：将心比心。这样大家的计算水平才可以得以普遍地提高。 请认真按照这个流程来解决问题，不要一出现问题，脑子不假思索就去论坛或者QQ群求助!!! 请记住，你的问题也代表了你的老板的水平。一般来说，不负责任的老板带出来的学生总会有各种各样的低级问题。 以上仅代表本人观点，不喜勿喷！祝大家踏踏实实做计算，多发实实在在的文章！</p>
+<p>最后，新手的话，请认真学习Learn Vasp The Hard Way 这本书(<a target="_blank" rel="noopener" href="http://www.bigbrosci.com/">www.bigbrosci.com</a>) 按照大师兄写的内容，从头认真学习VASP（本书只作为参考，关键是去浏览官网！！！）；如果在学习中遇到问题，也可以把问题准备好，发送邮件给大师兄解决：<a href="mailto:&#108;&#x71;&#99;&#97;&#x74;&#97;&#x40;&#x67;&#109;&#x61;&#105;&#x6c;&#108;&#x2e;&#99;&#x6f;&#x6d;">lqcata@gmaill.com</a> 最好不要直接QQ找我（拜托！）</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

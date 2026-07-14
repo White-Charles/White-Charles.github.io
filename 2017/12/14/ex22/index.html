@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex22 乙醇气相分子的优化 - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%89%93%E5%BC%80%E5%86%B0%E7%AE%B1%EF%BC%9A"><span class="toc-text">1. 打开冰箱：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%A4%8D%E4%B9%A0%E4%B8%80%E4%B8%8B%E5%89%8D%E9%9D%A2%E5%AD%A6%E5%88%B0%E7%9A%84INCAR%E5%92%8CKPOINTS%E7%9A%84%E5%86%85%E5%AE%B9%EF%BC%9A"><span class="toc-text">1.1 复习一下前面学到的INCAR和KPOINTS的内容：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%8A%8A%E5%A4%A7%E8%B1%A1%E5%A1%9E%E5%88%B0%E5%86%B0%E7%AE%B1%E9%87%8C%E9%9D%A2-POSCAR%E7%9A%84%E5%87%86%E5%A4%87%EF%BC%88%E6%9C%AC%E8%8A%82%E9%87%8D%E7%82%B9%EF%BC%89"><span class="toc-text">2 把大象塞到冰箱里面 :POSCAR的准备（本节重点）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%89%93%E5%BC%80%E7%BD%91%E7%AB%99"><span class="toc-text">2.1 打开网站</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#POTCAR"><span class="toc-text">POTCAR</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1"><span class="toc-text">3 提交任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%89%A9%E5%B1%95%E7%BB%83%E4%B9%A0%EF%BC%9A"><span class="toc-text">4 扩展练习：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">5 总结：</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex22 乙醇气相分子的优化
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2017-12-14 02:06:48</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#优化" title="优化">优化</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#数据库" title="数据库">数据库</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#乙醇" title="乙醇">乙醇</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>前面我们终于讲完了 $\rm{O_2}$ 分子优化的例子。相信大家对 <strong>VASP</strong> 计算已经有了一个初步的理解。这一节我们继续学习气相分子的优化。为了让大家进一步了解计算的过程，我们选取一个稍微复杂的分子作为例子：乙醇（$\rm{CH_3CH_2OH}$）。</p>
+<hr>
+<p>问：把大象装进冰箱需要几步？</p>
+<p><img src="/img/lvthw/ex22/ex22-1.jpeg"></p>
+<p>大师兄，这个问题我早就知道答案了。为啥还问这样低智商的问题？</p>
+<p>大师兄要求的不是让你回答开冰箱门，装进去，关门的这三步。而是让你尝试回想一下：当你第一次接触这个问题的时候，你的反应是什么？</p>
+<p>大师兄比较笨，我的第一反应是，这怎么可能？  冰箱那么点，大象那么大。</p>
+<p><img src="/img/lvthw/ex22/ex22-2.jpeg"></p>
+<p>当朋友告诉我答案的时候，才恍然大悟，这跟大小没关系。</p>
+<p><img src="/img/lvthw/ex22/ex22-3.jpeg"></p>
+<hr>
+<p>同样的，怎么用 <strong>VASP</strong> 计算乙醇分子？很多童鞋就如同第一次被问到大象这个问题一样不知所措。答，也是三步！</p>
+<p>1） 打开冰箱：准备 <strong>VASP</strong> 文件</p>
+<p>2） 把大象塞进去：准备乙醇分子模型</p>
+<p>3）关上冰箱：运行 <strong>VASP</strong></p>
+<h2 id="1-打开冰箱："><a href="#1-打开冰箱：" class="headerlink" title="1. 打开冰箱："></a>1. 打开冰箱：</h2><p>我们可以直接用O$_2$分子计算的输入文件，</p>
+<h3 id="1-1-复习一下前面学到的INCAR和KPOINTS的内容："><a href="#1-1-复习一下前面学到的INCAR和KPOINTS的内容：" class="headerlink" title="1.1 复习一下前面学到的INCAR和KPOINTS的内容："></a>1.1 复习一下前面学到的<code>INCAR</code>和<code>KPOINTS</code>的内容：</h3><p>1）乙醇分子是闭壳层的分子，没有磁性，不需要<code>ISPIN=2</code></p>
+<p>2）气相分子计算，我们要用<code>ISMEAR=0</code>，<code>SIGMA</code>取值要小，<code>SIGMA=0.02</code>；</p>
+<p><img src="/img/lvthw/ex22/ex22-4.jpeg"></p>
+<p> <strong>#</strong> 表示注释，这个符号后面的内容，VASP在运行的时候不考虑。</p>
+<hr>
+<p><strong>示例 1 ：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ENCUT = 400</span><br><span class="line"><span class="comment"># ENCUT = 500</span></span><br></pre></td></tr></table></figure>
+<p>和</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ENCUT = 400</span><br></pre></td></tr></table></figure>
+<p>效果是一样的。</p>
+<hr>
+<p><strong>示例 2：# 的用法：</strong></p>
+<p><img src="/img/lvthw/ex22/ex22-5.jpeg"></p>
+<p><strong>VASP</strong> 计算中一些常见的错误，以及注意事项，你可以通过 # 写在<code>INCAR</code>里面，方便计算的时候进行设置。可以 # 开头，单起一行，也可以在参数的最后面加上注释。新手们刚刚开始，可以结合 <strong>VASP</strong> 官网参考书，把用到的INCAR参数注释下来，时间长了慢慢就掌握了。</p>
+<p>3）气相分子计算，<code>K</code>点使用<code>Gamma</code>点就够了；</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">K-POINTS</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="built_in">Gamma</span></span><br><span class="line"><span class="number">1</span> <span class="number">1</span> <span class="number">1</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="2-把大象塞到冰箱里面-POSCAR的准备（本节重点）"><a href="#2-把大象塞到冰箱里面-POSCAR的准备（本节重点）" class="headerlink" title="2 把大象塞到冰箱里面 :POSCAR的准备（本节重点）"></a>2 把大象塞到冰箱里面 :POSCAR的准备（本节重点）</h2><p>前面我们学习到，一个好的初始结构会加快计算，获取准确的计算结果。因此我们需要去找一个合理的模型。对于气相分子的结构，一是手动搭建，大师兄推荐用 <code>GaussView</code>，另一个办法就是找数据库，大师兄推荐英国皇家学会的 <strong>ChemScpider</strong>。网址：<a target="_blank" rel="noopener" href="http://www.chemspider.com/">http://www.chemspider.com</a> </p>
+<p><img src="/img/lvthw/ex22/ex22-7.jpeg"></p>
+<p>下面我们把手动搭建乙醇分子的模型具体解释一下：</p>
+<h3 id="2-1-打开网站"><a href="#2-1-打开网站" class="headerlink" title="2.1 打开网站"></a>2.1 打开网站</h3><p><img src="/img/lvthw/ex22/ex22-8.jpeg"></p>
+<p>搜索框中输入： 分子名称<code>Ethanol</code> 或者 分子式<code>C2H6O</code>…. 点击搜索，等待结果：</p>
+<p><img src="/img/lvthw/ex22/ex22-9.jpeg"></p>
+<p>上面箭头指的两个地方随便点，效果是一样的，如下：</p>
+<p><img src="/img/lvthw/ex22/ex22-10.jpeg"></p>
+<p>分子默认显示 <code>2D</code> 的结构，点击箭头指的 <code>3D</code>，切换。第二个箭头所指的有对应结构的维基百科链接，翻墙的筒子们可以查阅下相关结构的知识。选择<code>3D</code>后，如下：</p>
+<p><img src="/img/lvthw/ex22/ex22-11.jpeg"></p>
+<p>点击箭头指的地方保存，浏览器会下载对应的 .mol 文件，文件名为该结构在数据库中的编号。</p>
+<hr>
+<p><code>.mol</code>文件也是纯文本，使用<code>Notepad++</code> 打开如下：看到这么多内容，不要害怕！</p>
+<p><img src="/img/lvthw/ex22/ex22-12.jpeg"></p>
+<p><strong>注： 不仅仅是 <code>.mol</code> 文件，很多结构文件都是文本格式，直接打开就是。</strong></p>
+<p>从里面找到乙醇结构的 $x, y, z$ 坐标信息</p>
+<p><img src="/img/lvthw/ex22/ex22-13.jpeg"></p>
+<p>删除上图中除红色框之外的所有行，1-4行，以及 14 至最后一行，只保留 $x, y, z$ 坐标信息的那几行。</p>
+<p><img src="/img/lvthw/ex22/ex22-14.jpeg"></p>
+<p>手动写<code>POSCAR</code>，首先你要熟记的格式，知道<code>POSCAR</code>从头开始，往下每一行代表的内容。</p>
+<p>我们的模型是把乙醇分子放到一个 $ 20 \times 20 \times 20~A^3 $ 的格子里面。输入完之后，坐标后面的元素符号以及那些 $0$ $0$ $0$ 可以删掉，也可以不管。</p>
+<p><img src="/img/lvthw/ex22/ex22-15.jpeg"></p>
+<p><strong>关键点1： .mol文件中，坐标那几行中的第 4 列写到<code>POSCAR</code>中的第 6, 7行！</strong></p>
+<p><strong>关键点2： 注意坐标为 <code>Cartesian</code> 或者是 <code>Direct</code>. <code>Direct</code> 是分数坐标，其 $x, y, z$ 值都小于 1.</strong></p>
+<hr>
+<p>如果你想删掉图中坐标第3列后面的内容：大师兄推荐notepad++里面的列块模式：如下：</p>
+<p><img src="/img/lvthw/ex22/ex22-16.jpeg"></p>
+<p>点击之后，可能会弹出对话框，告诉你如何使用，列块模式</p>
+<p><img src="/img/lvthw/ex22/ex22-17.jpeg"></p>
+<hr>
+<p><strong>方法1：</strong></p>
+<p> 摁住 <code>Alt</code> 键，然后用鼠标选择文本，不同电脑可能不一样，大师兄这边同时摁住 <code>Ctrl</code> 和 <code>Alt</code> 两个键，然后用鼠标选择的。</p>
+<hr>
+<p><strong>方法2：</strong></p>
+<p>同时摁住 <code>Alt</code>和<code>Shift</code>键，通过键盘上前后左右的箭头选择文本</p>
+<p>大家可以尝试下，选中效果如图：</p>
+<p><img src="/img/lvthw/ex22/ex22-18.jpeg"></p>
+<p>然后点键盘上的<code>Delete</code>键删除.</p>
+<p><img src="/img/lvthw/ex22/ex22-19.jpeg"></p>
+<p>然后另存为<code>POSCAR</code>即可。</p>
+<hr>
+<p>我们可以使用 <strong>p4vasp</strong> 来查看一下模型的结构：如下图</p>
+<p><img src="/img/lvthw/ex22/ex22-20.jpeg"></p>
+<p>我靠，师兄，结构怎么跑到格子外面啦？前面 $\rm{O_2}$ 分子的学习中，你已经知道了这是因为周期性导致的显示问题。对计算不会产生影响。这个结构可以拿来直接用。</p>
+<p>如果感觉不爽，想把结构放到中间，可以这么做：</p>
+<p>数学上，把 $x, y, z$ 坐标<strong>统统加上 $10$ 即可</strong>；</p>
+<p>软件使用上，我们讲一下 <strong>p4vasp</strong> 的操作方法：</p>
+<p><img src="/img/lvthw/ex22/ex22-21.jpeg"></p>
+<p>选择 <code>edit</code> –&gt; <code>Move atoms</code></p>
+<p><img src="/img/lvthw/ex22/ex22-22.jpeg"></p>
+<p><code>Move group</code> 是你要移动的原子，这里大师兄直接输入了 C H O 三个元素符号（中间有空格）表示选择所有元素的原子。然后在 <code>Vector</code> 中选择 $x, y, z$ 三个方向上移动的大小。你也可以写 $1$ $1$ $1$，然后点击 <code>Move</code> 按钮 $10$ 次。</p>
+<p>如果你想通过选择原子来实现移动的话(不直接在 <code>Move group</code> 里面输入 C H O)，需要按照大师兄说的步骤走：</p>
+<p><img src="/img/lvthw/ex22/ex22-23.jpeg"></p>
+<ol>
+<li><p>空格键结合鼠标选中所有的原子；鼠标指到原子上就点一下空格键</p>
+</li>
+<li><p>选中原子后，主界面会显示一些数字，这些数字和 <code>POSCAR</code> 中元素的顺序是一致的；</p>
+</li>
+<li><p>所有原子选中后，左下角的框中点击 <code>Get group</code>，会显示选择的那些原子；</p>
+</li>
+<li><p>在 <code>Vector</code> 中选择 $x, y, z$ 三个方向上移动的大小，然后点击 <code>Move</code> 按钮。</p>
+</li>
+</ol>
+<p>上面一堆废话就此打住，结果就是这样子的：</p>
+<p><img src="/img/lvthw/ex22/ex22-24.jpeg"></p>
+<p>然后点击 file -&gt; Save system as -&gt; 选择目录 -&gt; 保存成<code>POSCAR</code></p>
+<hr>
+<h4 id="POTCAR"><a href="#POTCAR" class="headerlink" title="POTCAR"></a>POTCAR</h4><p><strong>POSCAR</strong> 讲完了，我们就要按照里面的元素顺序制备<code>POTCAR</code>了。</p>
+<p>首先: 我们要准备 O C H 三个元素的<code>POTCAR</code>，去<code>POTCAR</code>的数据库中去找：</p>
+<p>然后复制到当前目录下，三个元素的<code>POTCAR</code>分别命名为：<code>POTCAR-O</code>, <code>POTCAR-C</code>和 <code>POTCAR-H</code>， 把三个元素的<code>POTCAR</code>合并在一起，命令就是</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> POTCAR-O POTCAR-C POTCAR-H &gt;&gt; POTCAR</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-提交任务"><a href="#3-提交任务" class="headerlink" title="3 提交任务"></a>3 提交任务</h2><p>提交任务之前，需要再次检查自己的输入文件一遍，没有问题，提交直至结束。</p>
+<h2 id="4-扩展练习："><a href="#4-扩展练习：" class="headerlink" title="4 扩展练习："></a>4 扩展练习：</h2><p>4.1 从头到尾，认真重复本节中大师兄的操作；</p>
+<p>4.2 记住本节讲解的内容，自己重复一遍操作，直至自己通过文本编辑器会搭建结构模型；</p>
+<p>4.3 运行乙醇计算的例子；</p>
+<p>4.4 尝试使用 <strong>GaussView</strong>，<strong>Materials Studio (MS)</strong>，以及其他可视化界面搭建模型；</p>
+<p>4.5 学会使用 <strong>VESTA</strong> 导出<code>POTCAR</code>格式的结构数据。</p>
+<h2 id="5-总结："><a href="#5-总结：" class="headerlink" title="5 总结："></a>5 总结：</h2><p>本节，我们主要讨论了一下分子模型的数据库搜索和搭建工作。希望大家能够完全掌握本节的所有内容和细节。在计算中，你会遇到各种各样的结构文件，其实都是$xyz$坐标的衍生物而已。不要害怕，直接打开它们，学会提取里面有价值的信息。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

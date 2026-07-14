@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        A33 利用matminer和pymatgen获取material project结构 - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A6%96%E5%85%88%E5%AF%BC%E5%85%A5%E6%A8%A1%E5%9D%97"><span class="toc-text">首先导入模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E5%8C%96-MPDataRetrieval-%E8%BF%99%E4%B8%AA%E7%B1%BB"><span class="toc-text">实例化 MPDataRetrieval 这个类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8%E5%AE%9E%E4%BE%8B%E5%8C%96-MPDataRetrieval-%E6%97%B6%E9%9C%80%E8%A6%81%E8%BE%93%E5%85%A5%E7%94%A8%E6%88%B7%E5%9C%A8-Material-Project-%E7%BD%91%E7%AB%99%E7%9A%84%E2%80%9C%E2%80%9D-API-Key"><span class="toc-text">在实例化 MPDataRetrieval 时需要输入用户在 Material Project 网站的“” API Key.</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5pymatgen-ext-matproj%E4%B8%8B%E7%9A%84MPRester%E6%A8%A1%E5%9D%97"><span class="toc-text">导入pymatgen.ext.matproj下的MPRester模块</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E5%8C%96-MPRester-%E8%BF%99%E4%B8%AA%E7%B1%BB"><span class="toc-text">实例化 MPRester 这个类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96Cu%E9%87%91%E5%B1%9E%E6%9F%90%E4%B8%80%E7%BB%93%E6%9E%84%E6%96%87%E4%BB%B6"><span class="toc-text">获取Cu金属某一结构文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%A9%E7%94%A8pymatgen-io-cif%E4%B8%8B%E7%9A%84CifWriter%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%87%BACu-cif%E6%96%87%E4%BB%B6"><span class="toc-text">利用pymatgen.io.cif下的CifWriter模块导出Cu.cif文件</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        A33 利用matminer和pymatgen获取material project结构
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2022-06-23 15:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#matminer" title="matminer">matminer</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#cif" title="cif">cif</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#pymatgen" title="pymatgen">pymatgen</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1 id="首先导入模块"><a href="#首先导入模块" class="headerlink" title="首先导入模块"></a>首先导入模块</h1><p>from matminer.data_retrieval.retrieve_MP import MPDataRetrieval</p>
+<h1 id="实例化-MPDataRetrieval-这个类"><a href="#实例化-MPDataRetrieval-这个类" class="headerlink" title="实例化 MPDataRetrieval 这个类"></a>实例化 MPDataRetrieval 这个类</h1><p>mpdr &#x3D; MPDataRetrieval(api_key&#x3D;’qIAww9QnUnXQJO41’)   # 自行查阅自己的api_key</p>
+<h1 id="在实例化-MPDataRetrieval-时需要输入用户在-Material-Project-网站的“”-API-Key"><a href="#在实例化-MPDataRetrieval-时需要输入用户在-Material-Project-网站的“”-API-Key" class="headerlink" title="在实例化 MPDataRetrieval 时需要输入用户在 Material Project 网站的“” API Key."></a>在实例化 MPDataRetrieval 时需要输入用户在 Material Project 网站的“” API Key.</h1><p>df &#x3D; mpdr.get_dataframe(criteria&#x3D;{“nelements”: 1,<br>                                  “elements”: {“$in”: [“Cu”]}},<br>                        properties&#x3D;[‘pretty_formula’,’cif’])<br>print(“There are {} entries on MP with 2 element”.format(df[‘pretty_formula’].count())) # 计算有多少材料<br>#请自行关注 df[‘density’].count() 语句，获取Cu金属的各种结构</p>
+<h1 id="导入pymatgen-ext-matproj下的MPRester模块"><a href="#导入pymatgen-ext-matproj下的MPRester模块" class="headerlink" title="导入pymatgen.ext.matproj下的MPRester模块"></a>导入pymatgen.ext.matproj下的MPRester模块</h1><p>from pymatgen.ext.matproj import MPRester</p>
+<h1 id="实例化-MPRester-这个类"><a href="#实例化-MPRester-这个类" class="headerlink" title="实例化 MPRester 这个类"></a>实例化 MPRester 这个类</h1><p>mpr &#x3D; MPRester(api_key&#x3D;”XXX”)  # 自行查阅自己的api_key，替换XXX。</p>
+<h1 id="获取Cu金属某一结构文件"><a href="#获取Cu金属某一结构文件" class="headerlink" title="获取Cu金属某一结构文件"></a>获取Cu金属某一结构文件</h1><p>data_structure&#x3D;mpr.get_structure_by_material_id(‘mp-1009018’)</p>
+<h1 id="利用pymatgen-io-cif下的CifWriter模块导出Cu-cif文件"><a href="#利用pymatgen-io-cif下的CifWriter模块导出Cu-cif文件" class="headerlink" title="利用pymatgen.io.cif下的CifWriter模块导出Cu.cif文件"></a>利用pymatgen.io.cif下的CifWriter模块导出Cu.cif文件</h1><p>from pymatgen.io.cif import CifWriter<br>w &#x3D; CifWriter(data_structure)<br>w.write_file(‘Cu.cif’)</p>
+<p><img src="/img/lvthw/A33/qr_a33.jpeg"></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

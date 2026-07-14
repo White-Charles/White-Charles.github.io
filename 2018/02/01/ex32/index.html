@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex32 Bulk的单点计算（Fe 单胞） - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A8%A1%E5%9E%8B"><span class="toc-text">1 模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-VASP%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6%E7%9A%84%E5%87%86%E5%A4%87"><span class="toc-text">2 VASP计算文件的准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1"><span class="toc-text">3 提交任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%89%A9%E5%B1%95%E7%BB%83%E4%B9%A0"><span class="toc-text">4 扩展练习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%80%BB%E7%BB%93"><span class="toc-text">5 总结</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex32 Bulk的单点计算（Fe 单胞）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-02-01 02:06:48</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#Bulk" title="Bulk">Bulk</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#单胞" title="单胞">单胞</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#原胞" title="原胞">原胞</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#单点" title="单点">单点</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>我们学习完了气相分子的相关计算后，下一步就是块体计算了，这也是VASP的强项所在，但块体的计算与气体分子的非常类似，如果前面掌握好了，后面的计算对你来说也就是轻而易举的事情了。</p>
+<p>本着从简入繁的原则，我们先学习Bulk的单点计算（以Fe的单胞为例），姑且称之为本书中级篇的开始。大家需要学习并初步了解Material Studio和VESTA这两款软件。</p>
+<ul>
+<li><p>Material Studio下载链接：<a target="_blank" rel="noopener" href="http://pan.baidu.com/s/1i5or3ZR">http://pan.baidu.com/s/1i5or3ZR</a>   对于这款软件怎么安装，大师兄就不指导了，网上全是相关的资料。本节默认大家已经安装好MS软件，并且可以打开界面。</p>
+</li>
+<li><p>VESTA下载官网：<a target="_blank" rel="noopener" href="http://jp-minerals.org/vesta/en/download.html">http://jp-minerals.org/vesta/en/download.html</a> 只在官网下载，网上乱七八糟的版本不要去管！VESTA 下载后解压，直接打开就可以用了。注意：很多人问VESTA的使用说明，官网有，网上也有很多相关资料！大家耐着性子多练一天就能摸索个差不多了。</p>
+</li>
+</ul>
+<h2 id="1-模型"><a href="#1-模型" class="headerlink" title="1 模型"></a>1 模型</h2><p> 1.1 课题的第一个难点</p>
+<p>模型的选择，计算的准确性，以及结果分析的合理性，是一个课题是否成功的三个最主要的因素。Bulk的计算很简单，难点在于Bulk模型的获取。这也是一个课题最难的部分之一。很多人在计算的时候，模型不对，基本上这个课题就被一棍子打死了。这里大师兄提醒大家的是：模型，模型，模型！！！在进入计算的时候，一定要确保模型的合理性与正确性。这是计算中的第一个坎！</p>
+<p>1.2 MS搭建Fe单胞的模型</p>
+<p>A) 左上角<code>file</code>—&gt; <code>newproject</code>，输入Fe，点OK;</p>
+<p>B) <code>file</code>—&gt; <code>import</code>—&gt; <code>Structures</code>—&gt;<code>metals</code>—&gt;<code>pure-metals</code>—&gt;找到Fe，选择打开即可;</p>
+<p>C) <code>file</code>—&gt;<code>export</code>—&gt;选择cif格式 （此时导出的是Fe的单胞，conventional cell）</p>
+<p>1.3 MS导出Fe原胞的模型：</p>
+<p>A)和B)步骤与前面一样，</p>
+<p>C) <code>Build</code> —&gt; <code>Symmetry</code>—&gt; <code>选择primitive cell</code></p>
+<p>D) <code>file</code>—&gt;<code>export</code>—&gt;选择cif格式 （此时导出的是Fe的原胞，primitive cell）</p>
+<p>1.4 VESTA 转换成VASP的格式</p>
+<p>a) 打开VESTA软件，<code>file</code>—&gt;<code>open</code>—&gt;选择之前保存的cif文件</p>
+<p>b) <code>file</code>—&gt; <code>export data</code> —&gt;保存类型选择VASP</p>
+<p>c) 将保存的文件重新命名成<code>POSCAR</code>即可</p>
+<p>1.5 需要掌握的知识：</p>
+<p>a) 晶体学相关的基本知识，什么是primitive cell，什么是conventional cell?</p>
+<p>b) MS和VESTA的基本操作</p>
+<p>1.6 需要注意的部分（其他转换方法）：</p>
+<p>a）可以使用<code>openbabel</code>转换：<a target="_blank" rel="noopener" href="http://openbabel.org/wiki/Main_Page">http://openbabel.org/wiki/Main_Page</a></p>
+<p>b）可以使用MS生成的.cell文件转化，可以根据POSCAR的格式手动复制，也可以通过脚本。</p>
+<p>c）或者通过其他脚本进行转化,例如：<a target="_blank" rel="noopener" href="http://theory.cm.utexas.edu/vasp/scripts.html">VTST</a>中的cif2pos.pl。<a target="_blank" rel="noopener" href="http://theory.cm.utexas.edu/vasp/scripts.html">http://theory.cm.utexas.edu/vasp/scripts.html</a></p>
+<p>d) 使用<a target="_blank" rel="noopener" href="https://wiki.fysik.dtu.dk/ase/">ASE</a>: Atomic Simulation Environment的缩写。</p>
+<h2 id="2-VASP计算文件的准备"><a href="#2-VASP计算文件的准备" class="headerlink" title="2 VASP计算文件的准备"></a>2 VASP计算文件的准备</h2><p> <strong>2.1 准备好INCAR文件：</strong></p>
+<p>A）Fe带有磁性，ISPIN和MAGMOM需要设置</p>
+<p>B）Fe是金属， ISMEAR&#x3D;1， SIGMA&#x3D;0.1</p>
+<p>C）ENCUT&#x3D;450， 统一起来，后面可能还需要计算其他元素，450是一个很安全的选择。</p>
+<p>D）EDIFF控制电子步收敛的精度</p>
+<p><img src="/img/lvthw/ex32/ex32-1.jpeg"></p>
+<p><strong>2.2 准备KPOINTS文件：</strong></p>
+<p>以单胞为例： a&#x3D;b&#x3D;c&#x3D;2.8664 $\AA$，根据前面的经验，我们可以设置$11\times11\times11$的KPOINTS（Gamma）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">K-POINTS</span><br><span class="line"> 0</span><br><span class="line">Gamma</span><br><span class="line">  11 11 11</span><br><span class="line">  0 0 0</span><br></pre></td></tr></table></figure>
+
+<p> <img src="/img/lvthw/ex32/ex32-2.jpeg"></p>
+<p>2.3 准备好与POSCAR对应的POTCAR文件，提交任务的脚本</p>
+<h2 id="3-提交任务"><a href="#3-提交任务" class="headerlink" title="3 提交任务"></a>3 提交任务</h2><p>3.1 提交任务之前，再次检查一遍我们的所有输入文件，确保无误；</p>
+<p>3.2 提交任务进行计算；</p>
+<p>3.3 大师兄的计算已经压缩放到百度网盘了，大家计算完毕后，与大师兄的进行对比。</p>
+<p>链接：<a target="_blank" rel="noopener" href="http://pan.baidu.com/s/1eRQHaX8">http://pan.baidu.com/s/1eRQHaX8</a></p>
+<h2 id="4-扩展练习"><a href="#4-扩展练习" class="headerlink" title="4 扩展练习"></a>4 扩展练习</h2><p>4.1 分析Fe体相的磁矩，并查找实验值；</p>
+<p>4.2 复习之前O$_2$分子的相关计算，分析实验结果；</p>
+<p>4.3 怎么在OUTCAR中查看磁矩等相关信息； （VASP 哪一个参数？）</p>
+<p>4.4 复习晶体学的相关知识；</p>
+<p>4.5 学会MS，VESTA的基本练习；</p>
+<p>4.6 掌握2种以上通过MS获取POSCAR的方法。</p>
+<h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5 总结"></a>5 总结</h2><p>本节的计算我们需要掌握一定的晶体学基础知识，基本的MS和VESTA操作，计算过程和O$_2$分子的例子极为相似，大家在学习的时候，可以将这两部分相互结合。本节我们采用的Fe单胞的例子，计算本身不难。难点在于自己课题中模型的选取。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

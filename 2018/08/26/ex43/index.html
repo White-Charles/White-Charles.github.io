@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex43 p(1x1) Cu(111)的单点计算 - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%90%AD%E5%BB%BAslab%E6%A8%A1%E5%9E%8B"><span class="toc-text">1  搭建slab模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-KPOINTS"><span class="toc-text">2  KPOINTS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-INCAR"><span class="toc-text">3  INCAR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%87%86%E5%A4%87%E4%BB%BB%E5%8A%A1%E8%84%9A%E6%9C%AC%EF%BC%8C%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1"><span class="toc-text">4 准备任务脚本，提交任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%89%A9%E5%B1%95%E7%BB%83%E4%B9%A0"><span class="toc-text">5   扩展练习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">6 总结：</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex43 p(1x1) Cu(111)的单点计算
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-08-26 02:06:48</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#单点" title="单点">单点</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#模型搭建" title="模型搭建">模型搭建</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Cu(111)" title="Cu(111)">Cu(111)</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Slab" title="Slab">Slab</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>上一节的内容主要简单介绍了一下Slab模型，具体的大家去看推荐的参考书！计算部分我们做了以下几个方面的操作：</p>
+<ul>
+<li>Cu的Bulk计算，获取了稳定体相结构，晶胞参数；</li>
+<li>将结果导入Material Studio， 并切(111)面</li>
+<li>将切出来的Cu(111) 面转换成POSCAR格式。</li>
+</ul>
+<p>因此，VASP的四个输入文件，我们已经有了POSCAR和POTCAR，下面我们复习下POSCAR，INCAR和KPOINTS的准备工作， 然后进行单点计算。</p>
+<h2 id="1-搭建slab模型"><a href="#1-搭建slab模型" class="headerlink" title="1  搭建slab模型"></a>1  搭建slab模型</h2><p>Cu(111) slab 模型（POSCAR）的制作流程（复习一下）。**注意：**前面我们用的是Conventional cell，下面用的是Primitive Cell。 一般来说用<code>Conventional cell</code>， FCC的金属可以用<code>Primitive Cell</code> 但对于其他体系，通过<code>Primitive Cell</code>切出来表面模型有问题。</p>
+<p>A）Bulk计算结束后，将CONTCAR用VESTA转换为cif文件，然后MS导入。<br>B）Build→Symmetry→primitive cell<br>C）Build→surfaces→cleave surface<br><img src="/img/lvthw/ex43/ex43-1.jpeg"><br>D）Build→Crystals→Build Vaccum Slab 真空层选择15Å<br><img src="/img/lvthw/ex43/ex43-2.jpeg"><br>E）导出为cif，通过VESTA转化为POSCAR格式，如下：<br><img src="/img/lvthw/ex43/ex43-3.jpeg"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Cu\(1\1\1)</span><br><span class="line">1.0</span><br><span class="line">        2.5717000961         0.0000000000         0.0000000000</span><br><span class="line">       -1.2858500481         2.2271576142         0.0000000000</span><br><span class="line">        0.0000000000         0.0000000000        21.2994003296</span><br><span class="line">   Cu</span><br><span class="line">    4</span><br><span class="line">Direct</span><br><span class="line">     0.000000000         0.000000000         0.000000000</span><br><span class="line">     0.333330005         0.666670024         0.098590001</span><br><span class="line">     0.000000000         0.000000000         0.295760006</span><br><span class="line">     0.666670024         0.333330005         0.197170004</span><br></pre></td></tr></table></figure>
+
+<p>前面的操作，我们生成 <code>p(1x1)</code> 的Cu(111)面，p是<code>Primitive</code>的简称，如果你不了解p(1x1)， 去学习一下<code>Wood  Notation</code>。当然，在此基础上，你也可以将p(1x1) 在晶胞a 和b方向上扩展，生成<code>p(2x2)</code>，<code> p(3x3)</code>， <code>p(2x1)</code>等不同大小的Cu(111)表面。本节，我们就用p(1x1)做为例子。</p>
+<h2 id="2-KPOINTS"><a href="#2-KPOINTS" class="headerlink" title="2  KPOINTS"></a>2  KPOINTS</h2><p><code>POSCAR</code>中，slab在平面方向上a 和 b 的大小为2.5717 Å，根据前面的经验规则，我们可以在两个方向上K点取值为：$13\times13$，z 方向上取值为1，最终KPOINTS如下图，脚本使用命令为：<code> kpoints.sh 13 13 1</code> （不知道脚本的请往前翻）</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbro:~/test/cu$  kpoints.sh <span class="number">13</span> <span class="number">13</span> <span class="number">1</span> </span><br><span class="line">qli@bigbro:~/test/cu$  cat KPOINTS</span><br><span class="line">K-POINTS</span><br><span class="line"> <span class="number">0</span></span><br><span class="line"><span class="built_in">Gamma</span></span><br><span class="line">  <span class="number">13</span> <span class="number">13</span> <span class="number">1</span></span><br><span class="line">  <span class="number">0</span> <span class="number">0</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>为什么在z方向上只用1个K点？查找参考书（DFT：A Practical Introduction， Page 88）的说明：<br>If the vacuum region is large enough， the electron density tails off to zero a short distance from the edge of the slab. It turns out that this means that accurate results are possible using just one k point in the b3 direction.</p>
+<h2 id="3-INCAR"><a href="#3-INCAR" class="headerlink" title="3  INCAR"></a>3  INCAR</h2><p>在贴出来INCAR之前，大家首先回顾一下单点计算需要注意的几个方面：<br>1）<code>System = Cu(111)</code> 可有可无<br>2）Cu 是金属，可以使用<code>ISMEAR = 1;SIGMA = 0.1</code><br>3）<code>ALGO = FAST</code> 或者使用默认值<br>4）纯净的Cu(111)体系中，Cu没有磁性，ISPIN 不用设置<br>注意：CuO中Cu具有磁性，如果你算的是Cu的氧化物，就需要考虑ISPIN了<br>5）单点计算：<code>NSW = 0</code> 也可以不设置，因为默认值就是0<br>6）截断能： <code>ENCUT = 450</code> 很多人喜欢测试这个参数，450直接用是一个很好的选择<br>7）<code>EDIFF = 1E-5</code> 电子步的收敛标准<br>8）偶极矫正：<code>LDIPOL = .TRUE. ; IDIPOL = 3</code> Slab模型一般都需要加上这个参数<br>9）控制OUTCAR和其他文件的输出：<code> NWRITE = 0 ; LWAVE  = .FALSE.;LCHARG = .FALSE.</code><br>10）也可以加上<code>NCORE </code>这个参数来加快计算步骤。一般来说，不同的机子大家需要自己测试下NCORE参数对计算的影响，个人经验：如果你的机器一个节点有12个核，设置<code>NCORE = 6</code>； 一个节点有24核，设置<code>NCORE = 12</code>。也就是节点中核数的一半。由于这个计算很快，本操作就不考虑了。最终INCAR 如下:</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">System = Cu111</span><br><span class="line"></span><br><span class="line">ISMEAR = <span class="number">1</span></span><br><span class="line">SIGMA = <span class="number">0.1</span></span><br><span class="line">ALGO = FAST</span><br><span class="line">ENCUT = <span class="number">450</span></span><br><span class="line">EDIFF = <span class="number">1E-5</span></span><br><span class="line"></span><br><span class="line">LDIPOL = <span class="literal">.TRUE.</span></span><br><span class="line">IDIPOL = <span class="number">3</span></span><br><span class="line"></span><br><span class="line">NWRITE = <span class="number">0</span></span><br><span class="line">LWAVE = <span class="literal">.FALSE.</span></span><br><span class="line">LCHARG = <span class="literal">.FALSE.</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-准备任务脚本，提交任务"><a href="#4-准备任务脚本，提交任务" class="headerlink" title="4 准备任务脚本，提交任务"></a>4 准备任务脚本，提交任务</h2><p>计算完成后， <code>grep &#39;  without&#39; OUTCAR</code>  （without前面有2个空格）或者<code>grep E0 OSZICAR | tail-n 1</code>，得到单点能为：<code> -13.96918440 eV</code></p>
+<h2 id="5-扩展练习"><a href="#5-扩展练习" class="headerlink" title="5   扩展练习"></a>5   扩展练习</h2><p>5.1 计算的例子下载链接：链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1cHY-9g2Iswl5zV9bijBG7Q">https://pan.baidu.com/s/1cHY-9g2Iswl5zV9bijBG7Q</a> 提取码: ctxc<br>5.2 重复本节所有的练习<br>5.3 VASP官网查找本节中不了解的参数，然后学习<br>5.4 思考一下：我们得到的单点能量可以干吗用？</p>
+<h2 id="6-总结："><a href="#6-总结：" class="headerlink" title="6 总结："></a>6 总结：</h2><p>刚刚步入slab的计算，我们速度稍微慢一些，本节只讲单点计算，希望大家能够跟上步骤，亲自进行操作练习，如果出错了，请认真改正，直至得到和上传的结果一样为止。再次强调，大家平时一定要多浏览VASP官网，请把VASP手册下载放到桌面上，没事的时候就翻一翻。不要去网上找一些乱七八糟的教程，拿过来就直接照着练，官网才是最正宗的。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

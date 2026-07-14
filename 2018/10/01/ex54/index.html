@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex54 简单粗暴地获取初始构型（一） - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Top-site-%E7%9A%84%E6%9E%84%E5%9E%8B"><span class="toc-text">1 Top site 的构型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%A1%AE%E5%AE%9AO%E5%8E%9F%E5%AD%90%E5%9C%A8z%E6%96%B9%E5%90%91%E4%B8%8A%E7%9A%84%E5%9D%90%E6%A0%87"><span class="toc-text">2  确定O原子在z方向上的坐标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%90%AD%E5%BB%BA%E5%88%9D%E7%AE%97%E7%9A%84%E6%A8%A1%E5%9E%8B-Cu-O%E5%8F%8C%E5%8E%9F%E5%AD%90%E7%BB%93%E6%9E%84"><span class="toc-text">3  搭建初算的模型(Cu-O双原子结构)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-INCAR%E6%A3%80%E6%9F%A5"><span class="toc-text">4 INCAR检查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-POTCAR%E3%80%81KPOINTS%E6%A3%80%E6%9F%A5"><span class="toc-text">5  POTCAR、KPOINTS检查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%A3%80%E6%9F%A5%E7%BB%93%E6%9E%9C"><span class="toc-text">6 检查结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%80%BB%E7%BB%93"><span class="toc-text">7 总结:</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex54 简单粗暴地获取初始构型（一）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-10-01 15:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#初始构型" title="初始构型">初始构型</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#简单粗暴" title="简单粗暴">简单粗暴</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#POSCAR" title="POSCAR">POSCAR</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>Ex54-Ex56主要介绍一下如何计算：单个氧原子在p(1x1)-Cu(111)表面top位上的吸附。在实际的计算过程中，一个好的初始结构会极大地加快并节约你的计算时间，这不仅仅体现在服务器运行的时间上，也会避免很多错误的结果，因为这些错误结果的纠正耗时费力，通常折磨得新手们心力交瘁。可以回顾下前面我们O$_2$ 分子的优化过程：不合理的初始结构导致的错误结果以及计算时间的增加。本节主要介绍一个快速获取优化初始构型的方法。该方法简单粗暴，可以让你在极短的时间内快速获得一个化学的feeling。</p>
+<hr>
+<h2 id="1-Top-site-的构型"><a href="#1-Top-site-的构型" class="headerlink" title="1 Top site 的构型"></a>1 Top site 的构型</h2><p>在Cu(111)表面上，top位指的是直接吸附在Cu原子上方。其他的位点是什么，先不要着急，后面会慢慢学。如果一个O原子吸附在Cu原子上方，在空间坐标上，大家很容易想到，O和Cu在xy方向的坐标应该是差不多的，z方向O的坐标为：Cu的z坐标 + Cu-O键的键长。如下图：</p>
+<p><img src="/img/lvthw/ex54/ex54-1.png"></p>
+<hr>
+<h2 id="2-确定O原子在z方向上的坐标"><a href="#2-确定O原子在z方向上的坐标" class="headerlink" title="2  确定O原子在z方向上的坐标"></a>2  确定O原子在z方向上的坐标</h2><p>知道了前面的基本原理，O原子的坐标我们就可以通过Cu-O的键长来初步获得了。那么Cu-O的键长怎么获得呢？这里列举了一下几个常用的方法。</p>
+<p>1）查数据库：</p>
+<p>2）查文献：自己去查，不要在QQ群里让别人给你发文献。</p>
+<p><img src="/img/lvthw/ex54/ex54-2.png"></p>
+<p>这两条主要考验的是大家查询资料的能力，这里暂且不详细介绍了。有兴趣的可以加入大师兄文献互助超级群，跟众多文献检索大牛学习。(群号:<strong>157099073</strong>)</p>
+<hr>
+<p>3）自己估算</p>
+<p>估算的话，可以根据Cu和O原子的半径：Cu和O成键，键长肯定要小于两者的半径之和。搜一下维基百科，Cu的半径为1.35 Å，O的为0.60 Å。(<a target="_blank" rel="noopener" href="https://www.wikipedia.org/">维基百科</a>，搜索<code>Atomic Radius</code>就可以得到下面这个表)</p>
+<p><img src="/img/lvthw/ex54/ex54-4.png"></p>
+<p>从上面的数据我们可以得出：Cu-O键要小于1.95 Å。在吸附构型搭建的时候设置比1.95 Å小点的值作为初始，进行优化。一般来说，原子半径之和减去0.1-0.3 Å都是可以的。但是不能太小，否则第一步优化的时候排斥力太大，会导致计算出错。</p>
+<hr>
+<p>4）自己初算：</p>
+<p>初算就是初步采用一个小的模型，简单优化一下，得到一个合理的键长数值。小的模型主要指2个方面： </p>
+<ul>
+<li><p>结构简单；</p>
+</li>
+<li><p>计算参数简单。</p>
+</li>
+</ul>
+<p>下面我们主要在估算的基础上，介绍一个初算的方法：直接优化一下气相中Cu-O双原子分子的结构。</p>
+<p>这个结构不难搭建，将前面练习中O$_2$分子中的一个O原子换成Cu进行优化即可。</p>
+<p>为了加深大家对搭建模型的印象，我们从<code>p(1x1)-Cu(111)</code>表面的结构出发，然后一步一步搭建CuO的气相结构模型，并计算。</p>
+<hr>
+<h2 id="3-搭建初算的模型-Cu-O双原子结构"><a href="#3-搭建初算的模型-Cu-O双原子结构" class="headerlink" title="3  搭建初算的模型(Cu-O双原子结构)"></a>3  搭建初算的模型(Cu-O双原子结构)</h2><p>1）p(1x1)-Cu(111)表面的结构</p>
+<p><img src="/img/lvthw/ex54/ex54-5.png"></p>
+<p>将前面几节计算的一个真空层为15 $\AA$的例子直接拿过来。表层原子在z方向的坐标为6.259 (第十二行)。</p>
+<hr>
+<p>2）修改格子大小(3-5行)</p>
+<p>这里修改的很随意，第三行中直接把2.571改成了12.571；</p>
+<p>第四行中把2.227改成了12.227。</p>
+<p>第五行中将21.299改成了12.299</p>
+<p><img src="/img/lvthw/ex54/ex54-6.png"></p>
+<p>效果如下:</p>
+<p><img src="/img/lvthw/ex54/ex54-7.png"></p>
+<p>注意：</p>
+<p>A）当然也可以用其他大小的格子；(例如：8x8x8 $\AA^3$)</p>
+<p>B）格子大小直接影响计算量和时间。(回顾下前面所学)</p>
+<hr>
+<p>3）保留表层的Cu原子，删除其他的Cu原子。</p>
+<p><img src="/img/lvthw/ex54/ex54-8.png"></p>
+<p>注意：</p>
+<p>A）我们这里将表层以下的三个原子删掉了，只保留z坐标为6.259的这个原子；</p>
+<p>B） 第7行中原子数目也要相应的改变。从4 改成1。</p>
+<p>C） 效果如下图：</p>
+<p><img src="/img/lvthw/ex54/ex54-9.png"></p>
+<hr>
+<p>4）加入O原子</p>
+<p><img src="/img/lvthw/ex54/ex54-10.png"></p>
+<p>注意：</p>
+<p>A）第6行中，在Cu的后面加上了一个O，不是数字0；</p>
+<p>B）Cu 和 O 之间用1个或者几个空格隔开，不要用<code>Tab</code>；</p>
+<p>C）第7行中，记得加上O原子的数目</p>
+<p>D）最后一行添加O原子的坐标，这里我们直接把Cu原子的复制过来了。</p>
+<p><img src="/img/lvthw/ex54/ex54-11.png"></p>
+<p>由于两个原子坐标一样，Cu和O堆在一起了。</p>
+<hr>
+<p>5）修改O原子坐标</p>
+<p><img src="/img/lvthw/ex54/ex54-12.png"></p>
+<p>注意:</p>
+<p>A）这里我们把Cu固定住了;为了方便下一步的计算。</p>
+<p>B）Cu-O之间的键长，设置的为1.8 Å；</p>
+<p>C）O的z坐标为：6.259 + 1.8 &#x3D; 8.059。</p>
+<p><img src="/img/lvthw/ex54/ex54-13.png"></p>
+<hr>
+<p>6）到这里，Cu-O双原子分子的气相结构就搭建完毕了，保存成POSCAR即可。</p>
+<p>上面的效果图是本人每一步打开展示给大家的。实际操作中，完全没有必要。我们需要学习的是：</p>
+<p>A）怎么将脑子中的模型转化为VASP的POSCAR文件；</p>
+<p>B）格子大小怎么修改；</p>
+<p>C）怎么添加原子，添加或者删除原子后，原子数目怎么弄；</p>
+<p>D）怎么添加原子坐标。</p>
+<p>E）怎么通过改坐标修改原子位置。</p>
+<hr>
+<h2 id="4-INCAR检查"><a href="#4-INCAR检查" class="headerlink" title="4 INCAR检查"></a>4 INCAR检查</h2><p><img src="/img/lvthw/ex54/ex54-14.png"></p>
+<p>注意:</p>
+<p>1）算的是气相中的：ISMEAR &#x3D; 0；SIGMA &#x3D; 0.05 (本书前面就讲过了)</p>
+<p>2）IBRION &#x3D; 2；POTIM &#x3D; 0.1；NSW &#x3D;100 是优化的参数</p>
+<p>3）EDIFF和EDIFFG是电子步和离子步的收敛标准。</p>
+<hr>
+<p>师兄，磁性呢？对称性呢？</p>
+<p>因为本例子是一个初算，几步算完，看下键长。这个任务的使命就完成了。</p>
+<p>很多细节的东西可以暂时不用考虑。这里EDIFFG用的也有点小，本人忘了修改了。大家可以设置为 -0.05或者直接使用能量作为标准，这些都可以的。</p>
+<p>虽然本节我们很多地方都没有考虑，这是由于任务的性质所决定的。我们对其定位就是瞎算下，得到一个初始的构型。这也是一个课题中为数不多的，可以为所欲为的计算了。但你正儿八经开始算的时候，各种细节问题都要考虑进去。而这一步的计算，也可以作为一个缓冲期，让你有充足的时间去思考一下正式计算时其他需要的注意事项。</p>
+<hr>
+<h2 id="5-POTCAR、KPOINTS检查"><a href="#5-POTCAR、KPOINTS检查" class="headerlink" title="5  POTCAR、KPOINTS检查"></a>5  POTCAR、KPOINTS检查</h2><p>A) 根据POSCAR获取对应的POTCAR：见附录自动生成POTCAR的脚本。</p>
+<p>B) 使用gamma点计算。<code>cat POTCAR</code></p>
+<p><strong>注意：</strong></p>
+<p>在提交一个任务前，一定要将INCAR、KPOINTS、POSCAR、POTCAR以及脚本在心里默念一遍。然后对应的检查一下，是否有些遗漏的地方。否则等算完了，发现错了，又得浪费很多时间重新计算了。</p>
+<hr>
+<h2 id="6-检查结果"><a href="#6-检查结果" class="headerlink" title="6 检查结果"></a>6 检查结果</h2><p><img src="/img/lvthw/ex54/ex54-16.png"></p>
+<p>1）上个厕所的功夫，任务就结束了，共算了6步。(其实是切换电脑系统的功夫)<img src="/img/lvthw/ex54/ex54-17.gif"></p>
+<p>2）Cu—O 的键长：7.95-6.26 &#x3D; 1.69 Å</p>
+<p><strong>注意：</strong> </p>
+<p>此时的键长只作为下一步的初始猜测，如果和文献去比有点差异，也不要太较真。</p>
+<h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7 总结:"></a>7 总结:</h2><p>本节，你会学到：</p>
+<p>1）如何通过原子半径，估算一个初始的键长值。</p>
+<p>2）如果搭建一个简单的模型，初算一个键长值。</p>
+<p>3）复习气相中的优化。</p>
+<p>4）复习下计算前准备工作：INCAR、POSCAR、POTCAR、KPONTS的检查。</p>
+<p>如果本节的内容，你有不理解的地方；想获取脚本等信息；请查阅前面讲的以及附录中的内容。搭建几何模型，无非就是按照软件的格式，修改原子坐标罢了。这里我们强调的是几何模型。但，几何模型所具有或者要表达的物理、化学意义，这才是最关键的。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

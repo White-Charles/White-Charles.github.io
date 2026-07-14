@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ubuntu常用软件的安装 - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E7%AC%AC%E4%B8%80%E4%BB%B6%E4%BA%8B%EF%BC%9A"><span class="toc-text">1  第一件事：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%91%BD%E4%BB%A4%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F"><span class="toc-text">2 命令安装程序</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%AE%89%E8%A3%85Anaconda"><span class="toc-text">3  安装Anaconda</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E5%85%B6%E4%BB%96%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%9A%84%E7%A8%8B%E5%BA%8F"><span class="toc-text">4 其他可执行的程序</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-Ubuntu%E7%9A%84%E5%A4%87%E4%BB%BD"><span class="toc-text">5 Ubuntu的备份</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E6%89%93%E8%B5%8F"><span class="toc-text">6 打赏</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ubuntu常用软件的安装
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-09-24 00:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#Ubuntu" title="Ubuntu">Ubuntu</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#安装" title="安装">安装</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#软件" title="软件">软件</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>前面一节我们介绍了Ubuntu虚拟机的安装，今天就介绍一些Ubuntu常用软件的软装。大部分极其简单，敲个命令，输入下密码就能解决。少部分非常简单，设置下环境变量就可以解决。有些安装比较蛋疼的可以借助第三方平台比如Anaconda等来安装，也可以归纳到非常简单的行列中。所以，So easy！！！</p>
+<h5 id="1-第一件事："><a href="#1-第一件事：" class="headerlink" title="1  第一件事："></a>1  第一件事：</h5><p>打开终端（<code>CONTROL</code> + <code>ALT</code> + <code>T</code>），创建<code>~/bin</code> 文件夹。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbrosci:~$ mkdir ~/bin</span><br></pre></td></tr></table></figure>
+
+<p>这个文件夹用于存储一些日常的脚本文件，可执行的小程序。 平时勤备份也不会占用太大空间。</p>
+<h5 id="2-命令安装程序"><a href="#2-命令安装程序" class="headerlink" title="2 命令安装程序"></a>2 命令安装程序</h5><p>复制下面的<code>sudo apt-get</code>命令，输入到<code>Terminal</code>中，回车，输入密码即可。 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"><span class="built_in">sudo</span> apt-get install python3-pip</span><br><span class="line"><span class="built_in">sudo</span> apt-get install curl</span><br><span class="line">curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py</span><br><span class="line"><span class="built_in">sudo</span> python get-pip.py</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> apt-get install vim </span><br><span class="line"><span class="built_in">sudo</span> apt-get install vim-gtk</span><br><span class="line"><span class="built_in">sudo</span> apt-get install sshfs</span><br><span class="line"><span class="built_in">sudo</span> apt-get install rename </span><br><span class="line"><span class="built_in">sudo</span> apt-get install xclip </span><br><span class="line"><span class="built_in">sudo</span> apt-get install git </span><br><span class="line"><span class="built_in">sudo</span> apt-get install gnuplot</span><br><span class="line"><span class="built_in">sudo</span> apt-get install xcrysden</span><br><span class="line"><span class="built_in">sudo</span> apt-get tree</span><br><span class="line"><span class="built_in">sudo</span> apt-get install inkscape  </span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> apt-get install fish </span><br><span class="line"><span class="built_in">sudo</span> apt-get install tmux </span><br><span class="line"><span class="built_in">sudo</span> apt-get install texlive-full</span><br><span class="line"><span class="built_in">sudo</span> apt-get install kile  </span><br></pre></td></tr></table></figure>
+
+
+
+<p>pip 用来安装python程序；</p>
+<p>vim就不介绍了；</p>
+<p>sshfs 用来把服务器挂载到本地电脑，方便传输数据；</p>
+<p>rename 可以很方便批量命名；</p>
+<p>xclip 可以把命令的输出复制到剪切板里面，方便鼠标粘贴；</p>
+<p>git 用来从git-hub下载，上传，管理一些脚本程序等， </p>
+<p>gnuplot 画图用的</p>
+<p>xcrysden 可视化软件</p>
+<p>tree 方便显示文件目录</p>
+<p>inkscape 一款非常好用的做图软件</p>
+<p>fish，tmux 装逼效果明显，没对象的重点关注下，好好学习一番，当然功能没的说，很强大。</p>
+<p>Latex 写文章的可以使用最后两个命令安装。</p>
+<p>其他的暂时也想不起来，如果你有推荐的，可以发邮件给我，后面再添上去。（<a href="mailto:&#x6c;&#113;&#99;&#x61;&#x74;&#x61;&#x40;&#103;&#109;&#97;&#x69;&#108;&#46;&#x63;&#x6f;&#109;">lqcata@gmail.com</a>）</p>
+<h5 id="3-安装Anaconda"><a href="#3-安装Anaconda" class="headerlink" title="3  安装Anaconda"></a>3  安装Anaconda</h5><p>它可以帮助你节省很多时间和精力去安装软件。下载后，按照下面命令，然后一路狂摁回车或者输入<code>yes</code>即可，官网也有安装教程，这里就不累赘了。通过Anaconda安装其他软件，可以参考前面的教程：<a target="_blank" rel="noopener" href="https://www.bigbrosci.com/2020/09/19/A20/">https://www.bigbrosci.com/2020/09/19/A20/</a> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbrosci:~/Downloads$ <span class="built_in">ls</span></span><br><span class="line">Anaconda3-2020.07-Linux-x86_64.sh  p4vasp-0.3.30.tgz </span><br><span class="line">qli@bigbrosci:~/Downloads$ bash Anaconda3-2020.07-Linux-x86_64.sh </span><br><span class="line">Welcome to Anaconda3 2020.07</span><br><span class="line"></span><br><span class="line">In order to <span class="built_in">continue</span> the installation process, please review the license</span><br><span class="line">agreement.</span><br><span class="line">Please, press ENTER to <span class="built_in">continue</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; </span><br></pre></td></tr></table></figure>
+
+
+
+<p>Anaconda安装的软件可以通过<a target="_blank" rel="noopener" href="https://anaconda.org/">https://anaconda.org</a> 来查询，都会列出来安装的命令，比如RDkit：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -c rdkit rdkit</span><br></pre></td></tr></table></figure>
+
+
+
+<p>另一个需要注意的是，Anaconda安装后，最喜爱的<code>p4vasp</code>不能正常使用了。解决办法如下：</p>
+<p>1） 找到p4v的目录，一般在<code>/usr/bin/</code></p>
+<p>2）将<code>p4v</code>中的<code>python</code> 全部改为<code>python2</code></p>
+<ol start="3">
+<li>将<code>p4v.py</code> 第一行中的<code>python</code>改为<code>python2</code>。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">(base) qli@bigbrosci:~$ p4v </span><br><span class="line">  File <span class="string">&quot;/usr/bin/p4v.py&quot;</span>, line 9</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&quot;&quot;</span><span class="string">&quot;You need to get version 2.0 (or later) of PyGTK for this to work. You</span></span><br><span class="line"><span class="string">             can get source code from http://www.pygtk.org &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">          ^</span><br><span class="line">SyntaxError: invalid syntax</span><br><span class="line">(base) qli@bigbrosci:~$ <span class="built_in">which</span> p4v </span><br><span class="line">/usr/bin/p4v</span><br><span class="line">(base) qli@bigbrosci:~$ <span class="built_in">sudo</span> vi /usr/bin/p4v</span><br><span class="line">[<span class="built_in">sudo</span>] password <span class="keyword">for</span> qli: </span><br><span class="line">(base) qli@bigbrosci:~$ <span class="built_in">sudo</span> vi /usr/bin/p4v.py </span><br><span class="line">(base) qli@bigbrosci:~$ grep python  /usr/bin/p4v</span><br><span class="line"><span class="built_in">export</span> PYTHONPATH=<span class="variable">$PYTHONPATH</span>:/usr/lib/python2.7/dist-packages</span><br><span class="line"><span class="built_in">exec</span> python2 /usr/bin/p4v.py <span class="string">&quot;<span class="variable">$@</span>&quot;</span></span><br><span class="line">(base) qli@bigbrosci:~$ grep python  /usr/bin/p4v.py </span><br><span class="line"><span class="comment">#!/usr/bin/env python2</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="4-其他可执行的程序"><a href="#4-其他可执行的程序" class="headerlink" title="4 其他可执行的程序"></a>4 其他可执行的程序</h5><p>这里我们以VESTA为例，这种方法非常简单实用。</p>
+<p>4.1） 下载解压VESTA程序包。（<a target="_blank" rel="noopener" href="https://jp-minerals.org/vesta/en/%EF%BC%89">https://jp-minerals.org/vesta/en/）</a> 直接通过官网下载即可，没必要去群里面求助，也没必要往群里面上传。</p>
+<p>4.2） 本人习惯性地将其解压到<code>/home/qli/Documents/VESTA-gtk3</code></p>
+<p>4.3)   设置环境变量，将下面的<code>export</code> 两行复制到<code>~/.bashrc</code> 文件中， <code>source</code> 下 <code>.bashrc</code> 文件，然后直接敲命令<code>VESTA</code>即可打开可视化界面。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbrosci:~/Documents/VESTA-gtk3$ <span class="built_in">ls</span></span><br><span class="line">asfdc           Library_License  RIETAN.sh          style         VESTA-core</span><br><span class="line">bvparm2016.cif  libVESTA.so      spgra.dat          style.ini     VESTA_def.ini</span><br><span class="line">elements        LICENSE          spgro.dat          template.ins  VESTA-gui</span><br><span class="line">elements.ini    mspgr.dat        STRUCTURE_TIDY     tmp           VESTA.ini</span><br><span class="line">img             PowderPlot       STRUCTURE_TIDY.sh  VESTA         wyckoff.dat</span><br><span class="line">qli@bigbrosci:~/Documents/VESTA-gtk3$ <span class="built_in">pwd</span></span><br><span class="line">/home/qli/Documents/VESTA-gtk3</span><br><span class="line">qli@bigbrosci:~/Documents/VESTA-gtk3$ <span class="built_in">cd</span> </span><br><span class="line">qli@bigbrosci:~$ vi .bashrc</span><br><span class="line"><span class="built_in">export</span> VESTA=<span class="string">&#x27;/home/qli/Documents/VESTA-gtk3&#x27;</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$VESTA</span></span><br><span class="line">qli@bigbrosci:~$ <span class="built_in">source</span> .bashrc	 </span><br><span class="line">qli@bigbrosci:~$ VESTA</span><br></pre></td></tr></table></figure>
+
+<p><code>注意</code> 上面VESTA的路径记得换成你自己电脑里面的。</p>
+<h5 id="5-Ubuntu的备份"><a href="#5-Ubuntu的备份" class="headerlink" title="5 Ubuntu的备份"></a>5 Ubuntu的备份</h5><p>本人喜欢瞎折腾，也经常会把电脑搞崩溃，备份就显得尤其重要。对于Ubuntu来说，前面我们在虚拟机的安装中提到存储Ubuntu系统的<code>vdi</code>文件，如果你有足够大的硬盘，可以定期将一个稳定版本的vdi保存起来，万一系统崩溃，删掉坏的，导入最新的备份即可。</p>
+<p>如果没有用虚拟机，直接装的Ubuntu系统，或者双系统，可以尝试定期保存<code>~/bin</code> 和<code>~/.bashrc</code> 文件，本人之前就是这样做的（现在懒得折腾，系统不坏了），它们不怎么占空间，打包压缩下，邮件基本就可以上传。如果系统坏掉了，非得安装一个新的才能解决的时候，只需要重复本教程，下载一些常用的软件，以及用备份的<code>~/bin</code> 和<code>~/.bashrc</code> 文件还原一下设置即可。数据一般来说都直接存储在服务器中，相关备份不在本教程讨论范围之内。</p>
+<p>当然还有其他的办法备份和恢复虚拟机，比如创建当前Ubuntu版本的iso文件，定期备份当前整个系统以便引导修复等等，精力有限，不再累赘。有兴趣的可以尝试。</p>
+<h5 id="6-打赏"><a href="#6-打赏" class="headerlink" title="6 打赏"></a>6 打赏</h5><p>如果感觉本文对你的相关研究有帮助，欢迎打赏，支持作者的热心付出。如果你也有自己擅长的操作等，热烈欢迎无私分享，可以通过QQ（122103465）或者邮件（<a href="mailto:&#108;&#x71;&#x63;&#x61;&#x74;&#x61;&#x40;&#x67;&#109;&#x61;&#105;&#x6c;&#x2e;&#99;&#111;&#109;">lqcata@gmail.com</a>）联系。</p>
+<img src="A23/打赏码.jpg" alt="打赏码" style="zoom: 33%;" />
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

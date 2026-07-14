@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex83 搬砖 - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%88%86%E6%9E%90%E4%B8%8B%E9%9C%80%E8%A6%81%E6%90%AC%E5%A4%9A%E5%B0%91%E7%A0%96%E5%9D%97"><span class="toc-text">第一步：分析下需要搬多少砖块</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E7%A1%AE%E5%AE%9A%E4%B8%80%E4%B8%AA%E5%90%88%E7%90%86%E7%9A%84%E6%90%AC%E7%A0%96%E6%96%B9%E6%A1%88%E3%80%82"><span class="toc-text">第二步：确定一个合理的搬砖方案。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E7%BB%93%E5%90%88%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BD%93%E5%8A%9B%EF%BC%8C%E4%BC%99%E9%A3%9F%EF%BC%8C%E8%AE%A4%E7%9C%9F%E6%90%AC%E7%A0%96%E3%80%82"><span class="toc-text">第三步：结合自己的体力，伙食，认真搬砖。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex83 搬砖
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-08-21 15:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#搬砖" title="搬砖">搬砖</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#课题" title="课题">课题</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>前面我们介绍完了算表面吸附，以及过渡态的一些基本的操作，和注意事项。当我们面对一个新的课题时，就需要运用所学到的这些技能来完成所必需的计算，来验证我们的想法，思路等。后面几节，主要参考本人2014年发表的一篇关于甲醇分解反应计算的文章来介绍一下怎么运用所学习到的这些本领。（<a target="_blank" rel="noopener" href="https://pubs.acs.org/doi/abs/10.1021/cs501698w%EF%BC%89">https://pubs.acs.org/doi/abs/10.1021/cs501698w）</a></p>
+<p>搬砖这个词用来形容我们完成一个课题的计算过程，简直不能再形象不过了。</p>
+<p>首先，搬砖这一过程， 我们要明确几个要素：</p>
+<p>1）老板：让你搬砖的人</p>
+<p>2）搬砖工人：你自己</p>
+<p>3）任务：搬砖</p>
+<p>4）目的：盖房子</p>
+<p>下面，你要明确一点：不会计算的搬砖工不是好搬砖工。</p>
+<p>这里说的计算，不是我们的计算化学中的计算。而是把我们的工作如何一步一步分解，结合自己的实际情况，算算需要多少的时间完活。毕竟房子总有盖完的时候，搬砖工不能一直守着。所以，当老板告诉你要盖一个大房子的时候，需要多少砖这一点你要清楚。然而，很多人都是第一次搬砖，或者之前没搬过表面计算的砖，对上面说的这一点并没有一个很清晰的概念。所以，摸清自己的现实情况，这也就是本节的重点啦。</p>
+<p>人有高低胖瘦之分，搬砖工也不例外，有的劲大，有的劲小。劲大搬的砖多，劲小搬的少。最后到底能搬多少砖，一方面取决于你的身体条件（自身因素，搬砖前的学习经历），另一方面取决于你的工资伙食情况（老板因素）。身体倍儿棒，老板钱儿多，这样的情况通常不会看本教程，有啥问题自己（组里）就能解决。身体倍儿棒，老板没钱，或者身体倍儿不棒，老板有钱的。就需要认真动动脑子，分析下当前的形势。没劲儿又没钱的，就应该更加注意了，需要更多地在脑力上下功夫。</p>
+<p><img src="/img/lvthw/ex83/ex83-1.png"></p>
+<p>比如，这篇文章中，老板让我们算一遍甲醇在四个金属上的分解反应（倒过来就是合成反应）。</p>
+<h5 id="第一步：分析下需要搬多少砖块"><a href="#第一步：分析下需要搬多少砖块" class="headerlink" title="第一步：分析下需要搬多少砖块"></a>第一步：分析下需要搬多少砖块</h5><p>别看甲醇分子简单，要彻底分解成基本的C、O、H，中间有很多的基元反应要计算。从上面的图可以发现：有三类的断裂反应：C-H，O-H，C-O键的断裂，第一步这三种都可能发生的。这一步的产物在第二步中又可以发生哪一类的反应，依次类推。 最终我们可以估算一下需要计算的基元反应，以及中间体的结构。 所以，计算之前，多分析下这些可能的过程，基本的框架，多少反应，多少物种要有个概念。可以自己尝试着画，亦可以参考文献中寻找答案。</p>
+<p>2）我们取的四个金属：Cu，Ru，Pt，Pd稳定的表面。所以前面的计算要乘以4。</p>
+<p>3）前面说的是最理想的情况，而实际情况则是：</p>
+<p>A) 对每一个表面吸附的物种来说，我们要尝试不同的位点，来获取一个稳定的构型；</p>
+<p>B）对基元反应来说，这些过渡态，100%不可能都100%一次性找到，还要考虑不收敛，不同的可能性等；</p>
+<p>这些都会使得计算量增加。所以，第一步，大体上有多少需要计算的东西，应该有个框架。</p>
+<h5 id="第二步：确定一个合理的搬砖方案。"><a href="#第二步：确定一个合理的搬砖方案。" class="headerlink" title="第二步：确定一个合理的搬砖方案。"></a>第二步：确定一个合理的搬砖方案。</h5><p>计算资源是老板提供的，也就是你的伙食。伙食好，干活就有劲。但不管有没有劲，都不愿意大热天地一个劲地搬砖。所以这一步，我们要充分结合自己现有的计算资源，来制定一个合理的策略，用最少地劲搬最多的转。该怎么做呢？</p>
+<p>A) 善于利用已经发表的文章的数据，比如，有些结构可以在支持信息里面找到，还有一些数据库里可以下载，也可以问作者要（可能性比较低）， 可以理解为找朋友一起帮忙搬砖；</p>
+<p>B) 选择合适的slab模型：3x3还是4x4，slab取四层，还是取5层？这些是课题开始之前一些基本的测试工作，可以参考文献中别人的做法，也可以根据测试的结果自己合理选择。可以理解为：搬多大的砖块。</p>
+<p>C) 选择合适的参数: 计算参数不对，很可能导致计算的结构或者能量有问题。 但这些都要具体分析，有些能量有问题，但结构还算OK的可以调整下参数，作为一个理想的初始结构继续用。可以理解为：半路翻车，捡起来那些没摔碎的转，继续搬。</p>
+<p>D）善于使用前面我们介绍的快速获取理想初始结构的方法。可以理解为先用车把砖块搬到离工地最近的地方，省去往返来回跑的劲。</p>
+<p>上面说的这些，尽可能在课题完全开展前做到位，因为它们不会花费很大的劲去做，但会节省后面很大的劲。而且，伙食好坏（计算资源给不给力），测试的过程一目了然。</p>
+<h5 id="第三步：结合自己的体力，伙食，认真搬砖。"><a href="#第三步：结合自己的体力，伙食，认真搬砖。" class="headerlink" title="第三步：结合自己的体力，伙食，认真搬砖。"></a>第三步：结合自己的体力，伙食，认真搬砖。</h5><p>这一步就简单啦，体力好同时进行，左手生擒中间体，右手活拿过渡态。体力不好，俩手搬一块砖，累了饿了（没资源）就一边凉快去。</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>不过对于新手来说，课题刚刚开始就真正掌握上面的这几点，难度有些大，所以建议先做些前提的准备工作：</p>
+<p>1） 熟悉自己的服务器，运算能力；</p>
+<p>2）多查找文献，整理需要计算的框架，幸运的话，可以从支持信息直接找到结构；</p>
+<p>3）多用小体系做测试，测试完了要对结果多思考总结。不要上来就狂交任务，最后把服务器累个半死，还不出什么好的结果。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

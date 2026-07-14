@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex67 H$_2$O在Cu(111)表面上的吸附能 - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%89-%E5%87%8F%E5%B0%8FK%E7%82%B9%E7%9A%84%E5%81%9A%E6%B3%95"><span class="toc-text">1） 减小K点的做法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%89-%E5%87%8F%E5%B0%8F%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%81%9A%E6%B3%95"><span class="toc-text">2） 减小模型的做法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%89-%E4%B9%9F%E5%8F%AF%E4%BB%A5%E5%89%8D%E9%9D%A2%E4%B8%A4%E4%B8%AA%E6%96%B9%E6%B3%95%E7%BB%93%E5%90%88%E8%B5%B7%E6%9D%A5%E8%BF%9B%E8%A1%8C%E6%93%8D%E4%BD%9C"><span class="toc-text">3） 也可以前面两个方法结合起来进行操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-H-2-O-%E5%90%B8%E9%99%84%E6%9E%84%E5%9E%8B%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AD%A5%E7%AD%9B%E9%80%89%EF%BC%9A"><span class="toc-text">1. H$_2$O 吸附构型的第一步筛选：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%BF%9B%E4%B8%80%E6%AD%A5%E4%BC%98%E5%8C%96"><span class="toc-text">2. 进一步优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%89%A9%E5%B1%95%E7%BB%83%E4%B9%A0%EF%BC%9A"><span class="toc-text">3. 扩展练习：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">4. 总结：</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex67 H$_2$O在Cu(111)表面上的吸附能
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-11-05 15:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#模型搭建" title="模型搭建">模型搭建</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#吸附能" title="吸附能">吸附能</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#H$_2$O" title="H$_2$O">H$_2$O</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>前面我们搭建了十二个H$_2$O的初始吸附构型。为了获取最稳定的结构，我们需要将这些可能的结构都优化一遍，然后通过吸附能来判断。但是这12个结构，我们都要优化的话，需要很多的机时，尤其是对于那些不太富裕的课题组来说，计算量着实不小。那么我们应该怎么办呢？ 回顾：</p>
+<ul>
+<li>1）前面几节我们讲的通过简化模型来加快计算的步骤</li>
+<li>2）谁偷了我的机时系列。</li>
+</ul>
+<hr>
+<p>这里我们可以选择的办法有N个：主要是这两个：1） 减小K点； 2）减小模型。</p>
+<h3 id="1）-减小K点的做法"><a href="#1）-减小K点的做法" class="headerlink" title="1） 减小K点的做法"></a>1） 减小K点的做法</h3><ul>
+<li>i)固定住所有的表面原子（H$_2$O分子除外） </li>
+<li>ii)使用gamma点进行计算</li>
+</ul>
+<h3 id="2）-减小模型的做法"><a href="#2）-减小模型的做法" class="headerlink" title="2） 减小模型的做法"></a>2） 减小模型的做法</h3><ul>
+<li>i)删去底部的2层原子</li>
+<li>ii)固定表层的所有原子</li>
+<li>iii)正常优化进行计算</li>
+</ul>
+<h3 id="3）-也可以前面两个方法结合起来进行操作"><a href="#3）-也可以前面两个方法结合起来进行操作" class="headerlink" title="3） 也可以前面两个方法结合起来进行操作"></a>3） 也可以前面两个方法结合起来进行操作</h3><p>不管你使用上面什么方法，简化模型这一步的主要目的就是在最快的时间，获取一个最理想的初始构型。当你的初始构型很多的时候，这种办法非常适合作为一个初始的筛选步骤。</p>
+<p>师兄，为什么不通过ENCUT来减小计算量？ </p>
+<p>答：完全可以，只是本人不经常用这种办法而已。个人偏好将INCAR保持不变，以避免ENCUT不同所导致的计算结果错误。</p>
+<hr>
+<h2 id="1-H-2-O-吸附构型的第一步筛选："><a href="#1-H-2-O-吸附构型的第一步筛选：" class="headerlink" title="1. H$_2$O 吸附构型的第一步筛选："></a>1. H$_2$O 吸附构型的第一步筛选：</h2><p>这里，大师兄采用的是前面提到的第一个办法，即固定住表面，采用gamma点，然后优化H$_2$O。</p>
+<p><img src="/img/lvthw/ex67/ex67-01.png"></p>
+<ul>
+<li><p>1） 准备INCAR，KPOINTS(1x1x1)；</p>
+</li>
+<li><p>2） 批量固定表面： </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;10,27s/T/F/g&#x27;  */*/POSCAR </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3） 将准备好的INCAR和KPOINTS批量复制到各个文件夹中: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for i in */*； do cp INCAR KPOINTS $i ; done</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>4） 批量提交任务qsuball.sh</p>
+</li>
+</ul>
+<hr>
+<p>任务结束后，首先查看一下能量信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for i in */*; do echo $i $(grep &#x27;  without&#x27; $i/OUTCAR | tail -n 1| awk &#x27;&#123;print $7&#125;&#x27;) ; done</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/lvthw/ex67/ex67-02.png"></p>
+<p>上图，我们发现能量数值相近的差不多，这表明它们很可能是同一个结构。我们把数值sort一下，如下图：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for i in */*; do echo $i $(grep &#x27;  without&#x27; $i/OUTCAR | tail -n 1| awk &#x27;&#123;print $7&#125;&#x27;) ; done | sort -k 2</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/lvthw/ex67/ex67-03.png"></p>
+<hr>
+<p>通过使用p4vasp 批量查看：（p4v <em>&#x2F;</em>&#x2F;CONTCAR） 你会发现能量为-145.56XXX的都是H$_2$O平行吸附在Cu表面，O在Cu的top位上。</p>
+<p><img src="/img/lvthw/ex67/ex67-04.png"></p>
+<hr>
+<p>而剩下的，就只有两种结构了：</p>
+<ul>
+<li>结构1） type_3&#x2F;bri 为V型吸附，O在桥式位置上。</li>
+</ul>
+<p><img src="/img/lvthw/ex67/ex67-05.png"></p>
+<ul>
+<li>结构2）type_3&#x2F;top为V型结构，O在top位置上。</li>
+</ul>
+<p><img src="/img/lvthw/ex67/ex67-06.png"></p>
+<h2 id="2-进一步优化"><a href="#2-进一步优化" class="headerlink" title="2. 进一步优化"></a>2. 进一步优化</h2><p>到现在位置，前面的12个初始结构，可以快速的被筛选成了3个。将这三个结构复制step2的文件夹中。在此基础上，开始正常计算：</p>
+<ul>
+<li><p>1） 将CONTCAR批量复制成POSCAR：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> *； <span class="keyword">do</span> <span class="built_in">mv</span> <span class="variable">$i</span>/CONTCAR <span class="variable">$i</span>/POSCAR ; <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2） KPOINTS变回原来的（4x4x1）:  sed 批量操作</p>
+</li>
+<li><p>3） 表面两层原子放开： sed 批量操作</p>
+</li>
+<li><p>4） 默背一遍提交任务的几个输入文件：INCAR，KPOINTS，POSCAR，POTCAR，脚本，集中注意力思考是否还有没有考虑到的参数或者细节，确保无误后</p>
+</li>
+<li><p>5） 批量提交任务： qsuball.sh</p>
+</li>
+<li><p>6）等待结束，查看结果</p>
+</li>
+</ul>
+<p><img src="/img/lvthw/ex67/ex67-07.png"></p>
+<p>你会发现两个top的能量也一样了，说明这两个结构很可能优化到一块去了。查看后发现都是平行吸附的结构了。</p>
+<ul>
+<li>7） 结构细节：化学上，我们对键长，键角这些信息一定不要放过。测量一下Cu—O 的距离，为： 2.343 $\AA$。</li>
+</ul>
+<p><img src="/img/lvthw/ex67/ex67-08.png"></p>
+<ul>
+<li>8） 计算吸附能：<br>$$<br>\begin{align}<br>E_{ads} &amp;&#x3D; E_{slab+H_2O} – E_{slab} – E_{H_2O^{gas}} \<br>&amp;&#x3D; (-140.33072118 eV) – (-125.93154318 eV) – (-14.21915741 eV)  \<br>&amp;&#x3D; - 0.18 eV。<br>\end{align}<br>$$</li>
+</ul>
+<p>与本人4年前的计算结果（-0.17 eV）相差0.01 eV。<a target="_blank" rel="noopener" href="https://pubs.acs.org/doi/abs/10.1021/cs501698w">ACS Catal., 2015, 5, 1027-1036： https://pubs.acs.org/doi/abs/10.1021/cs501698w </a> </p>
+<p><img src="/img/lvthw/ex67/ex67-09.png"></p>
+<p>本人发表文章支持信息里面的数据。</p>
+<p><strong>☆☆☆注意1：</strong></p>
+<p>这里吸附能计算的时候，我们取的是最稳定的结构。文献里面提到的也通常是作者所找到的稳定结构。当然，对于不稳定的结构，吸附能也就是顺带的事情了。写在文章里面的话，要标明什么结构对应的吸附能是多少。</p>
+<p><strong>☆☆☆注意2：</strong></p>
+<p>分子在表面上是物理吸附？还是化学吸附？ 通过计算出来的吸附能你应该会判断。如果不知道的话，那么就需要多多翻阅物化书了。</p>
+<hr>
+<h2 id="3-扩展练习："><a href="#3-扩展练习：" class="headerlink" title="3. 扩展练习："></a>3. 扩展练习：</h2><ul>
+<li>1） 根据结构和吸附能判断我们的计算结果是不是对的？</li>
+<li>2） 查找其他相关文献，将自己的计算结果与文献的进行对比。</li>
+<li>3） Step1中12个计算，以及step2中的3个计算，结构和输入文件已经打包，下载链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1iyS_nzhI-MuJykabI6rj1w">https://pan.baidu.com/s/1iyS_nzhI-MuJykabI6rj1w</a></li>
+</ul>
+<h2 id="4-总结："><a href="#4-总结：" class="headerlink" title="4. 总结："></a>4. 总结：</h2><p> 通过本节，你应该学会的知识有：</p>
+<ul>
+<li>1） 学会如何通过降低工作量来快速筛选不同的初始结构，并最终获取稳定的构型。</li>
+<li>2） 巩固和加深对批量操作的理解。</li>
+<li>3） 对于更加复杂的结构，其吸附能的基本计算流程要掌握。</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

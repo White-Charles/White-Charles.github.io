@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex66 H$_2$O在Cu(111)表面上的吸附模型 - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%AE%A1%E7%AE%97H-2-O%E6%B0%94%E7%9B%B8%E5%88%86%E5%AD%90%E7%9A%84%E8%83%BD%E9%87%8F"><span class="toc-text">1. 计算H$_2$O气相分子的能量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%90%AD%E5%BB%BAH-2-O%E7%9A%84%E5%90%B8%E9%99%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">2. 搭建H$_2$O的吸附模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%80%83%E8%99%91%E4%B8%8D%E5%90%8C%E7%9A%84%E5%8F%AF%E8%83%BD%E6%80%A7"><span class="toc-text">3. 考虑不同的可能性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%B8%8D%E5%90%8C%E7%9A%84%E5%90%B8%E9%99%84%E4%BD%8D%E7%82%B9"><span class="toc-text">4. 不同的吸附位点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%89%A9%E5%B1%95%E7%BB%83%E4%B9%A0%EF%BC%9A"><span class="toc-text">5. 扩展练习：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">6. 总结：</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex66 H$_2$O在Cu(111)表面上的吸附模型
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-11-04 15:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#模型搭建" title="模型搭建">模型搭建</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#吸附能" title="吸附能">吸附能</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#H$_2$O" title="H$_2$O">H$_2$O</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>结合上一节的内容，下面主要讲解一下H$_2$O分子在Cu(111)表面吸附的初始模型搭建。</p>
+<h2 id="1-计算H-2-O气相分子的能量"><a href="#1-计算H-2-O气相分子的能量" class="headerlink" title="1. 计算H$_2$O气相分子的能量"></a>1. 计算H$_2$O气相分子的能量</h2><p>相信大家已经轻车熟路了（老司机）。只将INCAR，KPOINTS，POSCAR列出来，不再详细解释。如下图：</p>
+<p><img src="/img/lvthw/ex66/ex66-01.png"></p>
+<p>提交任务，结束后，将CONTCAR中的Direct坐标转换为Cartesian，方便后面的表面模型搭建。</p>
+<p>怎么转换前面也讲过了，这里也不再啰嗦。</p>
+<hr>
+<p><strong>☆☆☆注意：很多人问H$_2$O的分子计算用不用打开自旋的问题?</strong></p>
+<p>我的回答是：</p>
+<ul>
+<li>1）如果你的体系是开壳层的，那么就打开自旋。</li>
+<li>2）如果你的体系是闭壳层的，那么就闭嘴。</li>
+<li>3）如果你不知道自己的体系是开壳层的还是闭壳层的，那么就：</li>
+<li><ul>
+<li>i) 自己去测试一把，然后对比下，打开与不打开的区别</li>
+</ul>
+</li>
+<li><ul>
+<li>ii）查找文献，看别人怎么做的。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="2-搭建H-2-O的吸附模型"><a href="#2-搭建H-2-O的吸附模型" class="headerlink" title="2. 搭建H$_2$O的吸附模型"></a>2. 搭建H$_2$O的吸附模型</h2><p><strong>1） 打开p(3x3)-Cu(111)的slab结构。</strong></p>
+<p>先点击左侧的Build，然后点击右上方的text 按钮，进入编辑的部分。如下面的示意图：</p>
+<p><img src="/img/lvthw/ex66/ex66-02.png"></p>
+<p>注意：上面的只是p4vasp的一个界面，不是p(3x3)-Cu(111)的slab结构。</p>
+<hr>
+<p><strong>2） 元素行，原子数目</strong></p>
+<p>在元素行，添加O和H，下面一行，添加对应的原子数。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="/img/lvthw/ex66/ex66-03.png"></h2><p><strong>3）添加H$_2$O分子坐标</strong></p>
+<p> 在坐标的最后面，将前面CONTCAR的Cartesian坐标直接复制过来即可。</p>
+<p><img src="/img/lvthw/ex66/ex66-04.png"></p>
+<p><strong>4） 结果：</strong></p>
+<p><img src="/img/lvthw/ex66/ex66-05.png"></p>
+<p>师兄，水分子跑到slab里面去了，这可怎么办？ 答：往上平移下即可。</p>
+<p>选择O H 以及表面上的任意一个Cu原子。回顾前面的平移操作：</p>
+<p>From 那行点 1st 代表的是O原子</p>
+<p>To 那行点 last 代表的是表面的4号Cu原子</p>
+<p>得到的vector 就是从O到Cu的平移矢量。</p>
+<p><strong>☆☆☆注意：</strong></p>
+<p>Vector的第三个数字，这个是O和Cu在垂直方向上的距离。我们知道，H$_2$O在Cu上吸附的时候，Cu—O有一定的距离，不妨先给个初始值2A。所以，我们需要把 1.246改成3.246。</p>
+<hr>
+<p><strong>小窍门</strong>：在下面红色圈出来的部分，可以通过一些快捷的操作来实现原子的选择。</p>
+<p><img src="/img/lvthw/ex66/ex66-06.png"></p>
+<ul>
+<li>i） 在p4vasp 里面可以直接通过写元素符号，选择该元素所有的原子；</li>
+<li>ii） -10 代表从第一个到第10个原子；</li>
+<li>iii） all 代表所有的原子；</li>
+<li>iv） 10- 代表从10到最后的原子；</li>
+<li>v） 10-25 代表从10到25号原子；</li>
+<li>vi） 剩下的，自己瞎捉摸去吧，我也不知道了。</li>
+</ul>
+<hr>
+<p>上面移动的效果如下：</p>
+<p><img src="/img/lvthw/ex66/ex66-07.png"></p>
+<p><strong>5） 周期性显示的小技巧</strong></p>
+<p>刚开始选择的4号原子在两个格子之间的界面上，本人喜欢将分子放到表面的中间。操作如上图：</p>
+<ul>
+<li>i） 选择表面上的2个原子： 4 和 5 来定义平移的一个vector。</li>
+<li>ii） 平移一下O和H原子，效果如下：</li>
+</ul>
+<p><img src="/img/lvthw/ex66/ex66-08.png"></p>
+<p>当然，在开始的时候，你也可以将H$_2$O分子直接移动到5号原子的表面，大师兄这里做了一些无用的分解操作，主要是为了加深大家的操作印象。</p>
+<hr>
+<h2 id="3-考虑不同的可能性"><a href="#3-考虑不同的可能性" class="headerlink" title="3. 考虑不同的可能性"></a>3. 考虑不同的可能性</h2><p>到目前为止，我们已经顺利搭建了一个H$_2$O分子的吸附模型。把它保存到type_1目录下，名字为POSCAR。</p>
+<p><strong>师兄，为什么要建一个type_1的目录？</strong></p>
+<p>因为除了这个结构，H$_2$O分子在表面上还有很多其他的可能性。为了保证我们可以获得最稳定的吸附结构，我们就需要将这些可能的结构都算一遍。那么还有其他什么样的可能性呢？</p>
+<ul>
+<li>1） 一个H原子指向天空，另外的O—H 键平行于表面。这个结构怎么实现？ 回想上一节我们讲到的绕着O—H键旋转的操作。看下图，不解释。</li>
+</ul>
+<p><img src="/img/lvthw/ex66/ex66-09.png"></p>
+<ul>
+<li>2） 2个H原子都指向天空，只留一个O原子在表面。（剪刀手V）</li>
+</ul>
+<p><img src="/img/lvthw/ex66/ex66-10.png"></p>
+<hr>
+<p>操作思路： 定义一个穿过O原子的y 轴，然后旋转氢原子。</p>
+<p>将这两个结构分别保存到type_2 和 type_3 目录下，名字为POSCAR。按照这样完成的话，你的目录应该是这个样子的：</p>
+<p><img src="/img/lvthw/ex66/ex66-11.png"></p>
+<p><strong>☆小窍门</strong>：p4vasp  *&#x2F;POSCAR  打开当前所有目录下的POSCAR，然后：</p>
+<p><img src="/img/lvthw/ex66/ex66-12.png"></p>
+<p><strong>☆☆☆注意</strong>：本操作是在Ubuntu系统下操作的。Windows的用户可能不能实现p4v *&#x2F;POSCAR 这样的操作，下面讲解的搭建模型可能会多花出一些时间。在这里大师兄表示无能为力。</p>
+<hr>
+<h2 id="4-不同的吸附位点"><a href="#4-不同的吸附位点" class="headerlink" title="4. 不同的吸附位点"></a>4. 不同的吸附位点</h2><p>我们前面了解到Cu(111)表面也有很多不同的位点：Top，Fcc，Hcp，和 Bri。所以这三种的初始构型在这四个位点上也要考虑。</p>
+<p>Bridge的操作，选择5 和 6， 然后将Vector的数值减小一半，然后平移。</p>
+<p><img src="/img/lvthw/ex66/ex66-13.png"></p>
+<p><img src="/img/lvthw/ex66/ex66-14.png"></p>
+<p>平移完了，将结构保存到bri目录下。</p>
+<p><strong>此时不要关闭平移的对话框（这是☆重点1）</strong></p>
+<p><strong>点system对应的这个框，选择type_2 的POSCAR（☆重点2）</strong></p>
+<p>再点一下move，就完成这个类型的bri结构了。</p>
+<p><img src="/img/lvthw/ex66/ex66-15.png"></p>
+<p><img src="/img/lvthw/ex66/ex66-16.png"></p>
+<p>同样，不要关闭对话框，打开type_3的结构，继续平移，获取对应的bri位结构。</p>
+<p><img src="/img/lvthw/ex66/ex66-17.png"></p>
+<p>这样操作的话，避免了重复获取平移Vector的那些鼠标点点的操作。点一次，可以继续用于其他结构的操作。希望大家可以掌握这个小窍门，提高自己搭模型的速度。Windows的用户，可以通过将Vector的数值先记下，然后打开另一个结构的时候，直接输入vector就可以了。类似的，我们可以快速搭建完FCC，HCP的结构，最后，你的目录应该是这样子的：</p>
+<p><img src="/img/lvthw/ex66/ex66-18.png"></p>
+<p>将这些结构复制到服务器里面，准备提交任务。</p>
+<hr>
+<h2 id="5-扩展练习："><a href="#5-扩展练习：" class="headerlink" title="5. 扩展练习："></a>5. 扩展练习：</h2><ul>
+<li>1） 完成这12个结构的搭建，彻彻底底地掌握p4vasp平移，旋转操作。</li>
+<li>2） 使用MS，VESTA，p4vasp 搭建一个p(4x4)-Pt(111) 的吸附模型。（Bulk，slab的优化过程不用做，只熟悉搭建模型的过程。</li>
+<li>3） 思考如何批量准备输入文件，并提交任务？</li>
+<li>4） 思考准备的任务输入文件有什么需要注意的地方？</li>
+</ul>
+<hr>
+<h2 id="6-总结："><a href="#6-总结：" class="headerlink" title="6. 总结："></a>6. 总结：</h2><p>学完这一节：</p>
+<ul>
+<li>1） p4vasp的基本操作，我是没有什么其他可以再教的了。基本上学会这些可以说p4vasp已经入门了，剩下的就是大家没事瞎点点，然后琢磨的事情了。</li>
+<li>2）至少含有1-3原子的分子吸附模型你应该会搭建了。原则如下：</li>
+<li><ul>
+<li>i）通过基本的化学常识和自己所学的知识判断与表面结合地原子；</li>
+</ul>
+</li>
+<li><ul>
+<li>ii）分析表面不同的吸附位点；</li>
+</ul>
+</li>
+<li><ul>
+<li>iii） 思考可能的吸附方式（躺着、竖着、斜着、歪着等等），并通过平移，旋转来实现。</li>
+</ul>
+</li>
+</ul>
+<p>而最后一点，每思考一种吸附方式，都会使得自己的模型数目激增（这种吸附方式在不同位点上），增加工作量。所以，大家在操作的时候，一定要多看文献，因为前人已经把这蛋疼的路帮你走通了。但这并不意味着别人算的就是对的，大家都是人，也会有疏忽的时候，如果你感觉某个结构应该会更稳定，一定要去尝试一下。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

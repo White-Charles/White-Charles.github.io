@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex58 吸附能的计算（三） - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%98%85%E8%AF%BB%EF%BC%9A"><span class="toc-text">参考阅读：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E7%BB%83%E4%B9%A0%EF%BC%9A"><span class="toc-text">扩展练习：</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex58 吸附能的计算（三）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-10-05 15:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#扩胞" title="扩胞">扩胞</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#吸附能" title="吸附能">吸附能</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#覆盖度" title="覆盖度">覆盖度</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>前面一节我们将Cu的slab表面扩展成p(2x2), 然后放了一个O原子在上面吸附。最后发现与p(1x1)表面上吸附相比，O原子的吸附能从+1.2 降低到0.2 eV. 说明覆盖度高的时候，O原子的吸附很差。吸附能受覆盖度的影响很大。</p>
+<p>那什么是覆盖度？ Surface coverage（θ）</p>
+<p>从字面上理解，就是表面被吸附物(原子或分子等)覆盖的程度。一个固定大小的表面，如果上面某一吸附物越多，那么说它的覆盖度也就越大。也可以理解为：该吸附物在表面上的浓度也就越大。在多相催化的过程中，吸附是第一步。而在催化剂表面上，其活性位点数量是有限的（N个），如果N1个活性位点被吸附物种占据了，那么此时的覆盖度：θ&#x3D; N1&#x2F;N。如果所有的活性位点都被占据了，那么覆盖度就是1。 这个相信学过物理化学，以及相关多相催化基础知识的都能理解。 如果不知道的，请自己查找相关参考书学习，主要是在Langmuir 吸附那一部分。</p>
+<hr>
+<p>在表面计算中，覆盖度我们通常使用原子数目的比来表示。首先，在p(2x2)的Cu(111)表面上，有4个Cu原子，我们可以认为活性位点是4个。当我们放一个O上去后，占据了一个Cu，那么此时的覆盖度是1&#x2F;4。前面我们在p(1x1)的表面上放了一个O，可以认为是Monolayer的O吸附，也就是覆盖度为1。</p>
+<p>1）之所以用原子数来表示，而不用表面积。是因为吸附的物种往往不像O原子这么简单，比如甲醇，乙醇，等等。这些表面上吸附物种的面积很难算，将它们的面积除以表面的面积，可行性不大。</p>
+<p>2）师兄，如果我的吸附分子很大，比如苯环。 1个Cu原子上面放不下，那该怎么表示?</p>
+<hr>
+<p>首先你需要扩胞，如上一节所讲的，将表面扩大到能容得下苯环为止。</p>
+<p>1）比如我们将表面扩展成p(3x3)后才能放上去一个苯环，那么此时的覆盖度就是1&#x2F;9。虽然数值很小，但对于苯环来说，Monolayer的吸附，按照这个定义，其覆盖度就是1&#x2F;9。</p>
+<p>2） 如果我们知道一个苯环可以占据9个表面的原子，那么我们将这9个原子看做一个活性位点，那么覆盖度就是 1&#x2F;1。第一个1指的是1个苯环，第二个1指的是1个活性位点（9个原子）。</p>
+<p>大家在计算的时候，一方面参考专业书，文献中的表示，另一方面根据自己的体系需要，只要将问题描述清楚就可以了。</p>
+<p>继续回到上一节留的另一个问题：扩胞时有什么需要注意的事项。</p>
+<p>1）扩胞的操作已经展示给大家了，相信这不再是什么难事了；</p>
+<p>扩胞后的结果见下图： </p>
+<p><img src="/img/lvthw/ex58/ex58-1.png"></p>
+<p>2）扩胞后计算，我们需要注意的主要是KPOINTS这个文件。前面p(1x1)-Cu(111)，我们用的K点是：13x13x1。那我们扩完胞后，晶格变大了，还能继续用$13\times13\times1$吗？</p>
+<p>答：可以用来计算。但结果不能用来和其他K点的进行比较。</p>
+<hr>
+<p>什么意思呢？</p>
+<p>这里大师兄想要表达的是：如果你想要对比两个计算结果，首先要保证它们在一个计算的等级上， 即两个计算K点的网格密度是一样的，或者差不多的。在Reciprocal space中，晶胞的长度为$2\pi&#x2F;a$。然后我们将这个长度分割成k段。每一段长度为：$2\pi&#x2F;ka$</p>
+<p>我们扩胞后，晶胞长度变为2a，则在Reciprocal Space中，晶胞的长度为$2\pi&#x2F;2a$ &#x3D;$\pi&#x2F;a$。</p>
+<p>如果我们用之前的KPOINTS，那么就会将π&#x2F;a分成k段，每段长：$\pi&#x2F;a$， 由于分的更细，这会导致扩胞后K点的密度更大。</p>
+<p>为了保持和扩胞前的密度一致，我们需要将$\pi&#x2F;a$分割成 k&#x2F;2 段，这样每段长为$2\pi&#x2F;ka$。</p>
+<hr>
+<p>因此当我们扩胞后，KPOINTS如果保持不变，会导致前后两个计算的K点密度不一致时，从而计算的精度也不一样，所以两个结果没有可比性。</p>
+<p>师兄，你说了这么多废话。那我们该怎么办呢？</p>
+<p>很简单，将K点数目减小就可以了。 前面p(1x1)我们使用的是$13\times13\times1$，那么扩胞成p(2x2)后，K点就需要相应的减小到$7\times7\times1$。更简单一点，回想我们前面说到的那个经验选择。<code>K * a</code> 的取值范围。</p>
+<p><a target="_blank" rel="noopener" href="https://wiki.fysik.dtu.dk/gpaw/exercises/surface/surface.html">https://wiki.fysik.dtu.dk/gpaw/exercises/surface/surface.html</a></p>
+<p><img src="/img/lvthw/ex58/ex58-2.png"></p>
+<p>我们只要保证所有计算中： K * a 的数值差不多就OK了。所以，当你看到这里，你就可以随便扩胞了，什么p(2x2),  p(3x3),  p(4x4)啦，扩胞后都知道该怎么选择K点并修改KPOINTS了。</p>
+<hr>
+<p>那对于其他输入文件呢？</p>
+<p>INCAR：</p>
+<p>此时，对于Cu体系来说，可以保持不变。但有些与原子数目相关的参数，你还是需要在INCAR里面修改，保持与新的POSCAR对应。比如： </p>
+<ul>
+<li><p>MAGMOM, 但如果你的体系是具有磁性，需要重新设置MAGMOM。</p>
+</li>
+<li><p>更复杂点的体系，如果你的体系是不仅有磁性，还是反铁磁，当你扩胞后，你还要给不同的原子设置磁矩的方向。</p>
+</li>
+</ul>
+<p>POTCAR： 保持不变</p>
+<p>提交任务的脚本： 扩胞后，由于体系变大， 计算会变慢，为了加快速度，我们可能会需要增加节点数目。</p>
+<hr>
+<p>计算步骤：</p>
+<p><strong>老实人的做法：</strong></p>
+<p>扩胞后，很多人问计算吸附能的步骤，不清楚该怎么样进行。</p>
+<p>第一步：优化扩胞后的Slab 模型： 因为扩抱前已经relax过了，所以这一步很快就会结束；得到新的slab能量。</p>
+<p>第二步：在第一步优化的基础上搭建吸附模型； 然后优化，得到slab+吸附物的能量。</p>
+<p>第三步：套公式，计算吸附能。</p>
+<p>老司机的做法</p>
+<p>当然了，如果你经验丰富，计算的够多了，可以尝试这样做：</p>
+<p>第一步：优化扩胞后的Slab 模型： 因为扩抱前已经relax过了，所以这一步很快就会结束；得到新的slab能量：</p>
+<p>同时：在扩胞后的slab模型上（没有优化）直接搭建吸附模型，然后优化，得到slab+吸附物的能量。</p>
+<p>第二步：套公式，计算吸附能。</p>
+<p>这两种做法，最后的结果应该是一样的，如果有差别，也是微乎其微，可以忽略不计。**注意：**在计算纯的slab能量时，表面应该是放开的。</p>
+<hr>
+<p>另一个很常见的问题是，slab的表面我应该放开还是固定呢？</p>
+<p>严格来说，slab的表层原子应该是弛豫的，也就是坐标后对应的是 T T T，这样更符合物理化学意义，因为催化剂表面的原子不可能会不动。厉害的时候，吸附物还会导致表面重构。所以你在阅读文献，会发现理论部分都会写：Top two layers 放开来模拟表面，底部的原子固定来模拟体相等等这样类似的话。</p>
+<p>但是，将表面原子放开后，会导致结构优化步数的增加，从而引起计算量的增加。如果你的模型很大，吸附结构很多，可以先从小模型，低K点出发，先固定住表面，算一遍吸附，大体有个感觉后，再一步一步增加计算的精度。</p>
+<p>如果体系太大了，可以尝试着固定表面来算吸附能，步骤如下：</p>
+<ul>
+<li>1）先优化slab模型，这一步表面原子是要放开的；</li>
+<li>2）固定表面原子，</li>
+<li>3）放吸附物种优化。</li>
+</ul>
+<p>目前计算能力基本上可以完全满足放开表面原子的计算。所以，大家不要纠结这个问题。表面的原子能放开，尽量放开。如果实在是不放心，那么就找一篇和你工作很相近，体系类似的计算文章，看看别人怎么设置的，照猫画虎就可以了。</p>
+<hr>
+<h2 id="参考阅读："><a href="#参考阅读：" class="headerlink" title="参考阅读："></a>参考阅读：</h2><p>Density Functional Theory：A Practical Introduction, <strong>Chapter 3</strong>：Nuts and bolts of DFT calculations</p>
+<p><img src="/img/lvthw/ex58/ex58-3.png"></p>
+<hr>
+<h2 id="扩展练习："><a href="#扩展练习：" class="headerlink" title="扩展练习："></a>扩展练习：</h2><p>另一个无关痛痒，但对后面工作效率会造成影响的问题就是：</p>
+<p><img src="/img/lvthw/ex58/ex58-4.png"></p>
+<p>当扩展完之后，你会看到，Cu原子的坐标，是按照每个单胞中的坐标来排列的。在p(2x2)中有4个p(1x1)的单胞，先列出来第一个(1x1)中4个原子的坐标，然后再列出来第二个(1x1)的，以此类推。但是，比如我们想仅仅放开表面的第一层原子（也就是纵坐标为6.26的所有原子），就得把纵坐标为4.189的原子挨个由T T T 改成 F F F （图中箭头所指的部分）。这样会很麻烦，还浪费很多时间。</p>
+<p>怎么解决这个问题，快速将表层，次表层原子固定或者放开呢 ? 看下一节的内容。</p>
+<hr>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex44 p(1x1)Cu(111) 的优化计算 - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BF%AE%E6%94%B9Slab%E6%A8%A1%E5%9E%8B"><span class="toc-text">1 修改Slab模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9%EF%BC%9F"><span class="toc-text">2 如何修改？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-KPOINTS-%E5%92%8C-POTCAR"><span class="toc-text">3 KPOINTS 和 POTCAR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-INCAR"><span class="toc-text">4 INCAR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1"><span class="toc-text">5 提交任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%89%A9%E5%B1%95%E7%BB%83%E4%B9%A0"><span class="toc-text">6 扩展练习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%80%BB%E7%BB%93"><span class="toc-text">7 总结</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex44 p(1x1)Cu(111) 的优化计算
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-08-27 02:06:48</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#优化" title="优化">优化</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Cu(111)" title="Cu(111)">Cu(111)</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Slab" title="Slab">Slab</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>前面我们学习了Slab模型的单点计算，在此基础上，本节我们主要学习下怎么优化Slab模型。</p>
+<h2 id="1-修改Slab模型"><a href="#1-修改Slab模型" class="headerlink" title="1 修改Slab模型"></a>1 修改Slab模型</h2><p>前面单点计算的<code>POSCAR</code>不可以直接拿过来用吗？为什么要修改<code>POSCAR</code>文件？</p>
+<p>这是因为在Slab模型中，要固定一部分原子来模拟体相，然后放开一部分原子来模拟表面。一般来说，表面的两层原子允许弛豫，而下面的那些原子则直接固定住。</p>
+<p>这样做的物理意义在于：在真实的环境下，催化剂体相看做是不变的，只有表面的原子参与催化反应。</p>
+<p>VASP中固定原子需要在POSCAR中进行操作。有两个关键点：</p>
+<p>1）在POSCAR的第7行后添加一行，改行内容为<code>Selective Dynamics</code>，VASP只认第一个字母，你可以直接在这一行只加 S或者s。也可以换成其他的S开头的单词，比如<code>SB</code>，<code>Sexy BigBro</code> ， <code>Super BigBro</code>等等；<br>2）在原子坐标后面加上 F 或者 T 表示固定或者放开，因为坐标有xyz三个数值，因此我们需要三个F或者T。我们可以通过设置允许原子在某一方向上移动，而其他方向上固定。</p>
+<ul>
+<li><code>F F F </code>表示xyz全部固定； </li>
+<li><code>T T T</code> 表示xyz全部放开，</li>
+<li><code>F F T</code> 表示 xy方向固定，只允许原子在z方向上移动。</li>
+</ul>
+<p>这一点我们前面也已经讲过了，详见Ex24 频率计算的输出与POSCAR原子的固定。</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>如果前面的<code>POSCAR</code>直接拿过来直接用，那么在优化过程中所有的原子都会被放开。回想一下我们计算Fe, Cu单胞的例子，计算中我们没有设置F或者T，晶胞尺寸和原子的坐标在优化过程前后都发生了变化。因此你不设置<code>Selective</code> 以及 F或者T，VASP默认是所有的原子都放开的。</li>
+<li><code>Selective</code> 和 F 或者 T同时出现，不要只设置<code>Selective</code>忘了FT，也不要只设置FT忘了Selective.</li>
+</ul>
+<h2 id="2-如何修改？"><a href="#2-如何修改？" class="headerlink" title="2 如何修改？"></a>2 如何修改？</h2><p>根据前面说，我们需要做的无非有两步，<br>1）  在第7行后加入<code>Selective Dynamics</code><br>2）  在坐标后面加入<code>T T T </code>或者 <code>F F F</code><br>我们在本节中，将底部的两层原子固定，上面两层放开。</p>
+<p>实现本目的，有以下几种方式： </p>
+<p>2.1）这个用文本编辑器就可以做到，很多编辑器都有列块模式，允许你同时添加N列到每行的最后。你可以使用下<code>Notepad++</code>，<code>Atom</code>这些免费开源的软件来操作</p>
+<p>2.2）使用<code>p4vasp</code>，详见前面的练习Ex24</p>
+<p>2.3） 本节我们重温一下<code>sed</code>的用法，直接使用命令进行操作。</p>
+<p>A) 在第 7行 后添加一行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed  -i  &#x27;7aSelective Dynamics&#x27;  POSCAR</span><br></pre></td></tr></table></figure>
+
+<p>7a 代表在第7行后面添加一行，a 是append的缩写。注意，a 和 Selective之间可以没有空格，也可以有空格，这里我们没有加空格。</p>
+<p>B） 添加了Selective这一行之后，原子坐标的行数也发生了变化，为10-13行。</p>
+<p>C） 第10，11行为底部的两层原子坐标，我们在最后面加上<code>F F F</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed  -i  &#x27;10,11s/$/ F F F/g&#x27; POSCAR</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong> 第一个F前面有个空格。</p>
+<p>d） 在12-13行最后面加上 <code>T T T</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed  -i  &#x27;12,13s/$/ T T T/g&#x27; POSCAR</span><br></pre></td></tr></table></figure>
+
+<p>这样，我们就顺利完成POSCAR的改造了，可以用来进行slab的优化计算了。</p>
+<h2 id="3-KPOINTS-和-POTCAR"><a href="#3-KPOINTS-和-POTCAR" class="headerlink" title="3 KPOINTS 和 POTCAR"></a>3 KPOINTS 和 POTCAR</h2><p>保持原来的样子不变</p>
+<h2 id="4-INCAR"><a href="#4-INCAR" class="headerlink" title="4 INCAR"></a>4 INCAR</h2><p>优化的时候，我门回想一下要设置的东西：<br>4.1<code> IBRION</code> 和 <code>POTIM</code><br>IBRION可以使用 1 和2，我们这里用2。（1的话适合初始结构比较好的情况，这里我们也可以用。）<br><code>POTIM =0.1</code>  官网默认值是0.5，个人感觉比较大， 0.1是一个很不错的选择。<br>4.2 <code>EDIFFG = -0.01</code>优化时以力作为收敛标准。注意 -0.01 已经很严格了，除非特殊需要，不要设置-0.001，这样你就会在QQ群里求助大家，为什么我优化的时候一直不收敛啊。如果设置-0.01，很多步过后仍然不收敛，可以尝试一下-0.02，也是一个很安全的选择。<br>4.3 <code>NSW = 500</code>  设置最大的优化步数。<br>4.4 <code>ISIF = 2</code>   slab 模型优化的时候，我们用<code>ISIF =2</code> ，也就是VASP的默认值，不用设置， 最终<code>INCAR</code>如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">System = Cu111</span><br><span class="line"></span><br><span class="line">ISMEAR = 1</span><br><span class="line">SIGMA = 0.1</span><br><span class="line">ALGO = FAST</span><br><span class="line">ENCUT = 450</span><br><span class="line">EDIFF = 1E-5</span><br><span class="line"></span><br><span class="line">LDIPOL = .TRUE.</span><br><span class="line">IDIPOL = 3</span><br><span class="line"></span><br><span class="line">NWRITE = 0</span><br><span class="line">LWAVE = .FALSE.</span><br><span class="line">LCHARG = .FALSE.</span><br><span class="line"></span><br><span class="line">IBRION = 2</span><br><span class="line">POTIM = 0.1</span><br><span class="line">EDIFFG = -0.01</span><br><span class="line">NSW = 500</span><br></pre></td></tr></table></figure>
+
+<p>注意：<br>上一节我们提到Cu没有磁性，表述是不准确的，应该是纯净的Cu(111) slab模型中，Cu不需要考虑自旋。如果你算的是CuO(111)表面，则需要考虑自旋了。</p>
+<h2 id="5-提交任务"><a href="#5-提交任务" class="headerlink" title="5 提交任务"></a>5 提交任务</h2><p>计算结束后，查看OUTCAR，OSZICAR的最后几行检查下是不是正常结束。</p>
+<h2 id="6-扩展练习"><a href="#6-扩展练习" class="headerlink" title="6 扩展练习"></a>6 扩展练习</h2><p>6.1 掌握本节提到的固定原子的三种做法：文本编辑器，p4vasp,  sed， 当然啦，更可以直接使用Vim 这个强大的工具来执行<br>6.2 查看结构优化相关的这几个参数，复习下它们的VASP官网说明。<br>6.3 运行本文的例子，然后将EDIFFG设置成 -0.02或者-0.001进行测试，查看与-0.01的区别。<br>6.4 VASP官网查找表面能计算的案例，结合本节以及前面的学习，尝试算一下Cu(111)面的表面能。</p>
+<h2 id="7-总结"><a href="#7-总结" class="headerlink" title="7 总结"></a>7 总结</h2><p>截止到本节为止，Slab模型的优化，你已经可以初步掌握了。请务必跟着节奏认真练习。后面我们会继续学习Slab模型的优化，现在感觉陌生没上手的也不用担心。认真总结一下，我们如何从Bulk模型，然后一步一步操作到Slab模型优化的。每一步中都有哪些该注意的细节。这些都掌握了，就可以大大提高你计算的成功率，进而节省时间和精力。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

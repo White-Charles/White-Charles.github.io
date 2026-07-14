@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex02_V3 服务器和程序语言 - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%B8%E5%85%B3"><span class="toc-text">服务器相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%9F%A5%E9%81%93%E6%80%8E%E4%B9%88%E8%BF%9E%E6%8E%A5%E8%87%AA%E5%B7%B1%E7%BB%84%E5%86%85%E6%88%96%E8%80%85%E7%A7%9F%E8%B5%81%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">1) 知道怎么连接自己组内或者租赁的服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9D%E6%AD%A5%E5%AD%A6%E4%B9%A0%E4%BD%BF%E7%94%A8%E5%9F%BA%E6%9C%AC%E7%9A%84linux%E5%91%BD%E4%BB%A4"><span class="toc-text">2) 初步学习使用基本的linux命令:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%89%8B%E4%B8%8A%E6%9C%89%E5%8F%AF%E4%BB%A5%E6%AD%A3%E5%B8%B8%E8%BF%90%E8%A1%8C%E7%9A%84VASP%E7%A8%8B%E5%BA%8F"><span class="toc-text">3) 手上有可以正常运行的VASP程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0"><span class="toc-text">程序语言学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex02_V3 服务器和程序语言
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2022-07-24 02:06:48</span></span>
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h2 id="服务器相关"><a href="#服务器相关" class="headerlink" title="服务器相关"></a>服务器相关</h2><p>VASP的计算就跟开车一样，设计到很多的内容，比如大街上的路怎么铺的？桥怎么建的？发动机怎么工作的？方向盘怎么工作的，刹车片什么材料做的？车身颜色怎么喷的？ 没有人会懂所有相关的知识。但是怎么打开车门，坐车里，启动发动机，踩油门，打方向盘，这是本教程所关心的，也就是类似驾校教练指导你学会如何开车，而不是关系如何去造车，去铺路。这里的车就是VASP。要开车，必须手头上有车，没车我瞎BB再多也是白搭。</p>
+<h3 id="1-知道怎么连接自己组内或者租赁的服务器"><a href="#1-知道怎么连接自己组内或者租赁的服务器" class="headerlink" title="1) 知道怎么连接自己组内或者租赁的服务器"></a>1) 知道怎么连接自己组内或者租赁的服务器</h3><p>后面大师兄会介绍一些挂载服务器的方法，但这些基本的连接服务器操作是基础。一般来说通过终端（terminal）来实现，Windows下有很多软件可以参考，比如：</p>
+<ul>
+<li>Winscp + Putty</li>
+<li><em>MobaXterm</em></li>
+</ul>
+<p>当然还有其他的软件，大师兄平时很少用Windows，推荐的就这两个。尤其是MobaXterm。 对于Ubuntu和Mac，则可以直接打开Terminal进行连接。</p>
+<h3 id="2-初步学习使用基本的linux命令"><a href="#2-初步学习使用基本的linux命令" class="headerlink" title="2) 初步学习使用基本的linux命令:"></a>2) 初步学习使用基本的linux命令:</h3><ul>
+<li><p>进入目录 : cd </p>
+</li>
+<li><p>移动文件(夹): mv </p>
+</li>
+<li><p>复制文件: cp </p>
+</li>
+<li><p>复制文件夹用: cp -r ; 注意 cp 和 -r 之间有个或者N个空格</p>
+</li>
+<li><p>创建文件夹:mkdir     </p>
+</li>
+<li><p>删除文件: rm ;    </p>
+</li>
+<li><p>删除文件夹: rm  -r    </p>
+</li>
+<li><p>强制删除文件夹: rm -fr  或者 rm -rf  (f 和 r 的顺序可以颠倒 )        </p>
+</li>
+<li><p>显示目录下文件: ls 等命令;   </p>
+</li>
+<li><p>这里大师兄就不再啰嗦了，后面教程里会介绍一些命令的使用，老司机们自动略过，新手自行百度：linux 命令，你会得到铺天盖地的信息。</p>
+</li>
+</ul>
+<h3 id="3-手上有可以正常运行的VASP程序"><a href="#3-手上有可以正常运行的VASP程序" class="headerlink" title="3) 手上有可以正常运行的VASP程序"></a>3) 手上有可以正常运行的VASP程序</h3><ul>
+<li><p>组里面已经安装好vasp程序，或者使用超算中心的VASP程序，只要手上有可以正常运行的VASP即可。因为我们在本书里，<strong>不讨论</strong>：</p>
+<ul>
+<li>去哪里下载VASP? 怎么安装VASP? 去哪里下载VASP的pseudo potentials?</li>
+</ul>
+<ul>
+<li>前面的问题可以在QQ群里面讨论，也可以付费求助别人解决。</li>
+<li>对于VASP的pseudo potentials，也就是POTCAR。<ul>
+<li>你老板买了VASP的版权，就直接问他要。</li>
+<li>用的盗版VASP，找其他人要一份，但是发文章的时候会很麻烦。国内很多人都是找有版权的老师挂名，其实这是非常学术不道德的事情。一方面涉及到版权，一方面涉及到瞎几把挂名。</li>
+<li>免费的可以用QE，CP2K，GPAW等开源的软件，没必要非得在VASP上面死磕。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>知道怎么提交VASP任务？</p>
+<ul>
+<li>自己组里都有提交任务的脚本，如果没有的话只能自行动手解决咯，可以<ul>
+<li>找组里的师兄师姐帮忙;</li>
+<li>第一个啃螃蟹的人，找老师解决，求助服务器商，求助超算管理员；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="程序语言学习"><a href="#程序语言学习" class="headerlink" title="程序语言学习"></a><strong>程序语言学习</strong></h2><p>建议大家学习两个语言: bash 和 python。主要是为了辅助计算，节省时间，并拓展自己的思维方式。现在机器学习，人工智能越来越热，学会使用Python或者其他语言，或许可以上升到以后能否生存的高度了。</p>
+<ul>
+<li>bash语言：日常terminal里面常用的基本命令，比如cd，ls这些，以及结合基本的逻辑语法，可以让你写出一些简单的小脚本。极大提高自己的工作效率；极大的意思就是别人一天或者N天的活，你可能几秒就完事。</li>
+<li>Python 语言：python是一款语法简单，很容易上手的程序，有着丰富的数据库支持，目前深受科研人员的喜爱。<strong>注意</strong>，这里我们不讨论类似：python是一门高级语言，运行的时候跟机器交互性差，需要时间比C++长这样的问题。因为这是专业程序员的事。不出意外，看这本书的大部分人，能够用python写个小脚本，方便地处理自己的任务和数据，就已经非常棒了，快和慢，对于我们来说，顶死了也就几秒的问题，完全可以接受。</li>
+<li>学习程序语言，一方面可以极大地提高自己的工作效率，另一方面也可以改变自己看待事物的思维方式。  </li>
+<li>如果不喜欢Python，当然也可以学习其他的程序语言，C++，R，Java等。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>1）学习VASP前，先保证自己能顺利连接到服务器，然后运行VASP。这个大师兄没法帮忙，可以求助自己课题组中的师兄师姐，老板，或者群里咨询。</p>
+<p>2）新手有大把的时间，建议系统性学习bash，python语言。Python可以换成其他你自己感兴趣的。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

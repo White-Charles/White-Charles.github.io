@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        通过ASE获取原子之间的距离 - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87ASE%E8%8E%B7%E5%8F%96%E5%8E%9F%E5%AD%90%E4%B9%8B%E9%97%B4%E7%9A%84%E8%B7%9D%E7%A6%BB"><span class="toc-text">通过ASE获取原子之间的距离</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E4%BE%8B%E5%AD%90%E5%B1%95%E7%A4%BA%E4%B8%80%E4%B8%8B%EF%BC%9A"><span class="toc-text">具体例子展示一下：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E5%86%85%E5%AE%B9"><span class="toc-text">脚本内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E6%95%88%E6%9E%9C%EF%BC%9A"><span class="toc-text">脚本效果：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B%E4%B8%8B%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-text">改进下输出格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%94%BE%E5%88%B0-bin%E7%9B%AE%E5%BD%95%E4%B8%8B%EF%BC%8C%E9%9A%8F%E6%97%B6%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%EF%BC%9A"><span class="toc-text">放到~&#x2F;bin目录下，随时可以使用：</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        通过ASE获取原子之间的距离
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2022-04-04 00:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#ASE" title="ASE">ASE</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#软件" title="软件">软件</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#原子距离" title="原子距离">原子距离</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h2 id="通过ASE获取原子之间的距离"><a href="#通过ASE获取原子之间的距离" class="headerlink" title="通过ASE获取原子之间的距离"></a>通过ASE获取原子之间的距离</h2><p>原子之间的距离是计算化学中模型搭建，结果分析中经常需要分析的部分。而计算原子的之间的距离也非常简单，通过可视化软件直接点两个原子就可以直接显示出来，可以通过自写的一些小脚本来实现。跟均相的体系不同，周期性体系由于周期性边界的存在，有时候模型中两个原子之间的距离需要将周期性边界条件考虑进去才能正确得到。今天简单介绍一个通过ASE获取原子之间的距离，并且考虑周期性边界条件的影响的小脚本。</p>
+<h4 id="具体例子展示一下："><a href="#具体例子展示一下：" class="headerlink" title="具体例子展示一下："></a>具体例子展示一下：</h4><p>图里面是$TiO{_2}(101)$表面上吸附的一个Pt单原子模型，如果直接计算Pt和Ti之间距离的话（图1），测量一下为 7.461 $\AA$。实际上我们把slab模型沿着y轴重复下就会发现，还有一个更短的Pt-Ti距离。</p>
+<p><img src="/img/lvthw/A28/1.png"></p>
+<p>图1： Pt-Ti原子之间的距离</p>
+<p>测量下，距离为：3.818 $\AA$。在周期性计算中，如果刚开始模型搭建的时候没有考虑到这一点，或者分子比较大，亦或者AIMD过程中分子到处跑，都会出现类似这样的情形。所以在测量距离时候，要注意周期性边界对数值的影响。当然最理想的情况就是模型搭建的时候将这一情况考虑进来，尽可能将分子放在slab的中间部分。如果出现这种情况，测量的时候加上周期性边界条件的校正即可，这也是本节要介绍的内容。</p>
+<p><img src="/img/lvthw/A28/2.png"></p>
+<p>图2：考虑周期性边界条件后Pt-Ti之间的距离</p>
+<p>首先我们看下体系的坐标，在<code>p4vasp</code>的界面中，<code>POSCAR</code>中每个原子对应着不同的序号（序号是从<code>1</code>开始的），比如：Pt在POSCAR中是第109号原子，前面测量的Pt-Ti距离就是109号和23号原子之间的距离。计算两点之间的距离公式相信大家初高中的时候已经学过了。过程很简单（参考下面脚本中注释掉的部分。）：1）获取两个原子之间的坐标； 2）套公式得到距离。本节介绍通过ASE写个小脚本获取两个原子之间的距离。</p>
+<p><img src="/img/lvthw/A28/3.png"></p>
+<p>图3：p4vasp中原子的序号</p>
+<h4 id="脚本内容"><a href="#脚本内容" class="headerlink" title="脚本内容"></a>脚本内容</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">Created on Fri Apr 22 10:06:51 2022</span></span><br><span class="line"><span class="string">@author: qli</span></span><br><span class="line"><span class="string">Command: python3 get_dis_AB.py  atom_A_index atom_B_index</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> ase.io <span class="keyword">import</span> read, write</span><br><span class="line"><span class="keyword">import</span> os, sys</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">Important Note: Atoms are indexed from 0.</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">atom_A, atom_B = [<span class="built_in">int</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> sys.argv[<span class="number">1</span>:<span class="number">3</span>]]</span><br><span class="line">model = read(<span class="string">&#x27;POSCAR&#x27;</span>)</span><br><span class="line">positions = model.get_positions()</span><br><span class="line">dis_AB_1 = model.get_distance(atom_A, atom_B, mic=<span class="literal">True</span>)</span><br><span class="line">dis_AB_2 = model.get_distance(atom_A, atom_B, mic=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">round</span>(dis_AB_1, <span class="number">4</span>), <span class="string">&#x27;\t&#x27;</span>,<span class="built_in">round</span>(dis_AB_2,<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">## Not Used </span></span><br><span class="line"><span class="comment">#coord_A = positions[atom_A]</span></span><br><span class="line"><span class="comment">#coord_B = positions[atom_B]</span></span><br><span class="line"><span class="comment">#dis_AB = np.linalg.norm(coord_A-coord_B)</span></span><br><span class="line"><span class="comment">#print(round(dis_AB,4))                     </span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>atom_A，和 atom_B 是要测量的2个原子，<code>注意：ASE中原子的序号是从0开始的</code>，所以上面的例子中，Ti和Pt在ASE中则是22和108号原子。</li>
+<li>脚本里面读的是<code>POSCAR</code>，根据自己的需求改成<code>CONTCAR</code>或者其他的带有坐标的文件。</li>
+<li><code>mic=True</code> 考虑周期性边界的影响。<code>mic=False</code> 则是直接测量两个原子的距离。</li>
+<li>最后面注释的几行是获取原子坐标，通过<code>numpy</code>计算距离的例子，效果等于前面<code>mic=False</code>.</li>
+<li>脚本使用的命令：<code>python3 get_dis_AB.py  22 108 </code></li>
+</ol>
+<h4 id="脚本效果："><a href="#脚本效果：" class="headerlink" title="脚本效果："></a>脚本效果：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbro:~/Desktop/example$ python3 get_dis_AB.py  22 108</span><br><span class="line">3.8175 	 7.4611</span><br></pre></td></tr></table></figure>
+
+<h4 id="改进下输出格式"><a href="#改进下输出格式" class="headerlink" title="改进下输出格式"></a>改进下输出格式</h4><p>将前面脚本中<code>print</code>的一行删掉，换成下面的即可，反正数值已经在这里了，怎么输出根据自己爱好，把print对应的效果改改即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Atom_A\tAtom_B\tdis_A-B&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;%s\t%s\t%.4f&#x27;</span> %(atom_A, atom_B, dis_AB_1))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbro:~/Desktop/example$ python3 get_dis_AB.py  22 108</span><br><span class="line">Atom_A Atom_B	dis_A-B</span><br><span class="line">22	108	3.8175</span><br></pre></td></tr></table></figure>
+
+<h4 id="放到-bin目录下，随时可以使用："><a href="#放到-bin目录下，随时可以使用：" class="headerlink" title="放到~/bin目录下，随时可以使用："></a>放到<code>~/bin</code>目录下，随时可以使用：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbro:~/Desktop/example$ <span class="built_in">chmod</span> u+x get_dis_AB.py </span><br><span class="line">qli@bigbro:~/Desktop/example$ <span class="built_in">mv</span> get_dis_AB.py  ~/bin/</span><br><span class="line">qli@bigbro:~/Desktop/example$ <span class="built_in">ls</span></span><br><span class="line">POSCAR</span><br><span class="line">qli@bigbro:~/Desktop/example$ get_dis_AB.py  22 108 </span><br><span class="line">Atom_A	Atom_B	dis_A-B</span><br><span class="line">22	108	3.8175</span><br></pre></td></tr></table></figure>
+
+<p>没有<code>~/bin</code>的话，自己创建一个即可：<code>mkdir ~/bin</code></p>
+<p>有兴趣的也可以自己尝试着解决周期性边界条件对计算两原子之间距离的影响，GitHub上也有很多类似的代码。也欢迎大家分享自己的代码或者链接；可以发送到我的邮箱：<code>lqcata@gmail.com</code>或者直接Q:<code>122103465</code>，微信：<code>BigBroSci</code> 联系。</p>
+<p><img src="/img/lvthw/A28/qrcode.png"></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

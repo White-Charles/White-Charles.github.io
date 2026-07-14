@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex59 吸附能的计算（四） - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E6%89%BE%E8%A7%84%E5%BE%8B-sed%E5%91%BD%E4%BB%A4"><span class="toc-text">方法一：找规律+sed命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E5%88%86%E5%B1%82%E5%A4%84%E7%90%86-sed%E5%91%BD%E4%BB%A4"><span class="toc-text">方法二：分层处理+sed命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%89%EF%BC%9A-%E4%BD%BF%E7%94%A8%E8%84%9A%E6%9C%AC%E5%88%86%E5%B1%82"><span class="toc-text">方法三： 使用脚本分层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">总结：</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex59 吸附能的计算（四）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-10-07 02:06:48</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#脚本" title="脚本">脚本</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#sed" title="sed">sed</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#sort" title="sort">sort</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#固定原子" title="固定原子">固定原子</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#规律" title="规律">规律</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>丑话说在前头，本节内容有点多，大家慢慢消化。掌握本节的核心思想，对于后面提高你的工作效率，节省时间有着很大的帮助。前面一节，我们在扩展练习中提到了扩胞后，原子坐标的后面T T T 和 F F F 修改的问题。因为扩展后原子坐标是按照单胞为顺序排列的，如果想要将表面的原子快速固定或者放开，那么我们就需要知道表面原子所在的行数。</p>
+<h2 id="方法一：找规律-sed命令"><a href="#方法一：找规律-sed命令" class="headerlink" title="方法一：找规律+sed命令"></a>方法一：找规律+sed命令</h2><p><img src="/img/lvthw/ex59/ex59-1.png"></p>
+<p>上图中，p(2x2)的POSCAR命名为POSCAR-2x2，最表层原子所在的行数为：13，17， 21， 25，次表层的原子所在的行数为： 12， 16， 20， 24。仔细分析下，你会发现，表层原子的行数为： 9 + 4*n ；次表层的行数为：8 + 4 * n，其中n &#x3D; 1-4，4表示在扩完后的slab模型里面有4个(1x1)的单元。有了这个关系，我们就可以通过sed命令任意固定这两层的原子了, 命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for i in &#123;1..4&#125;; do sed -i &quot;$((8+4*$i)), $((9+4*$i))s/T T T/F F F/g&quot; POSCAR</span><br></pre></td></tr></table></figure>
+
+<p>或者：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for i in &#123;1..4&#125;; do sed -i &quot;$((8+4*$i)), $((9+4*$i))s/T/F/g&quot; POSCAR</span><br></pre></td></tr></table></figure>
+
+<p>效果如下图：通过sed命令快速将表层原子批量固定住。</p>
+<p><img src="/img/lvthw/ex59/ex59-2.png"></p>
+<p>我们还可以只放开最表层的原子，使用sed命令快速将最表层的原子批量放开！</p>
+<p>在前面结果的基础上可以使用命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for  i  in &#123;1..4&#125;; do sed -i &quot;$((9+4*$i))s/ F F F/ T T T/g&quot; POSCAR</span><br></pre></td></tr></table></figure>
+
+<p>或者：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for  i  in &#123;1..4&#125;; do sed -i &quot;$((9+4*$i))s/F/T/g&quot; POSCAR</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/lvthw/ex59/ex59-3.png"></p>
+<p>Soooo Easy！！！再也不用挨行修改T T T 或者F F F 了。</p>
+<h2 id="方法二：分层处理-sed命令"><a href="#方法二：分层处理-sed命令" class="headerlink" title="方法二：分层处理+sed命令"></a>方法二：分层处理+sed命令</h2><p>什么，原来还有第二种方法？ 这种方法是本人常用的。前面我们提到，在p(2x2)的slab模型中，原子坐标是按照p(1x1)的单元排列的。既然我们想根据层数固定原子，那么我们可以先将原子按照层数来排列，这样就可以方便的选择同一层的原子了。</p>
+<p>那么该怎么将它们按照层数排列呢？ 这时候你应该想到，不同层之间的原子，它们的坐标在z方向是不同的。有了这个依据，我们就可以根据z方向坐标的大小来排列原子了。</p>
+<p>首先我们先用一个笨方法实现所预想的小目标。</p>
+<p>**第一步：**将坐标复制到excel表格里面。本人用的是libre office(Linux下面的Microsoft)。不过功能大同小异，Windows用户按照做就可以了。</p>
+<p>**第二步：**选中所复制的数据，然后根据图中的D列来排序。</p>
+<p><img src="/img/lvthw/ex59/ex59-4.png"></p>
+<p>排序完的结果, 如下图：</p>
+<p><img src="/img/lvthw/ex59/ex59-5.png"></p>
+<p>从图中，我们可以看出，原子根据在z方向上的坐标分成了4部分。</p>
+<p>**注意：**这里我们所有原子都是Cu原子，因此可以全部选中然后直接排序。如果你的体系中有好几种不同的原子，你需要按照元素，逐一进行排序。 比如体系中有C H O，我们先将C原子按照Z方向坐标排序，然后再排H原子的，最后再排O原子的。要保持和POSCAR前面元素顺序一致。</p>
+<p>排序完成之后，将POSCAR中的坐标替换为Excel中的数据。</p>
+<p><img src="/img/lvthw/ex59/ex59-6.png"></p>
+<p>这样的话，我们的模型就搞定了。剩下的就是使用sed命令批量替换T T T和 F F F了</p>
+<p>但是，师兄等等，上图看起来坐标很乱啊，结构能用吗？ 放心，绝对可以用。</p>
+<p>如果不放心的话，可以用p4vasp打开一下，然后重新保存成POSCAR即可。最终我们的POSCAR如下图：</p>
+<p><img src="/img/lvthw/ex59/ex59-7.png"></p>
+<p><img src="/img/lvthw/ex59/ex59-8.png"></p>
+<p>从图中可以看出来，次表层的原子在18-21行，最表层的原子在22-25行。所以可以这样使用sed命令来快速实现表层原子的固定与弛豫。</p>
+<p><img src="/img/lvthw/ex59/ex59-9.png"></p>
+<p><img src="/img/lvthw/ex59/ex59-10.png"></p>
+<h2 id="方法三：-使用脚本分层"><a href="#方法三：-使用脚本分层" class="headerlink" title="方法三： 使用脚本分层"></a>方法三： 使用脚本分层</h2><p>师兄，这个问题竟然还可以使用脚本来解决？</p>
+<p>当然了，使用鼠标拖拖点点的事情，一般都可以用脚本来实现。脚本是用python写的，本人给它起了一个高大上的响亮名字：sortcar.py。（适用于python2.6以及以上的版本，低于2.6或者python3可能会出错。）</p>
+<p>由于p(2x2)的slab坐标前面已经用过了，下面我们用p(3x3)的slab来演示一下脚本的使用。</p>
+<p><img src="/img/lvthw/ex59/ex59-11.png"></p>
+<p>新鲜出炉的，等待被sort的p(3x3)slab的POSCAR。被sort过的POSCAR如下图：</p>
+<p><img src="/img/lvthw/ex59/ex59-12.png"></p>
+<p>使用sortcar.py 将坐标按照z方向大小排列。输出文件为XXX_sorted，其中 XXX为我们想要排列的POSCAR或者CONTCAR。如果你的VASP坐标结构文件名字为：BigBro，那么被sort之后，输出文件就是: BigBro_sorted。</p>
+<p>脚本这么神奇，内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python </span></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> sys </span><br><span class="line"></span><br><span class="line">in_file = sys.argv[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">### READ input file ###</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">read_inputcar</span>(<span class="params">in_file</span>):</span><br><span class="line">    f = <span class="built_in">open</span>(in_file, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">    lines = f.readlines()</span><br><span class="line">    f.close()</span><br><span class="line">    ele_name  = lines[<span class="number">5</span>].strip().split()</span><br><span class="line">    ele_num = [<span class="built_in">int</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> lines[<span class="number">6</span>].strip().split()]</span><br><span class="line">    dict_contcar =  &#123;ele_name[i]:ele_num[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(ele_name))&#125; </span><br><span class="line">    dict_contcar2 = defaultdict(<span class="built_in">list</span>)</span><br><span class="line">    <span class="keyword">for</span> element <span class="keyword">in</span> ele_name: </span><br><span class="line">        indice  = ele_name.index(element)</span><br><span class="line">        n_start = <span class="built_in">sum</span>(ele_num[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, indice+<span class="number">1</span>)) - dict_contcar.get(element) +<span class="number">1</span></span><br><span class="line">        n_end = <span class="built_in">sum</span>(ele_num[i] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, indice+<span class="number">1</span>)) +<span class="number">1</span></span><br><span class="line">        dict_contcar2[element].append(<span class="built_in">range</span>(n_start, n_end)) </span><br><span class="line">    <span class="keyword">return</span> lines, ele_name, ele_num, dict_contcar2, dict_contcar</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_elements</span>(<span class="params">ele</span>):</span><br><span class="line">    lines, ele_name, ele_num, dict_contcar2, dict_contar = read_inputcar(in_file)</span><br><span class="line">    coord_total = []</span><br><span class="line">    my_list = []</span><br><span class="line">    my_dict = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> dict_contcar2.get(ele)[<span class="number">0</span>]:</span><br><span class="line">        coord_list = lines[j+<span class="number">8</span>].strip().split()[<span class="number">0</span>:<span class="number">3</span>]</span><br><span class="line">        tf_list = lines[j+<span class="number">8</span>].strip().split()[<span class="number">3</span>:]</span><br><span class="line">        my_list.append(coord_list)</span><br><span class="line">        dict_key = <span class="string">&#x27;-&#x27;</span>.join(coord_list)</span><br><span class="line">        my_dict[dict_key] = tf_list</span><br><span class="line">       </span><br><span class="line">    data = np.array(my_list)</span><br><span class="line">    data=data[np.argsort(data[:,<span class="number">2</span>])]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> data:</span><br><span class="line">         coord = <span class="string">&#x27;  &#x27;</span>.join(k)</span><br><span class="line">         tf = <span class="string">&#x27;  &#x27;</span>.join(my_dict.get(<span class="string">&#x27;-&#x27;</span>.join(k)))</span><br><span class="line">         coord_total.append(coord + <span class="string">&#x27;  &#x27;</span> + tf )</span><br><span class="line">    <span class="keyword">return</span> coord_total</span><br><span class="line"></span><br><span class="line"><span class="comment">## Generate the New POSCAR file</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">Get_and_Save_lines</span>(<span class="params">file_name, start_line, end_line</span>):</span><br><span class="line">    f = <span class="built_in">open</span>(file_name)</span><br><span class="line">    lines =  f.readlines()</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> lines[<span class="built_in">int</span>(start_line):<span class="built_in">int</span>(end_line)]:</span><br><span class="line">        file_out.write(line.rstrip()+<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">out_name = in_file + <span class="string">&#x27;_sorted&#x27;</span></span><br><span class="line">file_out = <span class="built_in">open</span>(out_name, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">Get_and_Save_lines(in_file, <span class="number">0</span>, <span class="number">9</span>)</span><br><span class="line"></span><br><span class="line">ele_name = read_inputcar(in_file)[<span class="number">1</span>]</span><br><span class="line">dict_contcar = read_inputcar(in_file)[-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> ele_name:</span><br><span class="line">    <span class="keyword">if</span> dict_contcar.get(i) &gt; <span class="number">1</span> :</span><br><span class="line">        file_out.write(<span class="string">&#x27;\n&#x27;</span>.join(get_elements(i)))</span><br><span class="line">    <span class="keyword">else</span>: </span><br><span class="line">        file_out.write(<span class="string">&#x27;\n %s \n&#x27;</span> %(<span class="string">&#x27;  &#x27;</span>.join(get_elements(i))))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>注意事项：</strong></p>
+<p>1） 这里我们用的是Cu(111)的例子，比较简答，脚本的威力展示不出来。<br>2） 如果你的体系有很多不同的原子，脚本首先会将同一种元素原子的坐标排列，然后依次类推。<br>3） 有些地方可能有些冗余。但本人一直在用，效果还不错。<br>4） 本人建议，只针对表面使用这个脚本。也就是吸附前的slab模型。如果你放了吸附物种，不建议使用，因为吸附物种间不同原子之间的连接顺序可能会被打乱。<br>5） 在放吸附物种之前，最好将表面先排序完，怎么做，前面三种方法任选。<br>6） 脚本的话已经上传，大家可以通过链接下载：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1X5xLRsvRmFfNE8IlKwvbFQ%EF%BC%89">https://pan.baidu.com/s/1X5xLRsvRmFfNE8IlKwvbFQ）</a></p>
+<p>7）如果使用脚本出错的话，可能是因为你的python版本太低。这个脚本只适用于python2.6及以上的。Python3可能也不适用。出现错误，直接放弃，掌握了这个方面的思想就足够了。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>本节讨论的内容与科研关系说大不大，说小也不小，主要是在解决工作效率和时间上。想象一下，如果你的slab中有很多原子（金属氧化物，硫化物等），而且还不是同一种的，你用前两种方法的时候，就得十分小心了，此时脚本的作用就显示出来了。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

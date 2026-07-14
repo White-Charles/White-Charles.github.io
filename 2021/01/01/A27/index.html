@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        从Citrine Informatics数据库获取数据 - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B1%EF%BC%9A%E8%8E%B7%E5%8F%96%E5%8C%96%E5%AD%A6%E5%BC%8F%E4%B8%BA-Si-%E7%9A%84%E6%89%80%E6%9C%89%E6%9D%90%E6%96%99%E7%9A%84%E5%AE%9E%E9%AA%8C%E6%B5%8B%E5%BE%97%E7%9A%84%E8%83%BD%E5%B8%A6"><span class="toc-text">示例1：获取化学式为 Si 的所有材料的实验测得的能带</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B2%EF%BC%9A%E8%8E%B7%E5%8F%96%E6%9D%90%E6%96%99%E5%AF%B9-OH-%E5%92%8C-O%E7%89%A9%E7%A7%8D%E7%9A%84%E5%90%B8%E9%99%84%E8%83%BD"><span class="toc-text">示例2：获取材料对 *OH 和 *O物种的吸附能</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        从Citrine Informatics数据库获取数据
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2021-01-01 00:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#骚操作" title="骚操作">骚操作</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#软件" title="软件">软件</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Citrine" title="Citrine">Citrine</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>Citrine 也是一个材料学数据库，自带了机器学习工具，大家也可以研究琢磨一下。官网是 <a target="_blank" rel="noopener" href="https://citrination.com/search/simple?searchMatchOption=fuzzyMatch%E3%80%82%E8%BF%99%E9%87%8C%EF%BC%8C%E6%88%91%E4%BB%AC%E5%B0%86%E9%80%9A%E8%BF%87%E5%87%A0%E4%B8%AA%E4%BE%8B%E5%AD%90%E4%BA%86%E8%A7%A3%E5%A6%82%E4%BD%95%E5%9C%A8%E8%BF%99%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E3%80%82%E5%9C%A8Citrine%E4%B8%AD%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E9%9C%80%E8%A6%81%E7%94%A8%E5%88%B0">https://citrination.com/search/simple?searchMatchOption=fuzzyMatch。这里，我们将通过几个例子了解如何在这个数据库中获取数据。在Citrine中获取数据需要用到</a> matminer.data_retrieval.retrieve_Citrine.CitrineDataRetrieval 这个工具，其跟materials project类似，也学要一个API_key。大家可以在官网注册，并记录下API_Key。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#请先在终端中输入： pip install citrination_client ； 否则会报错</span></span><br><span class="line"><span class="comment">#然后我们回到代码，导入 CitrineDataRetrieval 这个模块</span></span><br><span class="line"><span class="keyword">from</span> matminer.data_retrieval.retrieve_Citrine <span class="keyword">import</span> CitrineDataRetrieval</span><br></pre></td></tr></table></figure>
+
+<h4 id="示例1：获取化学式为-Si-的所有材料的实验测得的能带"><a href="#示例1：获取化学式为-Si-的所有材料的实验测得的能带" class="headerlink" title="示例1：获取化学式为 Si 的所有材料的实验测得的能带"></a>示例1：获取化学式为 Si 的所有材料的实验测得的能带</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先实例化这个工具，需要提供你的API_Key</span></span><br><span class="line">cdr = CitrineDataRetrieval(api_key=<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 接下来，类似从materials project获取数据，我们需要用get_dataframe函数</span></span><br><span class="line">df = cdr.get_dataframe(criteria=&#123;<span class="string">&#x27;formula&#x27;</span>:<span class="string">&#x27;Si&#x27;</span>, <span class="string">&#x27;data_type&#x27;</span>: <span class="string">&#x27;EXPERIMENTAL&#x27;</span>&#125;, </span><br><span class="line">                       properties=[<span class="string">&#x27;Band gap&#x27;</span>],</span><br><span class="line">                       secondary_fields=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  0%|                                                                                            | 0/7 [00:00&lt;?, ?it/s]d:\programs\anaconda3\envs\py36\lib\site-packages\matminer\data_retrieval\retrieve_Citrine.py:103: FutureWarning:</span><br><span class="line"></span><br><span class="line">pandas.io.json.json_normalize is deprecated, use pandas.json_normalize instead</span><br><span class="line"></span><br><span class="line">100%|████████████████████████████████████████████████████████████████████████████████████| 7/7 [00:00&lt;00:00, 87.33it/s]</span><br><span class="line"></span><br><span class="line">all available fields:</span><br><span class="line">[<span class="string">&#x27;Band gap&#x27;</span>, <span class="string">&#x27;uid&#x27;</span>, <span class="string">&#x27;Band gap-units&#x27;</span>, <span class="string">&#x27;category&#x27;</span>, <span class="string">&#x27;references&#x27;</span>, <span class="string">&#x27;chemicalFormula&#x27;</span>, <span class="string">&#x27;Crystallinity&#x27;</span>, <span class="string">&#x27;Band gap-conditions&#x27;</span>, <span class="string">&#x27;Band gap-methods&#x27;</span>, <span class="string">&#x27;Band gap-dataType&#x27;</span>]</span><br><span class="line"></span><br><span class="line">suggested common fields:</span><br><span class="line">[<span class="string">&#x27;references&#x27;</span>, <span class="string">&#x27;chemicalFormula&#x27;</span>, <span class="string">&#x27;Crystallinity&#x27;</span>, <span class="string">&#x27;Band gap&#x27;</span>, <span class="string">&#x27;Band gap-units&#x27;</span>, <span class="string">&#x27;Band gap-conditions&#x27;</span>, <span class="string">&#x27;Band gap-methods&#x27;</span>, <span class="string">&#x27;Band gap-dataType&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df <span class="comment">#查看表格</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/lvthw/A27/r1.png"></p>
+<p>从上面结果可以看出，数据库里有化学式为Si的材料共7中实验测得的能带数据。这些数据来源的文献，带隙的值，实验方法都被记录了下来。</p>
+<h4 id="示例2：获取材料对-OH-和-O物种的吸附能"><a href="#示例2：获取材料对-OH-和-O物种的吸附能" class="headerlink" title="示例2：获取材料对 *OH 和 *O物种的吸附能"></a>示例2：获取材料对 *OH 和 *O物种的吸附能</h4><p>想不到citrine数据库还有各种材料对*OH 和 *O 物种的吸附能，一起来看看怎么获取把。要查询更多的数据库，请探索官网<a target="_blank" rel="noopener" href="https://citrination.com/datasets">https://citrination.com/datasets</a> </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 我们发现这里不需要指定筛选条件，只需要返回所需要的性质即可。</span></span><br><span class="line">df_OH = cdr.get_dataframe(criteria=&#123;&#125;, properties=[<span class="string">&#x27;adsorption energy of OH&#x27;</span>], secondary_fields=<span class="literal">True</span>)</span><br><span class="line">df_O = cdr.get_dataframe(criteria=&#123;&#125;, properties=[<span class="string">&#x27;adsorption energy of O&#x27;</span>], secondary_fields=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<pre><code>  0%|                                                                                            | 0/9 [00:00&lt;?, ?it/s]d:\programs\anaconda3\envs\py36\lib\site-packages\matminer\data_retrieval\retrieve_Citrine.py:103: FutureWarning:
+
+pandas.io.json.json_normalize is deprecated, use pandas.json_normalize instead
+
+100%|███████████████████████████████████████████████████████████████████████████████████| 9/9 [00:00&lt;00:00, 128.63it/s]
+
+
+all available fields:
+[&#39;uid&#39;, &#39;Adsorption energy of OH&#39;, &#39;Adsorption energy of OH-units&#39;, &#39;Morphology&#39;, &#39;Surface facet&#39;, &#39;category&#39;, &#39;references&#39;, &#39;chemicalFormula&#39;, &#39;Adsorption energy of OH-conditions&#39;, &#39;Adsorption energy of OH-dataType&#39;]
+
+suggested common fields:
+[&#39;references&#39;, &#39;chemicalFormula&#39;, &#39;Surface facet&#39;, &#39;Adsorption energy of OH&#39;, &#39;Adsorption energy of OH-units&#39;, &#39;Adsorption energy of OH-dataType&#39;, &#39;Morphology&#39;, &#39;Adsorption energy of OH-conditions&#39;]
+
+
+100%|█████████████████████████████████████████████████████████████████████████████████| 21/21 [00:00&lt;00:00, 140.70it/s]
+
+all available fields:
+[&#39;uid&#39;, &#39;Surface facet&#39;, &#39;Adsorption energy of O&#39;, &#39;category&#39;, &#39;references&#39;, &#39;chemicalFormula&#39;, &#39;Reconstruction&#39;, &#39;Adsorption energy of O-units&#39;, &#39;Adsorption energy of O-conditions&#39;]
+
+suggested common fields:
+[&#39;references&#39;, &#39;chemicalFormula&#39;, &#39;Surface facet&#39;, &#39;Adsorption energy of O&#39;, &#39;Adsorption energy of O-units&#39;, &#39;Adsorption energy of O-conditions&#39;, &#39;Reconstruction&#39;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df_OH.head()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/lvthw/A27/r2.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df_O.head()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/lvthw/A27/r3.png"></p>
+<p>大家可以看到，这些数据库里面的数据还不够丰富。大家也可以把自己计算得到的数据上传到citrine数据库中，促进科学知识的开放获取。</p>
+<ul>
+<li>实际上 citrine 数据库包含了很多实验数据，下次的分享中，我们会把citrine数据库中的实验数据和materials project中的计算数据做个对比。</li>
+<li>强烈推荐大家在学习的时候使用jupyter notebook。</li>
+<li>附上jupyter notebook文件共大家参考：【链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1W1XKj-Fnjmx1yIe2QB7_MQ">https://pan.baidu.com/s/1W1XKj-Fnjmx1yIe2QB7_MQ</a> 提取码：jvoi 】</li>
+</ul>
+<p>本次分享到此结束。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

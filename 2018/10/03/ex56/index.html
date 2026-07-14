@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex56 吸附能的计算（一） - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%90%B8%E9%99%84%E8%83%BD%EF%BC%9F"><span class="toc-text">1 什么是吸附能？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%AE%A1%E7%AE%97%E5%90%B8%E9%99%84%E8%83%BD%EF%BC%88%E5%8D%95%E4%B8%AAO%E5%8E%9F%E5%AD%90%EF%BC%89"><span class="toc-text">2 计算吸附能（单个O原子）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%80%9D%E8%80%83%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="toc-text">3 思考问题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%89%A9%E5%B1%95%E7%BB%83%E4%B9%A0%EF%BC%9A"><span class="toc-text">4 扩展练习：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">5 总结：</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex56 吸附能的计算（一）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-10-03 15:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#Cu(111)" title="Cu(111)">Cu(111)</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#吸附能" title="吸附能">吸附能</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#结合能" title="结合能">结合能</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>我们已经优化完成了O原子在Cu(111)表面上的吸附。总结并数一下，到目前为止我们从前面的计算中可以获取哪些能量。</p>
+<ul>
+<li>Cu(111) slab 的能量</li>
+<li>slab上有O吸附时，体系优化完的能量</li>
+</ul>
+<p>再往前想一下，我们也计算了</p>
+<ul>
+<li><p>O$_2$分子的能量</p>
+</li>
+<li><p>以及O原子在气相中的能量。</p>
+</li>
+</ul>
+<p> 有了这几个能量，我们就可以计算O在p(1x1)的Cu(111)表面上的吸附能了。这也是本节的主要内容。</p>
+<h2 id="1-什么是吸附能？"><a href="#1-什么是吸附能？" class="headerlink" title="1 什么是吸附能？"></a>1 什么是吸附能？</h2><p><img src="/img/lvthw/ex56/ex56-1.png"></p>
+<p>从字面上不难理解，就是分子或者原子从气相中吸附到表面上所释放的能量。计算吸附能的时候，需要注意的有两点：起始和终态。</p>
+<p>1）  **终态：**这里说的终态就是O原子在表面吸附，并且优化完的构型。我们标记为 slab+O，它的能量为  E(slab+O)。</p>
+<p>2）  **初态：**我们计算O的吸附能，起始状态是O$_2$ 和 纯净的slab表面。因为在实际反应中，O$_2$在气相中解离成2个O原子，然后再吸附，这种可能性微乎其微。前面我们讲了O$_2$分子的优化，这里我们直接把O$_2$分子的能量拿来用。起始的两个结构能量分别标记为：E(O$_2$) 和 E(slab)。</p>
+<p>由于在终态的吸附结构上面，我们只有1个氧原子， 所以初始态我们要用O$_2$能量的一半:  E(O$_2$)&#x2F;2。</p>
+<p>3）  注意：文献报道里面，也有很多人用O原子在气相中的能量来计算O的吸附能。这样做的话，其物理意义为：O$_2$需要先解离成O原子，然后O原子再吸附。此时，初始状态为分解的O原子，因此O$_2$分子解离的能量没有考虑在内。由于O$_2$解离是吸热反应，忽略掉解离能，会导致O的吸附能很强。单个O原子的能量标记为：E(O)。</p>
+<p>4）  所以，大家在计算的时候，一定要把自己的计算公式标出来，此外，大家看到直接用O原子能量计算出来的吸附能，不要用O$_2$作为参考能量的结果进行对比。</p>
+<p>5） 这两个计算方法，哪个对，哪个错呢？ 答：都是对的。因为O$_2$的解离能是一个常数，加上去（用O$_2$能量作为起始）或者忽略掉（用O原子能量作为起始）得到的结果之间的区别无非也是这个常数。看下面的计算。</p>
+<hr>
+<h2 id="2-计算吸附能（单个O原子）"><a href="#2-计算吸附能（单个O原子）" class="headerlink" title="2 计算吸附能（单个O原子）"></a>2 计算吸附能（单个O原子）</h2><p>公式1:<br>$$<br>E_{ads1}(O) &#x3D; E_{slab+O} – E_{slab} – E_{O_2}&#x2F;2<br>$$<br>公式2:<br>$$<br>E_{ads2}(O) &#x3D; E_{slab+O} – E_{slab} – E_{O}<br>$$</p>
+<p>$E_{slab+O}$ ：O 在Slab上，优化完结构的能量；</p>
+<p>$E_{slab}$: 优化的slab的能量；</p>
+<p>$E_{O_2}$: O$_2$ 分子在气相中的能量；</p>
+<p>$E_{O}$: O原子在气相中的能量；</p>
+<p>带入数据后：</p>
+<p>$$<br>E_{ads1}(O) &#x3D;  -17.68238420<del>eV – (-13.97082922</del>eV) – (-9.85498627<del>eV) &#x3D; 1.216</del>eV<br>$$</p>
+<p>$$<br>E_{ads2}(O) &#x3D;  -17.68238420<del>eV – (-13.97082922</del>eV) – (-1.89237882<del>eV) &#x3D; -1.819</del>eV<br>$$</p>
+<hr>
+<p>前面我们说了，如果直接用O原子在气相中的能量，则忽略了O$_2$分子解离的能量（或者是O原子结合能）。</p>
+<p>我们知道O$_2$ 分子解离是一个吸热反应，那么，解离能可以通过以下两个方式来获取：</p>
+<ol>
+<li><pre><code>两个吸附能量相减来得到：
+</code></pre>
+</li>
+</ol>
+<p>$$<br>E_{ads1}(O) - E_{ads2}(O) &#x3D; 1.216<del>eV – (-1.819</del>eV) &#x3D; 3.035~eV<br>$$</p>
+<ol start="2">
+<li>直接通过O$_2$分子和O原子的能量得到。单个O原子的结合能为：</li>
+</ol>
+<p>$$<br>E_{binding} &#x3D; [ E_{O_2} – E_O * 2] &#x2F;2，<br>$$</p>
+<p>代入数据后得到：</p>
+<p>$$<br>E_{binding} &#x3D;[ -9.85498627<del>eV – (-1.89237882</del>eV *2) ] &#x2F; 2 &#x3D; -3.035~eV<br>$$</p>
+<hr>
+<h2 id="3-思考问题："><a href="#3-思考问题：" class="headerlink" title="3 思考问题："></a>3 思考问题：</h2><p>1）  前面我们计算的$E_{ads1}(O)$ &#x3D; 1.216 eV 是一个正值，为什么会这样？ 算错了吗？还是有其他物理意义？</p>
+<p>2）  如何计算H，CO，CH$_4$, CH$_3$OH 等的吸附能，把计算的公式列出来。每个能量计算的细节，注意部分有哪些？</p>
+<p>3） 如何计算脱附能？</p>
+<hr>
+<h2 id="4-扩展练习："><a href="#4-扩展练习：" class="headerlink" title="4 扩展练习："></a>4 扩展练习：</h2><p>1）  推荐阅读下面这两篇文章（本人的，当然喜欢大家多多引用了。）讲的是关于甲醇，乙醇，乙二醇，以及甘油在Cu, Ru, Pd以及Pt的(111)上面的解离。Ex系列的后续文章，表面反应的优化，过渡态的计算等，基本都以这两篇文章的内容为主。希望大家能够好好学习，并多多引用。此外，计算的很多细节都在支持信息里面，大家不要错过。一时半会看不完没有关系，下载后结合本书慢慢看。</p>
+<p><img src="/img/lvthw/ex56/ex56-2.png"></p>
+<p>链接：<a target="_blank" rel="noopener" href="https://pubs.acs.org/doi/abs/10.1021/cs501698w">https://pubs.acs.org/doi/abs/10.1021/cs501698w</a></p>
+<p><img src="/img/lvthw/ex56/ex56-3.png"></p>
+<p><strong>链接：</strong><a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-018-02884-y"><strong>https://www.nature.com/articles/s41467-018-02884-y</strong></a> </p>
+<hr>
+<p>2）  回顾并重复本节所涉及到的计算，以及注意细节部分。</p>
+<p>A.      单个O原子的能量；</p>
+<p>B.      O$_2$分子优化；</p>
+<p>C.      Cu bulk的优化；</p>
+<p>D.      p(1x1)-Cu(111)表面的搭建及优化；</p>
+<p>E.       O原子在p(1x1)-Cu(111)的top位吸附的模型搭建及优化；</p>
+<p>G.      不满半年的新手，建议从Ex0 从头学习。</p>
+<hr>
+<h2 id="5-总结："><a href="#5-总结：" class="headerlink" title="5 总结："></a>5 总结：</h2><p>本节我们主要介绍了O原子在p(1x1)-Cu(111)表面top位上的吸附能的计算公式。顺便带大家回顾一下整个计算流程。如果你从头跟着学过来的话，每个流程中的细节，需要注意的部分肯定都已经掌握了，后面举一反三，就慢慢渐入佳境了。也就是所谓的开始入門了。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

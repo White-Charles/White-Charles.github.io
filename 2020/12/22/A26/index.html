@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        利用matminer从数据库获取数据 - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8EMaterials-Project-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8E%B7%E5%8F%96"><span class="toc-text">从Materials Project 数据库获取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B1%EF%BC%9A%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%8D%95%E5%85%83%E7%B4%A0%E6%9D%90%E6%96%99%E7%9A%84%E5%AF%86%E5%BA%A6"><span class="toc-text">示例1：获取所有单元素材料的密度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B2%EF%BC%9A%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%B8%A6%E9%9A%99%E5%A4%A7%E4%BA%8E-4-0-eV%E7%9A%84%E6%9D%90%E6%96%99"><span class="toc-text">示例2：获取所有带隙大于 4.0 eV的材料</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B3%EF%BC%9A%E8%8E%B7%E5%8F%96-VRH-%E5%89%AA%E5%88%87%E6%A8%A1%E9%87%8F%E5%92%8C%E4%BD%93%E7%A7%AF%E6%A8%A1%E9%87%8F%C2%B6"><span class="toc-text">示例3：获取 VRH 剪切模量和体积模量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E5%B0%BE"><span class="toc-text">结尾</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        利用matminer从数据库获取数据
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-12-22 00:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#骚操作" title="骚操作">骚操作</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Pymatgen" title="Pymatgen">Pymatgen</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#软件" title="软件">软件</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p><a target="_blank" rel="noopener" href="https://nbviewer.jupyter.org/github/hackingmaterials/matminer_examples/blob/master/matminer_examples/data_retrieval-nb/data_retrieval_basics.ipynb">https://nbviewer.jupyter.org/github/hackingmaterials/matminer_examples/blob/master/matminer_examples/data_retrieval-nb/data_retrieval_basics.ipynb</a></p>
+<h2 id="从Materials-Project-数据库获取"><a href="#从Materials-Project-数据库获取" class="headerlink" title="从Materials Project 数据库获取"></a>从Materials Project 数据库获取</h2><p>从Materials Project数据库获取数据得用到 matminer.data_retrieval.retrieve_MP.MPDataRetrieval 功能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先导入模块</span></span><br><span class="line"><span class="keyword">from</span> matminer.data_retrieval.retrieve_MP <span class="keyword">import</span> MPDataRetrieval</span><br><span class="line"><span class="comment"># 实例化 MPDataRetrieval 这个类</span></span><br><span class="line">mpdr = MPDataRetrieval(api_key=<span class="string">&#x27;your_own_api_key&#x27;</span>) </span><br><span class="line"><span class="comment"># 在实例化 MPDataRetrieval 时需要输入用户在 Material Project 网站的 API Key.</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="示例1：获取所有单元素材料的密度"><a href="#示例1：获取所有单元素材料的密度" class="headerlink" title="示例1：获取所有单元素材料的密度"></a>示例1：获取所有单元素材料的密度</h2><p>上一次的介绍说到，matminer 处理的数据跟 pandas 库一样，是 dataframe，所以我们要用 get_dataframe 方法获取数据; dataframe 看起来就像excel 表格一样。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df = mpdr.get_dataframe(criteria=&#123;<span class="string">&quot;nelements&quot;</span>: <span class="number">1</span>&#125;, properties=[<span class="string">&#x27;density&#x27;</span>, <span class="string">&#x27;pretty_formula&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;There are &#123;&#125; entries on MP with 1 element&quot;</span>.<span class="built_in">format</span>(df[<span class="string">&#x27;density&#x27;</span>].count())) <span class="comment"># 计算有多少材料</span></span><br><span class="line"><span class="comment">#请自行关注 df[&#x27;density&#x27;].count() 语句</span></span><br></pre></td></tr></table></figure>
+
+<p>criteria 是搜索条件，它是一个字典，字典里面可以有多个键值对; properties 是想要获取的材料性质，它是个列表，里面可以有多个性质。其实criteria 也是材料的性质。想知道所有可用的性质，请参考 <a target="_blank" rel="noopener" href="https://github.com/materialsproject/pymatgen/blob/master/pymatgen/ext/matproj.py">https://github.com/materialsproject/pymatgen/blob/master/pymatgen/ext/matproj.py</a></p>
+<p>上述代码意味着 我们想在数据库中搜索材料，这些材料元素种类为1，对于这些材料，我们想得到它们的密度和化学式信息。</p>
+<p>结果如下：</p>
+<img src="A26/re1.png" style="zoom:80%;" />
+
+<p>让我们看一下这个 dataframe 表格长什么样</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.head()  <span class="comment"># 这个语句会显示 df 这个表格的前几行，可以看到，我们获得了 716 个单元素材料。</span></span><br><span class="line">           <span class="comment"># 表格里记录了我们需要的密度 和 化学式的性质，以及它们的ID</span></span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<img src="A26/re2.png" style="zoom: 80%;" />
+
+
+
+<h3 id="示例2：获取所有带隙大于-4-0-eV的材料"><a href="#示例2：获取所有带隙大于-4-0-eV的材料" class="headerlink" title="示例2：获取所有带隙大于 4.0 eV的材料"></a>示例2：获取所有带隙大于 4.0 eV的材料</h3><p>方法挺简单的，就是在上个例子的 get_dataframe 方法中设置新的搜索条件: 带隙大于4.0 eV.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 带隙是 band_gap，大于4怎么写呢？ 是 greater than, 缩写成 gt. 在 matminer中要写成 $gt </span></span><br><span class="line"><span class="comment"># 大家注意体会 criteria 的字典形式。criteria=, properties= 可以省略不写。</span></span><br><span class="line">df = mpdr.get_dataframe(&#123;<span class="string">&quot;band_gap&quot;</span>: &#123;<span class="string">&quot;$gt&quot;</span>: <span class="number">4.0</span>&#125;&#125;, [<span class="string">&#x27;pretty_formula&#x27;</span>, <span class="string">&#x27;band_gap&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;There are &#123;&#125; entries on MP with a band gap larger than 4.0&quot;</span>.<span class="built_in">format</span>(df[<span class="string">&#x27;band_gap&#x27;</span>].count()))</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<img src="A26/re3.png" style="zoom:80%;" />
+
+<p>再看一下表格长什么样子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<img src="A26/re4.png" style="zoom:80%;" />
+
+<p>如果想把表格保存成excel可读写的格式，可以用下面的语句：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.to_csv(<span class="string">&#x27;materials_bg_gt_4.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="示例3：获取-VRH-剪切模量和体积模量¶"><a href="#示例3：获取-VRH-剪切模量和体积模量¶" class="headerlink" title="示例3：获取 VRH 剪切模量和体积模量¶"></a>示例3：获取 VRH 剪切模量和体积模量<a target="_blank" rel="noopener" href="http://localhost:8888/notebooks/get_data_from_pymatgen.ipynb#%E7%A4%BA%E4%BE%8B3%EF%BC%9A%E8%8E%B7%E5%8F%96-VRH-%E5%89%AA%E5%88%87%E6%A8%A1%E9%87%8F%E5%92%8C%E4%BD%93%E7%A7%AF%E6%A8%A1%E9%87%8F">¶</a></h3><p>首先得要求这些材料存在弹性的性质，其次，我们还想要求这些弹性数据没有警告信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 存在弹性常数信息用 &quot;elasticity&quot;: &#123;&quot;$exists&quot;: True&#125; 表示，没有警告信息用 一个空列表表示：&quot;elasticity.warnings&quot;: []</span></span><br><span class="line"></span><br><span class="line">df = mpdr.get_dataframe(&#123;<span class="string">&quot;elasticity&quot;</span>: &#123;<span class="string">&quot;$exists&quot;</span>: <span class="literal">True</span>&#125;, <span class="string">&quot;elasticity.warnings&quot;</span>: []&#125;,</span><br><span class="line">                        [<span class="string">&#x27;pretty_formula&#x27;</span>, <span class="string">&#x27;elasticity.K_VRH&#x27;</span>, <span class="string">&#x27;elasticity.G_VRH&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;There are &#123;&#125; elastic entries on MP with no warnings&quot;</span>.<span class="built_in">format</span>(df[<span class="string">&#x27;elasticity.K_VRH&#x27;</span>].count()))</span><br></pre></td></tr></table></figure>
+
+<p>搜索结果如下：</p>
+<img src="A26/r5.png" style="zoom:80%;" />
+
+<p>我们想统计一下这些数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.describe() <span class="comment"># 该语句可以很方便地对表格中的每一列数据进行统计，给出数量，平均数，方差，最小、最大值等信息</span></span><br></pre></td></tr></table></figure>
+
+<p>得到：</p>
+<img src="A26/r6.png" style="zoom:80%;" />
+
+
+
+<p><strong>接下来看一个更复杂的例子</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">除了上次的搜索条件外，我们想搜索包含 Pb 和 Te 的材料：&quot;elements&quot;: &#123;&quot;$all&quot;: [&quot;Pb&quot;, &quot;Te&quot;]&#125; </span></span><br><span class="line"><span class="string">材料的稳定性也在考虑之中，energy above hull 必须在1e-6以下：&quot;e_above_hull&quot;: &#123;&quot;$lt&quot;: 1e-6&#125;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">df = mpdr.get_dataframe(criteria=&#123;<span class="string">&quot;elasticity&quot;</span>: &#123;<span class="string">&quot;$exists&quot;</span>: <span class="literal">True</span>&#125;, </span><br><span class="line">                         <span class="string">&quot;elasticity.warnings&quot;</span>: [],</span><br><span class="line">                         <span class="string">&quot;elements&quot;</span>: &#123;<span class="string">&quot;$all&quot;</span>: [<span class="string">&quot;Pb&quot;</span>, <span class="string">&quot;Te&quot;</span>]&#125;,</span><br><span class="line">                         <span class="string">&quot;e_above_hull&quot;</span>: &#123;<span class="string">&quot;$lt&quot;</span>: <span class="number">1e-6</span>&#125;&#125;, <span class="comment"># to limit the number of hits for the sake of time</span></span><br><span class="line">                        properties = [<span class="string">&quot;elasticity.K_VRH&quot;</span>, <span class="string">&quot;elasticity.G_VRH&quot;</span>, <span class="string">&quot;pretty_formula&quot;</span>, </span><br><span class="line">                                      <span class="string">&quot;e_above_hull&quot;</span>, <span class="string">&quot;bandstructure&quot;</span>, <span class="string">&quot;dos&quot;</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;There are &#123;&#125; elastic entries on MP with no warnings that contain &quot;</span></span><br><span class="line">      <span class="string">&quot;Pb and Te with energy above hull ~ 0.0 eV&quot;</span>.<span class="built_in">format</span>(df[<span class="string">&#x27;elasticity.K_VRH&#x27;</span>].count()))</span><br></pre></td></tr></table></figure>
+
+<p>结果是：</p>
+<p>There are 3 elastic entries on MP with no warnings that contain Pb and Te with energy above hull ~ 0.0 eV</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/lvthw/A26/r7.png"></p>
+<p>下面来查看一下其中一个材料的能带和DOS图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pymatgen.electronic_structure.plotter <span class="keyword">import</span> BSDOSPlotter <span class="comment"># 调用 Pymatgen 作图</span></span><br><span class="line"></span><br><span class="line">mpid = <span class="string">&#x27;mp-20740&#x27;</span></span><br><span class="line">idx = df.index[df.index==mpid][<span class="number">0</span>]  <span class="comment"># 获取 mp-20740 这个材料所在的行数</span></span><br><span class="line">plt = BSDOSPlotter().get_plot(bs=df.loc[idx, <span class="string">&#x27;bandstructure&#x27;</span>], dos=df.loc[idx, <span class="string">&#x27;dos&#x27;</span>]);</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<img src="A26/r8.png" style="zoom:80%;" />
+
+
+
+<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><ul>
+<li><p>matminer获得的数据(本教程保存在 df 变量中)可以可视化，也可以直接用来做机器学习。有兴趣的同学请自学 pandas 这个 python 库，学习 dataframe 数据的处理方法。</p>
+</li>
+<li><p>Pymatgen 做的能带和DOS图不够美观。大家可以留言，我有机会可以跟大家分享修改pymatgen代码来美化这些图。</p>
+</li>
+<li><p>官网的教程是基于 jupyter notebook的。jupyter notebook 的好处是既能运行代码，又能自由地给代码加注释，公式，图片。所得到的文档便于阅读和理解。希望大家也能学会这个python 库。</p>
+</li>
+<li><p>如果想调用 jupyter notebook来运行上述代码，建议大家在具有图形界面的终端上试验。以windows 系统为例，再按照上篇教程创建好 py36 虚拟环境后，需要</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install jupyter <span class="comment"># 具体的使用方法请参考其它网络教程</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>本文还附带jupyter notebook 版本的文档供大家阅读和使用 【链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/153PcfiM3vaAG71MCCTFuCQ">https://pan.baidu.com/s/153PcfiM3vaAG71MCCTFuCQ</a><br>提取码：w4us 】</p>
+</li>
+</ul>
+<p>本次的教程到这就结束了。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex25 乙醇分子的振动频率计算(三) - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Jmol%E5%9C%A8windows%E5%92%8Clinux%E4%B8%8B%E7%9A%84%E5%AE%89%E8%A3%85%EF%BC%9A"><span class="toc-text">1. Jmol在windows和linux下的安装：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%AE%89%E8%A3%85%E5%89%8D%E5%87%86%E5%A4%87%EF%BC%88Java%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%E7%9A%84%E5%AE%89%E8%A3%85%EF%BC%89"><span class="toc-text">1.1 安装前准备（Java运行环境的安装）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-Jmol%E8%BD%AF%E4%BB%B6%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%AE%89%E8%A3%85"><span class="toc-text">1.2 Jmol软件的下载和安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8Jmol%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%86%E5%AD%90%E6%8C%AF%E5%8A%A8"><span class="toc-text">2 使用Jmol可视化分子振动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E8%BD%BD%E5%85%A5%E6%8C%AF%E5%8A%A8%E6%96%87%E4%BB%B6%E5%88%B0-Jmol"><span class="toc-text">2.1 载入振动文件到 Jmol</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%80%89%E6%8B%A9%E6%8C%AF%E5%8A%A8%E6%A8%A1%E5%9E%8B"><span class="toc-text">2.2 选择振动模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%BC%80%E5%90%AF%E6%8C%AF%E5%8A%A8"><span class="toc-text">2.3 开启振动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E6%9F%A5%E7%9C%8B%E4%B8%8D%E5%90%8C%E6%8C%AF%E5%8A%A8"><span class="toc-text">2.4 查看不同振动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%89%A9%E5%B1%95%E7%BB%83%E4%B9%A0%EF%BC%9A"><span class="toc-text">3 扩展练习：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%80%BB%E7%BB%93"><span class="toc-text">4 总结</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex25 乙醇分子的振动频率计算(三)
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2017-12-16 02:06:48</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#乙醇" title="乙醇">乙醇</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#振动频率" title="振动频率">振动频率</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Jmol" title="Jmol">Jmol</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>本节推荐一款可视化程序：<strong>Jmol</strong>，可以用来看分子结构以及振动频率。<strong>Jmol</strong> 是一款<code>Java</code>语言编写的，开源，<code>Linux</code>，<code>Windows</code>均可的使用的可视化软件。还记的我们从<code>ChemSpider</code>获取乙醇分子的情景吗？</p>
+<p><img src="/img/lvthw/ex25/ex25-1.jpeg"></p>
+<p><img src="/img/lvthw/ex25/ex25-2.jpeg"></p>
+<p>对了！RSC的网页版中，乙醇分子的3D结构就是通过 <strong>Jmol</strong> 展示给大家的（3D图上方），并且我们下载的结构也是jmol格式的文件！可以通过 <strong>Jmol</strong> 直接打开。现在我们通过在电脑上运行Jmol，并查看分子的结构和振动频率。</p>
+<hr>
+<h2 id="1-Jmol在windows和linux下的安装："><a href="#1-Jmol在windows和linux下的安装：" class="headerlink" title="1. Jmol在windows和linux下的安装："></a>1. Jmol在windows和linux下的安装：</h2><h3 id="1-1-安装前准备（Java运行环境的安装）"><a href="#1-1-安装前准备（Java运行环境的安装）" class="headerlink" title="1.1 安装前准备（Java运行环境的安装）"></a>1.1 安装前准备（Java运行环境的安装）</h3><p><code>Windows</code>下：直接百度<code>Java Runtime Environment（JRE）</code>，安装软件。</p>
+<p><img src="/img/lvthw/ex25/ex25-3.jpeg"></p>
+<p>也可以官网下载：<a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html">http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html</a></p>
+<p><img src="/img/lvthw/ex25/ex25-4.jpeg"></p>
+<p>注意两点：</p>
+<p>1： 接受许可，</p>
+<p>2：64位系统下载箭头所指的文件，然后安装即可。</p>
+<p><code>Linux</code>下<code>Java</code>运行环境安装移步下方链接：</p>
+<p><a target="_blank" rel="noopener" href="https://linux.cn/article-3792-1.html">怎样在Ubuntu 14.04中安装Java</a>： <a target="_blank" rel="noopener" href="https://linux.cn/article-3792-1.html">https://linux.cn/article-3792-1.html</a> </p>
+<p>或者直接使用命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install default-jre</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-2-Jmol软件的下载和安装"><a href="#1-2-Jmol软件的下载和安装" class="headerlink" title="1.2 Jmol软件的下载和安装"></a>1.2 Jmol软件的下载和安装</h3><ul>
+<li>Windows：</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://sourceforge.net/projects/jmol/files/Jmol/">https://sourceforge.net/projects/jmol/files/Jmol/</a></p>
+<p>打开链接后，图中箭头指的地方下载最新版的（<code>Linux</code>其实和<code>Windows</code>下载的文件一模一样，见后面说明），也可以任选版本进行下载。</p>
+<p><img src="/img/lvthw/ex25/ex25-5.jpeg"></p>
+<p>等待几秒后会弹出下载的窗口，其他浏览器也应该一样。</p>
+<p><img src="/img/lvthw/ex25/ex25-6.jpeg"></p>
+<p><img src="/img/lvthw/ex25/ex25-7.jpeg"></p>
+<p>解压缩后就算安装好了，可以直接运行。</p>
+<hr>
+<p>运行 <strong>Jmol</strong> 程序：</p>
+<p><img src="/img/lvthw/ex25/ex25-8.jpeg"></p>
+<p>上图中 <code>箭头1</code>所指为 <code>jmol.bat</code> 文件，<code>箭头2</code>所指为 <code>Java</code>的可执行文件：<code>jmol.jar</code>。在<code>Windows</code>下任选一个双击即可打开 <strong>Jmol</strong> 程序。建议将解压缩之后文件夹中的<code>jmol.bat</code>或者<code>jmol.jar</code> 文件右键发送到桌面快捷方式。打开后如下图：</p>
+<p><img src="/img/lvthw/ex25/ex25-9.jpeg"></p>
+<hr>
+<ul>
+<li><code>Linux</code>下安装 <strong>Jmol</strong> 的方法:</li>
+</ul>
+<p>在 <a target="_blank" rel="noopener" href="https://sourceforge.net/projects/jmol/files/Jmol/">https://sourceforge.net/projects/jmol/files/Jmol/</a>下载 <strong>Jmol</strong>（和前面介绍的<code>Windows</code>下载的文件一模一样），解压后的文件复制到<code>usr/bin</code>中，打开文件时在命令行输入<code>jmol.sh 文件名</code>即可（<strong>注意</strong>，<code>jmol.sh</code>和<code>文件名</code>之间 <strong>有空格！</strong>）。将解压目录加入<code>.bashrc</code>路径中也可以实现，同时需要给<code>jmol.sh</code>加上可执行权限，即<code>chmod u+x jmol.sh</code>，打开文件的方法仍用<code>jmol.sh 文件名</code>。(QQ群友：连赞提供！)</p>
+<p>大师兄在<code>Linux</code>系统下的操作如下：</p>
+<p>a）下载和<code>Windows</code>版的过程一样，下载完毕后，解压，</p>
+<p>b）终端里面进入解压后的文件夹：</p>
+<p><img src="/img/lvthw/ex25/ex25-10.jpeg"></p>
+<p>注意一下几点：</p>
+<p>b.1) <code>jmol.sh</code>就是我们在<code>Linux</code>系统下面的命令（<code>Windows</code>里面我们用<code>jmol.bat</code> 和 <code>jmol.jar</code>）；</p>
+<p>b.2) 首先赋予它可执行的权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> u+x  jmol.sh</span><br></pre></td></tr></table></figure>
+<p>相反地，取消权限：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> u-x jmol.sh</span><br></pre></td></tr></table></figure>
+
+<p>b.3) 这里大师兄电脑下，<code>jmol.sh</code>变成绿色的了（不同电脑显示会不同，不要纠结）</p>
+<p>b.4) 尝试运行一下： <code>./jmol.sh  OK</code></p>
+<p>b.5) 下面设置环境变量：打开 <code>~/.bashrc</code> 文件，并加入这一行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:~/Downloads/jmol-14.20.2:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ul>
+<li>等号&#x3D;前后没有空格, 后面紧跟着<code>$PATH</code>；</li>
+<li>再往后是一个冒号，冒号前后也不能有空格，填上Jmol的解压目录！！！</li>
+</ul>
+<p>b.6) 保存<code>.bashrc</code> 文件并<code>source</code>一下:   <code>.  ~/.bashrc</code>  （注意前面的 <code>.</code> ）或者使用命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span>  ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>c） 进入其他目录，运行 <strong>Jmol</strong> 命令：下图中<code>~/Destkop/freq</code> 目录下有我们关于乙醇频率的计算结果。</p>
+<p><img src="/img/lvthw/ex25/ex25-12.jpeg"></p>
+<p>大功告成！！！</p>
+<p>此外，<code>sudo apt-get install jmol </code>这样安装的是<strong>旧版本</strong>，强烈不建议，原因如下：</p>
+<p><strong>可能图片有些模糊，但不重要！旧版本的不支持 OUTCAR…安了也是白搞！！！</strong></p>
+<p><img src="/img/lvthw/ex25/ex25-13.jpeg"></p>
+<hr>
+<h2 id="2-使用Jmol可视化分子振动"><a href="#2-使用Jmol可视化分子振动" class="headerlink" title="2 使用Jmol可视化分子振动"></a>2 使用Jmol可视化分子振动</h2><h3 id="2-1-载入振动文件到-Jmol"><a href="#2-1-载入振动文件到-Jmol" class="headerlink" title="2.1 载入振动文件到 Jmol"></a>2.1 载入振动文件到 Jmol</h3><p><code>Windows</code>：直接将频率计算得到的<code>OUTCAR</code>拖到<code>jmol.bat</code>就可以了</p>
+<p><code>Linux</code>：直接 <code>jmol 文件名</code></p>
+<p>两个系统下面均可使用左上角的 文件à打开à选择<code>OUTCAR</code>导入。</p>
+<p>得到如下界面。但是分子并没有开始振动，只是显示了其结构。</p>
+<p><img src="/img/lvthw/ex25/ex25-14.jpeg"></p>
+<p>（该结构和<code>ChemSpider</code>上的一样！）</p>
+<p>要查看振动模型，需要以下两步，<strong>选中振动模型</strong>和<strong>开启振动</strong>。这两步有多种方法可以实现，总结如下。</p>
+<hr>
+<h3 id="2-2-选择振动模型"><a href="#2-2-选择振动模型" class="headerlink" title="2.2 选择振动模型"></a>2.2 选择振动模型</h3><p>A）可以在工具–&gt;原子库选择器中选中要查看的振动模型</p>
+<p><img src="/img/lvthw/ex25/ex25-15.jpeg"></p>
+<p><strong>注意，先把右边的按钮拉倒底，然后双击Frequencies展开频率信息，</strong> 如下:</p>
+<p><img src="/img/lvthw/ex25/ex25-16.jpeg"></p>
+<p>B) 也可以直接右键–&gt;模型中选中</p>
+<p><img src="/img/lvthw/ex25/ex25-17.jpeg"></p>
+<hr>
+<h3 id="2-3-开启振动"><a href="#2-3-开启振动" class="headerlink" title="2.3 开启振动"></a>2.3 开启振动</h3><p>A) 原子库选择器中<strong>最下方</strong>: <strong>振动–&gt;振动开</strong> 可实现， 点击后，原子就开始振动了。</p>
+<p><img src="/img/lvthw/ex25/ex25-18.jpeg"></p>
+<p><img src="/img/lvthw/ex25/ex25-19.jpeg"></p>
+<p>B) 在<strong>菜单栏–&gt;工具–&gt;震动</strong> 中开启（原子库选择器选中时采用这种方式，需要先开启再选中）</p>
+<p><img src="/img/lvthw/ex25/ex25-20.jpeg"></p>
+<p>C) 也可以<strong>右键 –&gt; 振动 –&gt; 开启</strong></p>
+<p><img src="/img/lvthw/ex25/ex25-21.jpeg"></p>
+<hr>
+<h3 id="2-4-查看不同振动"><a href="#2-4-查看不同振动" class="headerlink" title="2.4 查看不同振动"></a>2.4 查看不同振动</h3><p>A) 原子集选择器中的频率列表，双击其中的一个就显示其振动方式了。</p>
+<p><img src="/img/lvthw/ex25/ex25-22.jpeg"></p>
+<p>B) 要查看下一个振动还可以通过点击向右的这个箭头就可以了。</p>
+<p><img src="/img/lvthw/ex25/ex25-23.jpeg"></p>
+<p>以上就是本节关于 <strong>Jmol</strong> 可视化的介绍了，更多信息，请查看 <strong>Jmol</strong> 的<code>wiki</code>：<br><a target="_blank" rel="noopener" href="http://wiki.jmol.org/index.php/Main_Page">http://wiki.jmol.org/index.php/Main_Page</a></p>
+<h2 id="3-扩展练习："><a href="#3-扩展练习：" class="headerlink" title="3 扩展练习："></a>3 扩展练习：</h2><p>3.1 熟练掌握 <strong>Jmol</strong> 的软件安装，查看频率的基本操作。</p>
+<p>3.2 通过在<code>Linux</code>系统下面安装 <strong>Jmol</strong>，尝试着安装其他软件；</p>
+<p>3.3 分析各项频率值对应的分子或者原子的移动。</p>
+<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4 总结"></a>4 总结</h2><p>本节主要介绍给大家一款除了 <strong>p4vasp</strong> 之外的另一款 <strong>VASP</strong> 可视化的软件，不仅仅局限在频率振动分析方面，查看<code>POSCAR</code>，<code>CONTCAR</code>也可以直接使用 <strong>Jmol</strong> 打开。该软件由连赞小朋友推荐，并编辑文中大部分内容，在此表示衷心的感谢。希望大家都可以熟练掌握这款软件。<code>Linux</code>下面可以直接用命令： <code>jmol 文件名</code>，打开查看结构，非常方便。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        常用的数据库总结 - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E6%9F%A5%E6%89%BE"><span class="toc-text">结构查找</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#The-Materials-Project"><span class="toc-text">The Materials Project</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ioChem-BD"><span class="toc-text">ioChem-BD</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ChemSpider"><span class="toc-text">ChemSpider</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Pubchem"><span class="toc-text">Pubchem</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ICSD-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">ICSD 数据库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#CCDC-The-Cambridge-Crystallographic-Data-Centre"><span class="toc-text">CCDC: The Cambridge Crystallographic Data Centre</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#cccbdb-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">cccbdb 数据库</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9B%A2%E7%B0%87%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%9A"><span class="toc-text">团簇数据库：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Wulffman"><span class="toc-text">Wulffman</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#XPS"><span class="toc-text">XPS</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%AD%E5%8A%9B%E5%AD%A6%E6%95%B0%E6%8D%AE"><span class="toc-text">热力学数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%A9%E7%90%86%E5%B8%B8%E6%95%B0"><span class="toc-text">物理常数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B9%A6%E7%B1%8D%E6%96%87%E7%8C%AE%E4%B8%8B%E8%BD%BD%EF%BC%9A"><span class="toc-text">书籍文献下载：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#VASP-%E7%9B%B8%E5%85%B3"><span class="toc-text">VASP 相关</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3%EF%BC%9A"><span class="toc-text">程序软件相关：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Bash-%EF%BC%9Ahttp-tldp-org-HOWTO-Bash-Prog-Intro-HOWTO-html"><span class="toc-text">Bash ：http:&#x2F;&#x2F;tldp.org&#x2F;HOWTO&#x2F;Bash-Prog-Intro-HOWTO.html</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A4%A7%E7%89%9B%E4%BB%AC%E7%9A%84Git-Hub-%E7%BD%91%E7%AB%99"><span class="toc-text">大牛们的Git-Hub 网站</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%90%86%E8%AE%BA%E8%AE%A1%E7%AE%97%EF%BC%8C%E6%8E%A8%E8%8D%90%E4%B9%A6%E7%B1%8D%EF%BC%9A"><span class="toc-text">理论计算，推荐书籍：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%EF%BC%89-Density-Functional-Theory-A-Practical-Introduction"><span class="toc-text">1） Density Functional Theory: A Practical Introduction</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%EF%BC%89Atkin%E2%80%99s-Physical-Chemisty-%EF%BC%8810th%EF%BC%89"><span class="toc-text">2）Atkin’s Physical Chemisty （10th）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%EF%BC%89of-Modern-Catalysis-and-Kinetics"><span class="toc-text">3）of Modern Catalysis and Kinetics</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BA%B6%E5%89%82%E7%9B%B8%E5%85%B3%E7%9A%84%EF%BC%9A"><span class="toc-text">溶剂相关的：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B1%82%E8%81%8C%E7%9B%B8%E5%85%B3"><span class="toc-text">求职相关</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Psik-Network%EF%BC%9A-http-psi-k-net"><span class="toc-text">Psik Network： http:&#x2F;&#x2F;psi-k.net&#x2F;</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Linkedin-%E9%A2%86%E8%8B%B1-https-www-linkedin-com-%EF%BC%8C"><span class="toc-text">Linkedin 领英 https:&#x2F;&#x2F;www.linkedin.com&#x2F;，</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Research-gate%EF%BC%9A-https-www-researchgate-net"><span class="toc-text">Research gate： https:&#x2F;&#x2F;www.researchgate.net&#x2F;,</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        常用的数据库总结
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-09-28 15:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#数据库" title="数据库">数据库</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#网站" title="网站">网站</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p><img src="https://mmbiz.qpic.cn/mmbiz_png/eHmVsslNkaBtAHO0jsHMuK5APDGLDXXLGYribdZDjcjYmEiaz7KtQPzPe1L0wYiaY0Ok2jtgl80Kx11zHDlWG8jfg/640?wx_fmt=png" alt="img"></p>
+<p>汇集本人日常学习中的一些数据库，个人感觉不错的网站。也会不断地更新完善。如果你有好的数据库，链接，推荐的书籍，也欢迎发邮件至<a href="mailto:&#x6c;&#113;&#x63;&#97;&#116;&#x61;&#x40;&#103;&#109;&#x61;&#105;&#108;&#46;&#99;&#111;&#109;">lqcata@gmail.com</a>留言帮助我们更新。</p>
+<h4 id="结构查找"><a href="#结构查找" class="headerlink" title="结构查找"></a>结构查找</h4><h5 id="The-Materials-Project"><a href="#The-Materials-Project" class="headerlink" title="The Materials Project"></a>The Materials Project</h5><p> <a target="_blank" rel="noopener" href="https://www.materialsproject.org/">https://www.materialsproject.org/</a></p>
+<p>使用方法：</p>
+<p>1） 点击右上方：Login  </p>
+<p>2） 点击： Sign in with your email address </p>
+<p>3） 输入自己的邮箱，然后点击：send login link</p>
+<p>4） 打开邮箱，点击链接，即可查询数据库。</p>
+<h5 id="ioChem-BD"><a href="#ioChem-BD" class="headerlink" title="ioChem-BD"></a>ioChem-BD</h5><p> <a target="_blank" rel="noopener" href="http://www.iochem-bd.org/">http://www.iochem-bd.org/</a> </p>
+<p>本人老板和其他几个老板一起做的数据库，涵盖VASP，高斯等主流程序，可以上传结果。数据库依托于巴塞罗那超算中心。本人博士，博后的所有工作都在这个数据库中。</p>
+<h5 id="ChemSpider"><a href="#ChemSpider" class="headerlink" title="ChemSpider"></a>ChemSpider</h5><p> <a target="_blank" rel="noopener" href="http://www.chemspider.com/">http://www.chemspider.com/</a> RSC旗下的一个数据库，非常方便查找下载结构。</p>
+<h5 id="Pubchem"><a href="#Pubchem" class="headerlink" title="Pubchem"></a>Pubchem</h5><p><a target="_blank" rel="noopener" href="https://pubchem.ncbi.nlm.nih.gov/">https://pubchem.ncbi.nlm.nih.gov/</a> </p>
+<h5 id="ICSD-数据库"><a href="#ICSD-数据库" class="headerlink" title="ICSD 数据库"></a>ICSD 数据库</h5><p> <a target="_blank" rel="noopener" href="http://www2.fiz-karlsruhe.de/icsd_home.html">http://www2.fiz-karlsruhe.de/icsd_home.html</a> , 需要账号密码</p>
+<h5 id="CCDC-The-Cambridge-Crystallographic-Data-Centre"><a href="#CCDC-The-Cambridge-Crystallographic-Data-Centre" class="headerlink" title="CCDC: The Cambridge Crystallographic Data Centre"></a>CCDC: The Cambridge Crystallographic Data Centre</h5><p><a target="_blank" rel="noopener" href="https://www.ccdc.cam.ac.uk/">https://www.ccdc.cam.ac.uk/</a></p>
+<h5 id="cccbdb-数据库"><a href="#cccbdb-数据库" class="headerlink" title="cccbdb 数据库"></a>cccbdb 数据库</h5><p><a target="_blank" rel="noopener" href="https://cccbdb.nist.gov/">https://cccbdb.nist.gov</a></p>
+<h5 id="团簇数据库："><a href="#团簇数据库：" class="headerlink" title="团簇数据库："></a>团簇数据库：</h5><p><a target="_blank" rel="noopener" href="http://www-wales.ch.cam.ac.uk/~wales/CCD/CoCCD/cobalt.html">http://www-wales.ch.cam.ac.uk/~wales/CCD/CoCCD/cobalt.html</a>  </p>
+<p>可能有些老了。</p>
+<p><a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/matlabcentral/fileexchange/33449-cluster-generator">https://ww2.mathworks.cn/matlabcentral/fileexchange/33449-cluster-generator</a> </p>
+<h5 id="Wulffman"><a href="#Wulffman" class="headerlink" title="Wulffman"></a>Wulffman</h5><p><a target="_blank" rel="noopener" href="https://www.ctcms.nist.gov/wulffman/">https://www.ctcms.nist.gov/wulffman/</a></p>
+<h5 id="XPS"><a href="#XPS" class="headerlink" title="XPS"></a>XPS</h5><p><a target="_blank" rel="noopener" href="https://xpssimplified.com/">https://xpssimplified.com/</a></p>
+<p><strong>Cn Fullerenes</strong></p>
+<p><a target="_blank" rel="noopener" href="http://www.nanotube.msu.edu/fullerene/fullerene-isomers.html">http://www.nanotube.msu.edu/fullerene/fullerene-isomers.html</a></p>
+<h4 id="热力学数据"><a href="#热力学数据" class="headerlink" title="热力学数据"></a>热力学数据</h4><p>NIST 数据库： <a target="_blank" rel="noopener" href="https://physics.nist.gov/cuu/Constants/index.html">https://physics.nist.gov/cuu/Constants/index.html</a>  </p>
+<p>CRC Handbook of physical chemistry ： <a target="_blank" rel="noopener" href="http://hbcponline.com/faces/contents/ContentsSearch.xhtml">http://hbcponline.com/faces/contents/ContentsSearch.xhtml</a> 查找热力学参数，晶格常数，entropy等等。</p>
+<p><a target="_blank" rel="noopener" href="http://www2.ucdsb.on.ca/tiss/stretton/database/inorganic_thermo.htm">http://www2.ucdsb.on.ca/tiss/stretton/database/inorganic_thermo.htm</a> 无机化合物的物理和热力学相关数据</p>
+<p><a target="_blank" rel="noopener" href="http://www.knowledgedoor.com/2/elements_handbook/cohesive_energy.html">http://www.knowledgedoor.com/2/elements_handbook/cohesive_energy.html</a> 结合能</p>
+<p><a target="_blank" rel="noopener" href="http://www.surface-tension.de/">http://www.surface-tension.de/</a> 表面张力</p>
+<p><a target="_blank" rel="noopener" href="http://www.wiredchemist.com/chemistry/data/thermodynamic-data">http://www.wiredchemist.com/chemistry/data/thermodynamic-data</a></p>
+<p><a target="_blank" rel="noopener" href="https://atct.anl.gov/">https://atct.anl.gov/</a></p>
+<h4 id="物理常数"><a href="#物理常数" class="headerlink" title="物理常数"></a>物理常数</h4><p><a target="_blank" rel="noopener" href="https://physics.nist.gov/cuu/Constants/index.html">https://physics.nist.gov/cuu/Constants/index.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://wild.life.nctu.edu.tw/class/common/energy-unit-conv-table.html">http://wild.life.nctu.edu.tw/class/common/energy-unit-conv-table.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://halas.rice.edu/conversions">http://halas.rice.edu/conversions</a></p>
+<h4 id="书籍文献下载："><a href="#书籍文献下载：" class="headerlink" title="书籍文献下载："></a>书籍文献下载：</h4><p>google和google scholar：科学上网。</p>
+<p><a target="_blank" rel="noopener" href="http://gen.lib.rus.ec/">http://gen.lib.rus.ec/</a> 下载书籍</p>
+<p>资源丰富，但不要贪多，更不要下一堆放到自己电脑里占地方。找几本好书，认真静下心来好好学习。</p>
+<p><a target="_blank" rel="noopener" href="http://www.expaper.cn/">http://www.expaper.cn/</a> 科研速递论坛， 求助文献，书籍，成功率极高。</p>
+<p>sci-hub 系列，现在网上各种域名，插件，桌面版的都有，我就不瞎凑热闹了。</p>
+<p>5000人QQ群:  157099073  汇聚大家的力量，解决每一篇小文献的困难。</p>
+<p>书籍和文献下载的原则，宁缺毋滥，认真阅读每一篇下载的文献，对自己的时间负责。别图多。</p>
+<h4 id="VASP-相关"><a href="#VASP-相关" class="headerlink" title="VASP 相关"></a>VASP 相关</h4><p><strong>VASP官网</strong></p>
+<p><a target="_blank" rel="noopener" href="http://www.vasp.at/">http://www.vasp.at/</a>, VASP最权威，最专业的学习资料都在这里面了。英文刚开始看起来有点不适应，坚持下去，慢慢就好了。不建议看除官网以外的那些乱七八糟的说明（包括我自己写的教程）</p>
+<p><strong>VASP 教程视频</strong></p>
+<p><a target="_blank" rel="noopener" href="http://www.nersc.gov/users/training/events/3-day-vasp-workshop/">http://www.nersc.gov/users/training/events/3-day-vasp-workshop/</a>, A 3-day VASP Workshop at NERSC: VASP 开发者（长发大胡子那哥们）做的workshop, youtube 有视频。链接：<a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PL20S5EeApOSumWZkzsaYxAvozjvFZ3ks4">https://www.youtube.com/playlist?list=PL20S5EeApOSumWZkzsaYxAvozjvFZ3ks4</a> </p>
+<p><strong>VASP官方论坛</strong></p>
+<p><a target="_blank" rel="noopener" href="https://cms.mpi.univie.ac.at/vasp-forum/">https://cms.mpi.univie.ac.at/vasp-forum/</a></p>
+<p>VASP官方论坛，需要注册才可以提问，但一般来说你的问题已经有人提问过了，直接复制到google里面，基本都会显示该论坛的链接。可以不保存。</p>
+<p><strong>Henkelman 课题组</strong></p>
+<p><a target="_blank" rel="noopener" href="http://theory.cm.utexas.edu/henkelman/">http://theory.cm.utexas.edu/henkelman/</a>, 大量VASP相关的脚本，VTST计算过渡态，bader电荷分析，CHGCAR处理脚本等，向Henkelman致以崇高的敬意。</p>
+<p><strong>ASE</strong>： Atomic Simulation Environment： <a target="_blank" rel="noopener" href="https://wiki.fysik.dtu.dk/ase/%EF%BC%8C">https://wiki.fysik.dtu.dk/ase/，</a> 适合催化计算相关</p>
+<p><strong>Pymatgen</strong>： <a target="_blank" rel="noopener" href="http://pymatgen.org/">http://pymatgen.org/</a>, 适合材料计算的</p>
+<p><strong>K-path</strong>： <a target="_blank" rel="noopener" href="https://www.materialscloud.org/work/tools/seekpath">https://www.materialscloud.org/work/tools/seekpath</a> </p>
+<p>能带Kpath选择的网站，上传自己的结构，便可以得到建议的路径。</p>
+<p><strong>Chemml</strong>: <a target="_blank" rel="noopener" href="https://hachmannlab.github.io/chemml/">https://hachmannlab.github.io/chemml/</a></p>
+<p><strong>p4vasp</strong>：<a target="_blank" rel="noopener" href="http://www.p4vasp.at/">http://www.p4vasp.at/</a></p>
+<p><strong>RDkit</strong>：<a target="_blank" rel="noopener" href="https://www.rdkit.org/">https://www.rdkit.org/</a>  </p>
+<p><strong>VASPkit</strong> ： <a target="_blank" rel="noopener" href="https://sourceforge.net/projects/vaspkit/files/">https://sourceforge.net/projects/vaspkit/files/</a> 来自中国的良心软件, VASP计算前后处理，功能强大，使用简单，老少皆宜。</p>
+<p>**VESTA ** ： <a target="_blank" rel="noopener" href="http://jp-minerals.org/vesta/en/">http://jp-minerals.org/vesta/en/</a> 来自日本的良心软件</p>
+<p><strong>Xcrysden</strong>  ：<a target="_blank" rel="noopener" href="http://www.xcrysden.org/%EF%BC%8C">http://www.xcrysden.org/，</a> 用于批量做图，选择K-path做能带图，等。</p>
+<p><strong>Openbabel</strong> ：<a target="_blank" rel="noopener" href="http://openbabel.org/wiki/Main_Page">http://openbabel.org/wiki/Main_Page</a>  强大的格式转换工具，它说第二，没人敢说第一。</p>
+<p><strong>RDkit</strong>：化学信息学重要的开源包。</p>
+<h4 id="程序软件相关："><a href="#程序软件相关：" class="headerlink" title="程序软件相关："></a>程序软件相关：</h4><h5 id="Bash-：http-tldp-org-HOWTO-Bash-Prog-Intro-HOWTO-html"><a href="#Bash-：http-tldp-org-HOWTO-Bash-Prog-Intro-HOWTO-html" class="headerlink" title="Bash ：http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html"></a>Bash ：<a target="_blank" rel="noopener" href="http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html">http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html</a></h5><p><a target="_blank" rel="noopener" href="https://learnpythonthehardway.org/">https://learnpythonthehardway.org/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/">https://www.liaoxuefeng.com</a>, 廖雪峰的网站，英文不想读的话，可以到这里学习。</p>
+<p><a target="_blank" rel="noopener" href="https://matplotlib.org/">https://matplotlib.org/</a>  用python画图</p>
+<p><a target="_blank" rel="noopener" href="https://www.scipy.org/">https://www.scipy.org/</a> python 科学运算相关的库 </p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/">https://stackoverflow.com/</a>  一般谷歌搜索遇到出现的程序问题，都可以在这里找到答案。</p>
+<p><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/">https://www.geeksforgeeks.org</a></p>
+<p> <a target="_blank" rel="noopener" href="https://stackoverflow.com/">https://stackoverflow.com/</a>  一般谷歌搜索遇到出现的程序问题，都可以在这里找到答案。</p>
+<h5 id="大牛们的Git-Hub-网站"><a href="#大牛们的Git-Hub-网站" class="headerlink" title="大牛们的Git-Hub 网站"></a>大牛们的Git-Hub 网站</h5><p>很多懂程序, 喜欢分享的大牛们都有自己的github网址，下面会逐渐完善。</p>
+<p>1）<a target="_blank" rel="noopener" href="https://github.com/Ionizing">https://github.com/Ionizing</a> （<a target="_blank" rel="noopener" href="http://www.bigbrosci.com这个网站就是这牛人帮忙搭建的)/">www.bigbrosci.com这个网站就是这牛人帮忙搭建的）</a></p>
+<p>2）<a target="_blank" rel="noopener" href="https://github.com/wangvei">https://github.com/wangvei</a> （VASPkit的作者，王伟老师）</p>
+<p>3）<a target="_blank" rel="noopener" href="https://github.com/QijingZheng">https://github.com/QijingZheng</a>  （很屌的一个大牛，虽然没见过）</p>
+<p>4） <a target="_blank" rel="noopener" href="https://github.com/obaica">https://github.com/obaica</a> （只要Follow了他，基本就可以找到其他大牛的github了）</p>
+<p>5）<a target="_blank" rel="noopener" href="https://github.com/tamaswells">https://github.com/tamaswells</a> （脚本小王子，the king of sharing）</p>
+<p>6）<a target="_blank" rel="noopener" href="https://github.com/jensengroup">https://github.com/jensengroup</a>  （总有一些人，会默默地支持穷人们的科研）</p>
+<p>7）<a target="_blank" rel="noopener" href="https://github.com/LePingKYXK">https://github.com/LePingKYXK</a></p>
+<p>8）<a target="_blank" rel="noopener" href="http://home.ustc.edu.cn/~lipai/scripts/vasp.html">http://home.ustc.edu.cn/~lipai/scripts/vasp.html</a></p>
+<h4 id="理论计算，推荐书籍："><a href="#理论计算，推荐书籍：" class="headerlink" title="理论计算，推荐书籍："></a>理论计算，推荐书籍：</h4><h5 id="1）-Density-Functional-Theory-A-Practical-Introduction"><a href="#1）-Density-Functional-Theory-A-Practical-Introduction" class="headerlink" title="1） Density Functional Theory: A Practical Introduction"></a>1） Density Functional Theory: A Practical Introduction</h5><p><a target="_blank" rel="noopener" href="http://onlinelibrary.wiley.com/book/10.1002/9780470447710">http://onlinelibrary.wiley.com/book/10.1002/9780470447710</a> </p>
+<p>有权限的直接下载；没有权限的不要在网上瞎求，很多公式都不全，这个要注意。</p>
+<h5 id="2）Atkin’s-Physical-Chemisty-（10th）"><a href="#2）Atkin’s-Physical-Chemisty-（10th）" class="headerlink" title="2）Atkin’s Physical Chemisty （10th）"></a>2）Atkin’s Physical Chemisty （10th）</h5><p>网上到处都是，最新的是第10版，如果下载不了，看第9版即可。</p>
+<h5 id="3）of-Modern-Catalysis-and-Kinetics"><a href="#3）of-Modern-Catalysis-and-Kinetics" class="headerlink" title="3）of Modern Catalysis and Kinetics"></a>3）of Modern Catalysis and Kinetics</h5><p>做多相催化的强烈建议！<a target="_blank" rel="noopener" href="http://onlinelibrary.wiley.com/book/10.1002/3527602658">http://onlinelibrary.wiley.com/book/10.1002/3527602658</a> </p>
+<p>以上书籍，如不提供下载链接，基本都可以在 <a target="_blank" rel="noopener" href="http://gen.lib.rus.ec/">http://gen.lib.rus.ec/</a>  这个网站获得。</p>
+<h4 id="溶剂相关的："><a href="#溶剂相关的：" class="headerlink" title="溶剂相关的："></a>溶剂相关的：</h4><p><a target="_blank" rel="noopener" href="https://www.organicdivision.org/wp-content/uploads/2016/12/organic_solvents.html">https://www.organicdivision.org/wp-content/uploads/2016/12/organic_solvents.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://murov.info/orgsolvents.htm">http://murov.info/orgsolvents.htm</a></p>
+<h4 id="求职相关"><a href="#求职相关" class="headerlink" title="求职相关"></a>求职相关</h4><h5 id="Psik-Network：-http-psi-k-net"><a href="#Psik-Network：-http-psi-k-net" class="headerlink" title="Psik Network： http://psi-k.net/"></a>Psik Network： <a target="_blank" rel="noopener" href="http://psi-k.net/">http://psi-k.net/</a></h5><p>注册后，一旦有人在网络里面发送海外职位信息，你便会收到邮件提醒。更为重要的是，网站里面有很多珍贵的学习资料。</p>
+<h5 id="Linkedin-领英-https-www-linkedin-com-，"><a href="#Linkedin-领英-https-www-linkedin-com-，" class="headerlink" title="Linkedin 领英 https://www.linkedin.com/，"></a>Linkedin 领英 <a target="_blank" rel="noopener" href="https://www.linkedin.com/%EF%BC%8C">https://www.linkedin.com/，</a></h5><p>有些老板也会在这上面发布招聘信息，本人当年的博士位置，就是在这里面发现的。 </p>
+<h5 id="Research-gate：-https-www-researchgate-net"><a href="#Research-gate：-https-www-researchgate-net" class="headerlink" title="Research gate： https://www.researchgate.net/,"></a>Research gate： <a target="_blank" rel="noopener" href="https://www.researchgate.net/">https://www.researchgate.net/</a>,</h5><p>可以用来下文献，关注同行最新进展。</p>
+<hr>
+<p>（七）理论计算，推荐书籍：</p>
+<p>1 DFT: A Practical Introduction</p>
+<p> <a target="_blank" rel="noopener" href="http://onlinelibrary.wiley.com/book/10.1002/9780470447710">http://onlinelibrary.wiley.com/book/10.1002/9780470447710</a> </p>
+<p>1）有权限的直接下载</p>
+<p>2）没有权限的不要在网上瞎求，很多公式都不全，这个要注意。</p>
+<p>2 Atkin’s Physical Chemisty （10th）</p>
+<p>网上到处都是，最新的是第10版，如果下载不了，看第9版即可。</p>
+<p>3 Concepts of Modern Catalysis and Kinetics 多相催化的强烈建议！</p>
+<p><a target="_blank" rel="noopener" href="http://onlinelibrary.wiley.com/book/10.1002/3527602658">http://onlinelibrary.wiley.com/book/10.1002/3527602658</a> </p>
+<p>以上书籍，如不提供下载链接，基本都可以在 <a target="_blank" rel="noopener" href="http://gen.lib.rus.ec/">http://gen.lib.rus.ec/</a>  这个网站获得。</p>
+<hr>
+<p>其他： </p>
+<p>1 颜色数据库：</p>
+<p><a target="_blank" rel="noopener" href="https://www.rapidtables.com/web/color/RGB_Color.html">https://www.rapidtables.com/web/color/RGB_Color.html</a> </p>
+<p>2 元素周期表：</p>
+<p><a target="_blank" rel="noopener" href="http://www.rsc.org/periodic-table">http://www.rsc.org/periodic-table</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.ptable.com/">https://www.ptable.com/</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.periodictable.com/">http://www.periodictable.com/</a></p>
+<p>3 Latex相关：</p>
+<p>本人的文章，除合作的外， 基本都是用latex写的，但是推荐网址的话，确实想不起有什么来。找一个latex入门pdf，练上几天，遇到问题google搜索，慢慢就好了。如果非要推荐一个网址的话，那么就选这个： <a target="_blank" rel="noopener" href="https://tex.stackexchange.com/">https://tex.stackexchange.com/</a>  和 <a target="_blank" rel="noopener" href="http://www.google.com/">www.google.com</a> </p>
+<hr>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/eHmVsslNkaBtAHO0jsHMuK5APDGLDXXL7M3g9VbsIicuyWwcNrwXMnL9cQBsvrIeRFbgNmHiaAlMp1yZTswmcNeA/640?wx_fmt=jpeg" alt="img"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/eHmVsslNkaBtAHO0jsHMuK5APDGLDXXLjOuXI8VKlV8BECMzI4PehhbehXThX1tysRKCM2tJrEufnh9JwSQ97w/640?wx_fmt=jpeg" alt="img"></p>
+<p>也欢迎大家关注微信公众号</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

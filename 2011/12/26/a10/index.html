@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        A10 超算中心使用前的准备工作（二） - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A9%E6%B2%B3%E4%BA%8C%E5%8F%B7%EF%BC%88%E5%90%95%E6%A2%81%E8%B6%85%E7%AE%97%EF%BC%89%E6%8F%90%E4%BA%A4VASP%E4%BD%9C%E4%B8%9A%E7%9A%84%E8%84%9A%E6%9C%AC%E5%92%8C%E5%91%BD%E4%BB%A4"><span class="toc-text">天河二号（吕梁超算）提交VASP作业的脚本和命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%89%88%E6%9C%AC%E7%9A%84%E4%BB%BB%E5%8A%A1%E6%8F%90%E4%BA%A4"><span class="toc-text">不同版本的任务提交</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        A10 超算中心使用前的准备工作（二）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2011-12-26 02:06:48</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#Bader" title="Bader">Bader</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#Henkelman" title="Henkelman">Henkelman</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h2 id="天河二号（吕梁超算）提交VASP作业的脚本和命令"><a href="#天河二号（吕梁超算）提交VASP作业的脚本和命令" class="headerlink" title="天河二号（吕梁超算）提交VASP作业的脚本和命令"></a>天河二号（吕梁超算）提交VASP作业的脚本和命令</h2><hr>
+<p>上一节我们讲了怎么连接天河2号超算中心。这一节，我们主要讲一下VASP提交任务的脚本和命令。在天河2号提交任务非常简单，大家只要记住：<code>一个脚本</code>和<code>一个命令</code>就可以了。首先我们看一下提交任务的实例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">iciq-lq@ln3:/THFS/home/iciq-lq/LVASPTHW/ex_a09$ ls</span><br><span class="line">INCAR  job_sub  KPOINTS  POSCAR  POTCAR</span><br><span class="line">iciq-lq@ln3:/THFS/home/iciq-lq/LVASPTHW/ex_a09$ yhbatch -p gsc -N 1 -J test job_sub </span><br><span class="line">Submitted batch job 1028912</span><br><span class="line">iciq-lq@ln3:/THFS/home/iciq-lq/LVASPTHW/ex_a09$ yhq</span><br><span class="line">             JOBID    PARTITION                       NAME             USER ST       TIME  NODES NODELIST(REASON)</span><br><span class="line">           1028912          gsc                       test          iciq-lq PD       0:00      1 (None)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>上图中：</p>
+<p>1） job_sub 是提交任务的脚本，内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">export LD_LIBRARY_PATH=/THFS/opt/intel/composer_xe_2013_sp1.3.174/mkl/lib/intel64:$LD_LIBRARY_PATH</span><br><span class="line">yhrun -p gsc -n 24 /THFS/opt/vasp/5.4.4/vasp.5.4.4/bin/vasp_std </span><br></pre></td></tr></table></figure>
+
+<p>2） 提交任务的命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yhbatch -p gsc -N 1 -J test job_sub</span><br></pre></td></tr></table></figure>
+
+<p>-p  gsc 是指定提交任务的队列</p>
+<p>-N 1 是提交任务的节点数（每个节点24核）</p>
+<p>-J test  是提交任务的名字，这里我们给任务起的名字是：test。</p>
+<p>4）如果你想用2个节点，提交一个名为 bigbro的任务，可以使用下面的命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yhbatch -p gsc -N 2 -J bigbro job_sub</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="不同版本的任务提交"><a href="#不同版本的任务提交" class="headerlink" title="不同版本的任务提交"></a>不同版本的任务提交</h2><p>当然，超算中心上上面也安装了不同的VASP版本，5.3，5.4以及用于过渡态计算的VTST系列版本。如果我们使用编译了VTST的5.4.4版本提交一个过渡态的任务。需要做的有2点：</p>
+<p>1） 找到编译了VTST的5.4.4版本的VASP安装目录。在天河2号，所有的软件都装在 &#x2F;THFS&#x2F;opt 这个目录下。Vasp也不例外，如果你进入这个目录，就会发现它。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">iciq-lq@ln3:/THFS/home/iciq-lq/LVASPTHW/ex78/step2$ <span class="built_in">cd</span> /THFS/opt/</span><br><span class="line">iciq-lq@ln3:/THFS/opt$ <span class="built_in">cd</span> vasp/</span><br><span class="line">iciq-lq@ln3:/THFS/opt/vasp$ <span class="built_in">ls</span></span><br><span class="line">5.2   5.3.5   5.3.5_neb   5.3.5-wannier90-2.0  5.4.1_neb  .... 5.4.1_sol_vtst  5.4.4_neb  ....</span><br><span class="line">iciq-lq@ln3:/THFS/opt/vasp$ <span class="built_in">cd</span> 5.4.4_neb/</span><br><span class="line">iciq-lq@ln3:/THFS/opt/vasp/5.4.4_neb$ <span class="built_in">ls</span></span><br><span class="line">vasp.5.4.4  vasp.5.lib  vtstcode-174  vtstcode.gz  vtstscripts-933  vtstscripts.gz</span><br><span class="line">iciq-lq@ln3:/THFS/opt/vasp/5.4.4_neb$ <span class="built_in">cd</span> vasp.5.4.4/</span><br><span class="line">iciq-lq@ln3:/THFS/opt/vasp/5.4.4_neb/vasp.5.4.4$ <span class="built_in">ls</span></span><br><span class="line"><span class="built_in">arch</span>  bin  build  makefile  makefile.include  README  src</span><br><span class="line">iciq-lq@ln3:/THFS/opt/vasp/5.4.4_neb/vasp.5.4.4$ <span class="built_in">cd</span> bin/</span><br><span class="line">iciq-lq@ln3:/THFS/opt/vasp/5.4.4_neb/vasp.5.4.4/bin$ <span class="built_in">ls</span></span><br><span class="line">vasp_gam  vasp_ncl  vasp_std</span><br><span class="line">iciq-lq@ln3:/THFS/opt/vasp/5.4.4_neb/vasp.5.4.4/bin$ <span class="built_in">pwd</span></span><br><span class="line">/THFS/opt/vasp/5.4.4_neb/vasp.5.4.4/bin</span><br><span class="line">iciq-lq@ln3:/THFS/opt/vasp/5.4.4_neb/vasp.5.4.4/bin$ </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>一路追踪，直至找到安装目录中bin文件夹下面的vasp_std可执行程序（一般是绿色的）。使用<code>pwd</code>命令得到当前的路径。 </p>
+<p>2） 修改提交任务脚本的最后一行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">export LD_LIBRARY_PATH=/THFS/opt/intel/composer_xe_2013_sp1.3.174/mkl/lib/intel64:$LD_LIBRARY_PATH</span><br><span class="line">yhrun -p gsc -n 24 /THFS/opt/vasp/5.4.4_neb/vasp.5.4.4/bin/vasp_std</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>将之前的目录，替换成刚刚通过<code>pwd</code>命令输出的内容。记得在目录后面加上<code>vasp_std</code> 表示你要运行这个目录下的<code>vasp_std</code>文件。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>到此为止，连接VPN，天河2号，挂载服务器到本地电脑，互传文件，以及使用脚本提交vasp任务。你已经都掌握了。后面的就是好好利用超算中心，得到自己所期望的数据，好好搞科研了。如果想试用超算中心，加下方的QQ群，或者直接联系超算中心即可。</p>
+<hr>
+<p><img src="/img/lvthw/a10/a10-8.jpeg"></p>
+<p>超算中心试用联系方式：<a href="mailto:&#108;&#118;&#x6c;&#x69;&#x61;&#x6e;&#x67;&#x68;&#112;&#99;&#x30;&#49;&#x40;&#x31;&#x36;&#x33;&#x2e;&#x63;&#x6f;&#109;">lvlianghpc01@163.com</a>；</p>
+<p>联系电话（微信）：15383480556 <strong>18903588277</strong></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

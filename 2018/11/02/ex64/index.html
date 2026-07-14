@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex64 吸附能的计算（九） - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-CO%E5%88%86%E5%AD%90%E4%BF%A1%E6%81%AF%EF%BC%9A"><span class="toc-text">1. CO分子信息：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%89CO%E7%9A%84%E5%88%86%E5%AD%90%E7%BB%93%E6%9E%84%EF%BC%8C%E5%A6%82%E4%B8%8B%E5%9B%BE%EF%BC%9A"><span class="toc-text">1）CO的分子结构，如下图：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%89-CO%E7%9A%84%E5%87%A0%E4%BD%95%E7%BB%93%E6%9E%84%EF%BC%9A%EF%BC%88%E7%94%A8%E6%9D%A5%E6%90%AD%E5%BB%BA%E5%90%B8%E9%99%84%E5%92%8C%E6%B0%94%E7%9B%B8%E7%9A%84%E6%A8%A1%E5%9E%8B%EF%BC%89"><span class="toc-text">2） CO的几何结构：（用来搭建吸附和气相的模型）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%89-CO%E4%B8%8E%E9%87%91%E5%B1%9E%E7%9A%84%E6%88%90%E9%94%AE%E6%96%B9%E5%BC%8F-%EF%BC%88%E7%94%A8%E6%9D%A5%E6%90%AD%E5%BB%BA%E5%90%B8%E9%99%84%E6%A8%A1%E5%9E%8B%EF%BC%89"><span class="toc-text">3） CO与金属的成键方式 （用来搭建吸附模型）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%90%AD%E5%BB%BACO%E5%90%B8%E9%99%84%E7%9A%84%E6%A8%A1%E5%9E%8B%EF%BC%9A"><span class="toc-text">2. 搭建CO吸附的模型：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%89-%E5%B0%86%E4%B8%8A%E4%B8%80%E8%8A%82%E4%B8%AD-C-%E5%8E%9F%E5%AD%90%E5%90%B8%E9%99%84%E7%9A%84%E9%82%A3%E5%87%A0%E4%B8%AA%E6%A8%A1%E5%9E%8B%E5%A4%8D%E5%88%B6%E8%BF%87%E6%9D%A5%EF%BC%8C%E8%BF%9B%E8%A1%8C%E4%BF%AE%E6%94%B9%EF%BC%9A"><span class="toc-text">1） 将上一节中 C 原子吸附的那几个模型复制过来，进行修改：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%83%8C%E4%B8%80%E9%81%8DVASP%E7%9A%84%E8%BE%93%E5%85%A5%E6%96%87%E4%BB%B6%EF%BC%8C%E6%A3%80%E6%9F%A5%E8%BF%98%E6%9C%89%E9%82%A3%E4%BA%9B%E9%9C%80%E8%A6%81%E4%BF%AE%E6%94%B9%E7%9A%84%EF%BC%9A"><span class="toc-text">3. 背一遍VASP的输入文件，检查还有那些需要修改的：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1%EF%BC%9A"><span class="toc-text">4. 提交任务：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%80%9D%E8%80%83%E4%B8%8B%E5%90%B8%E9%99%84%E8%83%BD%E7%9A%84%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F%EF%BC%9A"><span class="toc-text">5. 思考下吸附能的计算公式：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%89-%E6%B0%94%E7%9B%B8%E5%88%86%E5%AD%90%E7%9A%84%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9E%8B%E6%90%AD%E5%BB%BA%E3%80%82"><span class="toc-text">1） 气相分子的结构模型搭建。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%89-INCAR%EF%BC%9A%E7%9B%B4%E6%8E%A5%E6%8B%BFCu-111-%E5%90%B8%E9%99%84%E7%9A%84%E4%BF%AE%E6%94%B9%E4%B8%8B%E3%80%82"><span class="toc-text">2） INCAR：直接拿Cu(111)吸附的修改下。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%89-KPOINTS%EF%BC%9A-gamma-%E7%82%B9%E5%8D%B3%E5%8F%AF%E3%80%82"><span class="toc-text">3） KPOINTS： gamma 点即可。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%EF%BC%89-%E8%BF%99%E9%87%8C%E6%88%91%E4%BB%AC%E6%B2%A1%E6%9C%89%E6%89%B9%E9%87%8F%E6%8F%90%E4%BA%A4%EF%BC%8C%E6%89%8B%E5%8A%A8%E8%BF%90%E8%A1%8C%E4%B8%80%E4%B8%8B%EF%BC%9Apospot-sh%E8%84%9A%E6%9C%AC%EF%BC%8C%E7%94%9F%E6%88%90%E5%AF%B9%E5%BA%94%E7%9A%84POTCAR%E3%80%82"><span class="toc-text">4） 这里我们没有批量提交，手动运行一下：pospot.sh脚本，生成对应的POTCAR。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%EF%BC%89-%E4%BD%BF%E7%94%A8%E6%8F%90%E4%BA%A4%E5%8D%95%E4%B8%AA%E4%BB%BB%E5%8A%A1%E7%9A%84%E8%84%9A%E6%9C%AC%EF%BC%9A-qsub-%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1%E3%80%82%E5%85%B7%E4%BD%93%E6%93%8D%E4%BD%9C%E5%A6%82%E4%B8%8B%E5%9B%BE%EF%BC%9A"><span class="toc-text">5） 使用提交单个任务的脚本： qsub  提交任务。具体操作如下图：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%89%A9%E5%B1%95%E7%BB%83%E4%B9%A0%EF%BC%9A"><span class="toc-text">6. 扩展练习：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">7. 总结：</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex64 吸附能的计算（九）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-11-02 15:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#模型搭建" title="模型搭建">模型搭建</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#吸附能" title="吸附能">吸附能</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#CO" title="CO">CO</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p><img src="/img/lvthw/ex64/ex64-00.png"></p>
+<p>前面我们讲解了一堆单原子的吸附计算和一些日常的操作，现在是时候来点复杂的操练了。这次，我们拿CO开刷，计算它在Cu(111)表面上的吸附。由于CO比前面的O多了一个原子，复杂性稍微提高了些，但也不是太复杂。作为一个由简单向复杂体系的过渡，是一个很好地例子。</p>
+<p>在计算CO的吸附之前，我们首先要了解以下3点：（都是教科书里面的经典内容，下面只列出来，不再细说，如果不懂的话，找本结构化学书好好啃一啃。）</p>
+<h2 id="1-CO分子信息："><a href="#1-CO分子信息：" class="headerlink" title="1. CO分子信息："></a>1. CO分子信息：</h2><h3 id="1）CO的分子结构，如下图："><a href="#1）CO的分子结构，如下图：" class="headerlink" title="1）CO的分子结构，如下图："></a>1）CO的分子结构，如下图：</h3><p><img src="/img/lvthw/ex64/ex64-01.png"></p>
+<h3 id="2）-CO的几何结构：（用来搭建吸附和气相的模型）"><a href="#2）-CO的几何结构：（用来搭建吸附和气相的模型）" class="headerlink" title="2） CO的几何结构：（用来搭建吸附和气相的模型）"></a>2） CO的几何结构：（用来搭建吸附和气相的模型）</h3><p><img src="/img/lvthw/ex64/ex64-02.png"><br><img src="/img/lvthw/ex64/ex64-03.png"></p>
+<h3 id="3）-CO与金属的成键方式-（用来搭建吸附模型）"><a href="#3）-CO与金属的成键方式-（用来搭建吸附模型）" class="headerlink" title="3） CO与金属的成键方式 （用来搭建吸附模型）"></a>3） CO与金属的成键方式 （用来搭建吸附模型）</h3><p><img src="/img/lvthw/ex64/ex64-04.png"></p>
+<h2 id="2-搭建CO吸附的模型："><a href="#2-搭建CO吸附的模型：" class="headerlink" title="2. 搭建CO吸附的模型："></a>2. 搭建CO吸附的模型：</h2><p>上一节我们学到了闭着眼操作的一些方式，这一节我们继续闭着眼搭结构。操作流程如下：</p>
+<h3 id="1）-将上一节中-C-原子吸附的那几个模型复制过来，进行修改："><a href="#1）-将上一节中-C-原子吸附的那几个模型复制过来，进行修改：" class="headerlink" title="1） 将上一节中 C 原子吸附的那几个模型复制过来，进行修改："></a>1） 将上一节中 C 原子吸附的那几个模型复制过来，进行修改：</h3><ul>
+<li>i) 修改POSCAR中的元素（第6行）和原子数目部分（第七行），添加O原子。</li>
+</ul>
+<p><img src="/img/lvthw/ex64/ex64-05.png"></p>
+<ul>
+<li>iii）在POSCAR的尾部，添加O原子的坐标：</li>
+</ul>
+<p><img src="/img/lvthw/ex64/ex64-06.png"></p>
+<p>可以看到上图中，最后两行的坐标一模一样，这是因为CO在表面上吸附的时候，我们假定的是直立吸附。所以C 和 O原子的坐标在x和y方向上一样。不同的区别在z方向上，即CO的键长。CO如果吸附在表面上，肯定会和表面原子有作用，也就是所谓的活化，如果原子被活化了，那么CO键就会被削弱，具体体现在键长上。与气相的键长相比，表面上CO的键长数值更大一些。前面我们查数据库得到CO键长为：1.138A.这里我们不妨设置成1.2A。根据这些，我们设置O原子的坐标，如下：</p>
+<p><img src="/img/lvthw/ex64/ex64-07.png"></p>
+<p>同样，我们可以对其他吸附位点的坐标进行类似的修改，结果如下图：</p>
+<p><img src="/img/lvthw/ex64/ex64-08.png"></p>
+<h2 id="3-背一遍VASP的输入文件，检查还有那些需要修改的："><a href="#3-背一遍VASP的输入文件，检查还有那些需要修改的：" class="headerlink" title="3. 背一遍VASP的输入文件，检查还有那些需要修改的："></a>3. 背一遍VASP的输入文件，检查还有那些需要修改的：</h2><ul>
+<li>i） INCAR： 跟之前保持一致；</li>
+<li>ii）KPOINTS：跟之前保持一致；</li>
+<li>iii） POSCAR： 已经修改完毕；</li>
+<li>iV） POTCAR：提交任务的脚本里面自动生成</li>
+<li>V）提交任务命令： qsuball （前面已经讲解过了）</li>
+</ul>
+<h2 id="4-提交任务："><a href="#4-提交任务：" class="headerlink" title="4. 提交任务："></a>4. 提交任务：</h2><p><img src="/img/lvthw/ex64/ex64-09.png"></p>
+<p>上图，我们删除了slab的计算，因为前面我们已经计算过了，没有必要浪费机时再算一遍。</p>
+<h2 id="5-思考下吸附能的计算公式："><a href="#5-思考下吸附能的计算公式：" class="headerlink" title="5. 思考下吸附能的计算公式："></a>5. 思考下吸附能的计算公式：</h2><p>$$<br>E_{ads}(CO) &#x3D; E_{slab+CO} - E_{slab} - E_{CO^{gas}}<br>$$</p>
+<p>前面我们还忘记了CO的气相结构优化。现在我们回忆一下前面所讲的气相分子的优化：</p>
+<h3 id="1）-气相分子的结构模型搭建。"><a href="#1）-气相分子的结构模型搭建。" class="headerlink" title="1） 气相分子的结构模型搭建。"></a>1） 气相分子的结构模型搭建。</h3><p>直接将一个Cu(111)表面上吸附的POSCAR拿过来修改一下即可：</p>
+<p><img src="/img/lvthw/ex64/ex64-10.png"></p>
+<h3 id="2）-INCAR：直接拿Cu-111-吸附的修改下。"><a href="#2）-INCAR：直接拿Cu-111-吸附的修改下。" class="headerlink" title="2） INCAR：直接拿Cu(111)吸附的修改下。"></a>2） INCAR：直接拿Cu(111)吸附的修改下。</h3><p>对于气相分子的优化来说：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ISMEAR = 0 </span><br><span class="line">SIGMA = 0.01</span><br></pre></td></tr></table></figure>
+
+<h3 id="3）-KPOINTS：-gamma-点即可。"><a href="#3）-KPOINTS：-gamma-点即可。" class="headerlink" title="3） KPOINTS： gamma 点即可。"></a>3） KPOINTS： gamma 点即可。</h3><h3 id="4）-这里我们没有批量提交，手动运行一下：pospot-sh脚本，生成对应的POTCAR。"><a href="#4）-这里我们没有批量提交，手动运行一下：pospot-sh脚本，生成对应的POTCAR。" class="headerlink" title="4） 这里我们没有批量提交，手动运行一下：pospot.sh脚本，生成对应的POTCAR。"></a>4） 这里我们没有批量提交，手动运行一下：<code>pospot.sh</code>脚本，生成对应的POTCAR。</h3><h3 id="5）-使用提交单个任务的脚本：-qsub-提交任务。具体操作如下图："><a href="#5）-使用提交单个任务的脚本：-qsub-提交任务。具体操作如下图：" class="headerlink" title="5） 使用提交单个任务的脚本： qsub  提交任务。具体操作如下图："></a>5） 使用提交单个任务的脚本： qsub  提交任务。具体操作如下图：</h3><p><img src="/img/lvthw/ex64/ex64-11.png"></p>
+<h2 id="6-扩展练习："><a href="#6-扩展练习：" class="headerlink" title="6. 扩展练习："></a>6. 扩展练习：</h2><ul>
+<li>1）完成CO吸附的计算；</li>
+<li>2）进一步熟练简单模型的闭着眼操作方式；</li>
+<li>3）复习分子气相结构的优化过程。</li>
+</ul>
+<h2 id="7-总结："><a href="#7-总结：" class="headerlink" title="7. 总结："></a>7. 总结：</h2><p>本节，通过CO的吸附模型搭建，带领大家走出简单的单原子吸附，开始逐渐接触复杂的吸附计算。如果前面内容掌握了，本节就是一个水到渠成的事情。在多原子分子的吸附计算中，首先我们要知道分子的电子和几何结构，分子哪一部分（这里的C原子）和表面成键。在本节的例子中，如果你不知道C和金属作用，你还需要计算Metal-O-C这样的结构。可能还会计算CO横着吸附的结构，任务无形中就会增加一倍或者更多，从而造成机时的浪费。退一步来说，如果你真的不知道吸附是以什么方式进行的，想尝试N种初始的结构，我的建议是：把slab的原子全部固定住，然后用gamma点算一下它们的吸附能，先大体上判断一下，把那些吸附特别强的结构筛选出来，用作下一步的计算。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        ExA16 通过ASE简单扩胞的小脚本 - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        ExA16 通过ASE简单扩胞的小脚本
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-10-03 20:06:48</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#p4vasp" title="p4vasp">p4vasp</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#ASE" title="ASE">ASE</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#扩胞" title="扩胞">扩胞</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>我们计算的时候，经常会遇到扩胞的需求。比如，我们要优化（4x4）的Ag(111)的一个slab。直接切一个slab拿来优化，可能会比较耗时。另一个办法就是我们先优化一个（1x1)的Ag(111)的slab，然后在将优化完的结构扩成（4x4)的，最后再优化。这样能有效地减少工作量。</p>
+<p>扩胞的话，有很多工具可以选择，MS, P4vasp,等等可视化的软件，用鼠标点点就OK了。也可以使用一些现成的脚本，小程序。本节就介绍一个通过ASE进行扩胞的小脚本，也是本人偶然在一个网站发现的。有兴趣的可以自己看下： <a target="_blank" rel="noopener" href="https://www.nsc.liu.se/~pla/blog/2013/02/26/vaspsupercells/">https://www.nsc.liu.se/~pla/blog/2013/02/26/vaspsupercells/</a> </p>
+<p>废话不多说，直接上例子，例子完了是脚本的具体内容。</p>
+<p>如果你有自己的脚本或者推荐的程序，也欢迎发送到本人邮箱：<a href="mailto:&#108;&#x71;&#x63;&#x61;&#116;&#97;&#64;&#103;&#x6d;&#x61;&#x69;&#108;&#46;&#99;&#x6f;&#109;">lqcata@gmail.com</a>。后面我们会逐渐扩展本节的内容。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">qli@bigbro:~/Desktop/test_expand$ <span class="built_in">ls</span></span><br><span class="line">CONTCAR  expand.py</span><br><span class="line">qli@bigbro:~/Desktop/test_expand$ <span class="built_in">cat</span> CONTCAR  </span><br><span class="line">Ag                                      </span><br><span class="line">   1.00000000000000     </span><br><span class="line">     3.0472766735234269    0.0000000000000000    0.0000000000000000</span><br><span class="line">     1.5236383367617135    2.6390190116310261    0.0000000000000000</span><br><span class="line">     0.0000000000000000    0.0000000000000000   22.4642729552180782</span><br><span class="line">   Ag</span><br><span class="line">     4</span><br><span class="line">Selective dynamics</span><br><span class="line">Direct</span><br><span class="line">  0.0000000000000000  0.0000000000000000  0.0000000000000000   F   F   F</span><br><span class="line">  0.3333333333333357  0.3333333333333357  0.1107576902236147   F   F   F</span><br><span class="line">  0.6666666666666643  0.6666666666666643  0.2214586458624846   T   T   T</span><br><span class="line"> -0.0000000000000000 -0.0000000000000000  0.3323996157642722   T   T   T</span><br><span class="line"> </span><br><span class="line">  0.00000000E+00  0.00000000E+00  0.00000000E+00</span><br><span class="line">  0.00000000E+00  0.00000000E+00  0.00000000E+00</span><br><span class="line">  0.00000000E+00  0.00000000E+00  0.00000000E+00</span><br><span class="line">  0.00000000E+00  0.00000000E+00  0.00000000E+00</span><br><span class="line">qli@bigbro:~/Desktop/test_expand$ python expand.py  CONTCAR  2 2 1 </span><br><span class="line">qli@bigbro:~/Desktop/test_expand$ <span class="built_in">ls</span></span><br><span class="line">CONTCAR  expand.py  POSCAR_ex</span><br><span class="line">qli@bigbro:~/Desktop/test_expand$ <span class="built_in">cat</span> POSCAR_ex </span><br><span class="line">Supercell</span><br><span class="line"> 1.0000000000000000</span><br><span class="line">     6.0945533470468538    0.0000000000000000    0.0000000000000000</span><br><span class="line">     3.0472766735234269    5.2780380232620523    0.0000000000000000</span><br><span class="line">     0.0000000000000000    0.0000000000000000   22.4642729552180782</span><br><span class="line">  16</span><br><span class="line">Selective dynamics</span><br><span class="line">Direct</span><br><span class="line">  0.0000000000000000  0.0000000000000000  0.0000000000000000   F   F   F</span><br><span class="line">  0.1666666666666679  0.1666666666666679  0.1107576902236147   F   F   F</span><br><span class="line">  0.3333333333333321  0.3333333333333321  0.2214586458624846   T   T   T</span><br><span class="line">  0.0000000000000000  0.0000000000000000  0.3323996157642722   T   T   T</span><br><span class="line">  0.0000000000000000  0.5000000000000000  0.0000000000000000   F   F   F</span><br><span class="line">  0.1666666666666679  0.6666666666666679  0.1107576902236147   F   F   F</span><br><span class="line">  0.3333333333333321  0.8333333333333323  0.2214586458624846   T   T   T</span><br><span class="line">  0.0000000000000000  0.5000000000000000  0.3323996157642722   T   T   T</span><br><span class="line">  0.4999999999999999  0.0000000000000000  0.0000000000000000   F   F   F</span><br><span class="line">  0.6666666666666679  0.1666666666666679  0.1107576902236147   F   F   F</span><br><span class="line">  0.8333333333333320  0.3333333333333321  0.2214586458624846   T   T   T</span><br><span class="line">  0.4999999999999999  0.0000000000000000  0.3323996157642722   T   T   T</span><br><span class="line">  0.4999999999999999  0.5000000000000000  0.0000000000000000   F   F   F</span><br><span class="line">  0.6666666666666677  0.6666666666666679  0.1107576902236147   F   F   F</span><br><span class="line">  0.8333333333333320  0.8333333333333323  0.2214586458624846   T   T   T</span><br><span class="line">  0.4999999999999999  0.5000000000000000  0.3323996157642722   T   T   T</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>脚本内容如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment">## https://www.nsc.liu.se/~pla/blog/2013/02/26/vaspsupercells/</span></span><br><span class="line"><span class="keyword">import</span>  ase.io.vasp</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">cell_file = sys.argv[<span class="number">1</span>]</span><br><span class="line">x,y,z = [<span class="built_in">int</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> sys.argv[<span class="number">2</span>:<span class="number">5</span>]]</span><br><span class="line">cell = ase.io.vasp.read_vasp(cell_file)</span><br><span class="line">ase.io.vasp.write_vasp(<span class="string">&quot;POSCAR_ex&quot;</span>,cell*(x,y,z), label=<span class="string">&#x27;Supercell&#x27;</span>,direct=<span class="literal">True</span>,sort=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>使用前提是你已经安装好了ASE。</p>
+<p>再次啰嗦一下，欢迎大家分享自己扩胞的小脚本，推荐的小程序，一起完善本节的内容。请发送到本人邮箱：<a href="mailto:&#x6c;&#x71;&#x63;&#x61;&#x74;&#97;&#x40;&#x67;&#109;&#x61;&#105;&#x6c;&#x2e;&#99;&#111;&#x6d;">lqcata@gmail.com</a>。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang=zh-CN,zh,en,default>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Charles White personal blog - computational materials science, machine learning">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ex-39 DOS 计算(三) - Charles White
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- MathJax for LaTeX math rendering -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'tex2jax_ignore|code|pre'
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+    
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> code. compute. create. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Charles White</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li class="has-sub">
+                <a class="nav-toggle" href="javascript:void(0)">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                    <i class="sub-arrow"></i>
+                </a>
+                <ul class="sub-menu">
+                    <!-- LVTHW -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>LVTHW</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>A 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/a-series/"><span>A 系列总览</span></a></li>
+                                    <li><a href="/lvthw/a-series/01-basic-tools/"><span>基础工具</span></a></li>
+                                    <li><a href="/lvthw/a-series/02-bader/"><span>Bader 电荷</span></a></li>
+                                    <li><a href="/lvthw/a-series/03-hpc/"><span>超算中心</span></a></li>
+                                    <li><a href="/lvthw/a-series/04-ase-python/"><span>ASE & Python</span></a></li>
+                                    <li><a href="/lvthw/a-series/05-ubuntu/"><span>Ubuntu & 软件</span></a></li>
+                                    <li><a href="/lvthw/a-series/06-ml-data/"><span>机器学习 & 数据</span></a></li>
+                                    <li><a href="/lvthw/a-series/07-advanced/"><span>高级工具</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Ex 系列 · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/lvthw/ex-series/"><span>Ex 系列总览</span></a></li>
+                                    <li><a href="/lvthw/ex-series/01-intro/"><span>入门准备</span></a></li>
+                                    <li><a href="/lvthw/ex-series/02-vasp-output/"><span>VASP 输出文件</span></a></li>
+                                    <li><a href="/lvthw/ex-series/03-o2/"><span>O₂ 分子计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/04-structure/"><span>结构优化</span></a></li>
+                                    <li><a href="/lvthw/ex-series/05-efficiency/"><span>计算效率</span></a></li>
+                                    <li><a href="/lvthw/ex-series/06-ethanol/"><span>乙醇分子案例</span></a></li>
+                                    <li><a href="/lvthw/ex-series/07-crystal/"><span>晶体与状态方程</span></a></li>
+                                    <li><a href="/lvthw/ex-series/08-dos/"><span>DOS 计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/09-surface/"><span>表面模型</span></a></li>
+                                    <li><a href="/lvthw/ex-series/10-adsorption/"><span>吸附计算</span></a></li>
+                                    <li><a href="/lvthw/ex-series/11-postproc/"><span>后处理分析</span></a></li>
+                                    <li><a href="/lvthw/ex-series/12-neb/"><span>过渡态 NEB</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- CHARLES -->
+                    <li class="has-sub">
+                        <a class="nav-toggle" href="javascript:void(0)">
+                            <span>CHARLES</span>
+                            <i class="sub-arrow"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>Z 系列 · 附录</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/z-series/"><span>Z 系列总览</span></a></li>
+                                    <li><a href="/charles/z-series/01-linux/"><span>向日葵 · 远程控制</span></a></li>
+                                    <li><a href="/charles/z-series/02-python/"><span>Keras · 错误解决</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="has-sub">
+                                <a class="nav-toggle" href="javascript:void(0)">
+                                    <span>DFT · 教程</span>
+                                    <i class="sub-arrow"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li><a href="/charles/dft-series/"><span>DFT 系列总览</span></a></li>
+                                    <li><a href="/charles/dft-series/01-neb/"><span>过渡态计算</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%AE%A1%E7%AE%97%E5%AE%9E%E4%BE%8B%EF%BC%9A"><span class="toc-text">1 计算实例：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-DOS%E5%8F%AF%E8%A7%86%E5%8C%96%EF%BC%9A"><span class="toc-text">2 DOS可视化：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%90%8E%E5%A4%84%E7%90%86%EF%BC%9A"><span class="toc-text">3 后处理：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%89%A9%E5%B1%95%E7%BB%83%E4%B9%A0%EF%BC%9A"><span class="toc-text">4 扩展练习：</span></a></li></ol>
+</div>
+    
+</div>
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> code. compute. create. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ex-39 DOS 计算(三)
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-02-08 15:30:16</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#p4vasp" title="p4vasp">p4vasp</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#DOS" title="DOS">DOS</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <p>本节主要介绍如何使用p4vasp获取DOS数据。</p>
+<hr>
+<h2 id="1-计算实例："><a href="#1-计算实例：" class="headerlink" title="1 计算实例："></a><strong>1</strong> <strong>计算实例：</strong></h2><p>计算的体系是一个Ru的单胞，含有2个Ru原子。结构优化完毕后进行以下操作。</p>
+<p>1.1 <code>cp  CONTCAR  POSCAR </code></p>
+<p>1.2 INCAR的设置（一步计算）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">IBRION = -1</span><br><span class="line">NSW = 0</span><br><span class="line">ISMEAR = -5</span><br><span class="line">LORBIT = 11 </span><br></pre></td></tr></table></figure>
+
+<p>1.3 KPOINTS 采用: <code>21 21 21</code> （gamma centered：Ru为六方堆积结构！！！）</p>
+<p>1.4 提交任务等待结束。</p>
+<p>1.5 该计算的所有文件可以通过百度网盘下载： <a target="_blank" rel="noopener" href="http://pan.baidu.com/s/1kVebDWz">http://pan.baidu.com/s/1kVebDWz</a> </p>
+<hr>
+<h2 id="2-DOS可视化："><a href="#2-DOS可视化：" class="headerlink" title="2 DOS可视化："></a><strong>2 DOS</strong>可视化：</h2><p>2.1 打开p4vasp</p>
+<p>2.2 点击左侧<code>open</code>，导入vasprun.xml文件；</p>
+<p>**注意：**前面的2步，Linux系统下面直接输入命令 ：</p>
+<p><code>p4v &amp;</code>或者 <code>p4v vasprun.xm</code>即可。</p>
+<p>2.3 查看DOS：<strong>Electronic –&gt; DOS+bands</strong></p>
+<p><img src="/img/lvthw/ex39/ex39-1.png"></p>
+<p>效果如下如：</p>
+<p> <img src="/img/lvthw/ex39/ex39-2.png"></p>
+<hr>
+<p>2.4 获取d轨道的DOS: </p>
+<p>这里我们取d band作为例子，大家根据自己的需要选择：</p>
+<p><code>Electronic</code> –&gt; <code>Local DOS+bands control </code></p>
+<p> <img src="/img/lvthw/ex39/ex39-3.png"></p>
+<p> 点击后如下图： </p>
+<p>  <img src="/img/lvthw/ex39/ex39-4.png"></p>
+<p>注意：</p>
+<p>1） 这里我们填的是Ru，表示选择所有的Ru原子，具体到大家自己的计算中，</p>
+<p>换成自己感兴趣的原子即可，怎么选择，我们前面已经讲到过了。（通过左侧的show按钮，以及鼠标和空格选择）</p>
+<p>2） 这里我们没有考虑自旋，如果你的体系有自旋，可以选择<code>up</code>，<code>down</code>或者<code>both</code>。<code>up</code>和<code>down</code>的数据导出来的时候通过一个空行分割（后面会讲到）。</p>
+<p>3）选择感兴趣的轨道：</p>
+<p>如果计算中你设置的<code>LORBIT=10</code>，点击 <code>dxy</code>的时候，则其他的d轨道也会同时被选中，</p>
+<p>如果你设置的<code>LORBIT=11</code>，点击<code>dxy</code>时，则仅仅选择<code>dxy</code>，其他的d轨道不会选中。如下图： </p>
+<p>  <img src="/img/lvthw/ex39/ex39-5.png"></p>
+<p>如果看不明白：</p>
+<p>a）VASP官网查看 <code>LORBIT = 10</code> 和11 的含义；</p>
+<p>b）亲自动手操作一下就明白了。</p>
+<p>选择完毕后，点击 <code>Add New line</code>，效果如下：</p>
+<p>  <img src="/img/lvthw/ex39/ex39-6.png"></p>
+<p>图中增加了一条红色的曲线，为Ru的d轨道的DOS图， 如果你选择了s，点击Add New line，就会增加另外一条曲线。不想要某个曲线了，可以点击remove line，大家自己随意操作，直至熟练为止！！</p>
+<hr>
+<h2 id="3-后处理："><a href="#3-后处理：" class="headerlink" title="3 后处理："></a><strong>3</strong> <strong>后处理：</strong></h2><p>3.1  导出数据：</p>
+<p>p4vasp导出数据通过中间的一个按钮： （注意，这里不通过左上角的File按钮！），如下图：点击 <code>Graph</code> –&gt; <code>Export</code> </p>
+<p> <img src="/img/lvthw/ex39/ex39-7.png"></p>
+<p>弹出的窗口中，选择保存的目录和数据的文件名称 </p>
+<p> <img src="/img/lvthw/ex39/ex39-8.png"></p>
+<p>注意：</p>
+<p>1）choose 选择保存的目录；</p>
+<p>2）我们选择的D盘下的VASP目录；</p>
+<p>3）填上保存数据的文件名：</p>
+<p>a）文件名处 <strong>.dat</strong> 记得写上，要不然后面可能会导不出数据！</p>
+<p>b）为了保证导出数据，Export 多点几遍！！！</p>
+<p>c）去导出的目录里面查看一下，如有了数据的文件名，说明保存成功，没有的话，继续点Export.</p>
+<p> <img src="/img/lvthw/ex39/ex39-9.png"></p>
+<p>图中说明：导出数据成功。</p>
+<p> d）为了避免浪费时间，一定要保存成功后再关闭窗口，否则你还要重复一遍前面的步骤。 </p>
+<p>4） 保存成功后，点击OK，关闭窗口。</p>
+<p>3.2 查看数据：（Notepad++直接打开，无视**.dat**尾缀！）</p>
+<p> <img src="/img/lvthw/ex39/ex39-10.png"></p>
+<hr>
+<p><strong>问题1： 为什么在301行后面有一个空行？ （重点是301）</strong></p>
+<hr>
+<ol>
+<li><p>这是因为DOS计算的点VASP默认是301个，该数目由NEDOS这个参数来确定。NEDOS决定了DOS曲线中间隔的点数，如果你想要自己的DOS曲线更加平滑，可以设置一个较大的NEDOS数值，比如：<code>NEDOS = 3000</code></p>
+</li>
+<li><p>如果你设置了<code>NEDOS = 500</code>， 那么会在500行以后出现一个空行。</p>
+</li>
+</ol>
+<p>问题2：为什么会有一个空行？？？(<strong>一定要搞明白</strong>！！！)</p>
+<p>我们看一下前面DOS的图：</p>
+<p> <img src="/img/lvthw/ex39/ex39-11.png"> </p>
+<p>图中有2个DOS曲线，黑色的为空行前面的部分，红色为后面的部分。</p>
+<p>同样，如果DOS图中有N个曲线，则导出的数据中会有N-1个空行将它们分开。</p>
+<p>N个曲线的横坐标坐标（也就是能量）是完全一样的。知道了这一点，你就知道了自己想要的数据在哪里了！！！</p>
+<p>此外，如果有<strong>磁性</strong>的话，你要注意了，up和down也是通过空行分开的。</p>
+<hr>
+<p>3.3 作图：</p>
+<p>有了数据之后，就可以随心所欲地作图了。将数据导入excel或者origin作图，也可以使用其他小脚本，程序。这里我们使用Excel简单说下：</p>
+<p>  <img src="/img/lvthw/ex39/ex39-12.png"></p>
+<p>左侧为空行前面的数据，Ru总的DOS， DOS曲线1 （黑色的那个）</p>
+<p>右侧为空行后面的数据，Ru d轨道的DOS， DOS曲线2（红色的那个）</p>
+<p>作出来的图跟p4vasp的结果一样。图像就不美化了。关键是有了数据，并且知道数据里面空行前后代表的内容。</p>
+<p> <img src="/img/lvthw/ex39/ex39-13.png"></p>
+<hr>
+<h2 id="4-扩展练习："><a href="#4-扩展练习：" class="headerlink" title="4 扩展练习："></a><strong>4</strong> <strong>扩展练习：</strong></h2><p>4.1 下载本节的练习，可以在自己的服务器上提交，也可以直接使用结果；</p>
+<p>4.2 通过p4vasp读取vasprun.xml文件，熟练进行本节的所有操作；</p>
+<p>4.3 不要偷懒！！！</p>
+<p><strong>5</strong> <strong>总结：</strong></p>
+<p>本节主要手把手交给大家如何用<code>p4vasp</code>这个软件查看<code>DOS</code>计算的结果。希望大家掌握这几点：</p>
+<ul>
+<li>1 会熟练使用改软件进行本节的操作；</li>
+<li>2 了解导出数据的格式（空行是怎么分割不同曲线的）；</li>
+<li>3 知道LORBIT &#x3D; 10 和 11 的区别，以及在可视化操作中的不同；</li>
+<li><strong>4</strong> <strong>最关键的：要会分析DOS！！！</strong></li>
+</ul>
+<hr>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+</html>
